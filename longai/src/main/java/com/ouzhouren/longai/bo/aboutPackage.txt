@@ -1,0 +1,1 @@
+包装业务，使用各种Dao操作数据库。Dao将数据库记录提取为PO/entity，BO将多个PO/entity合并为该业务需要的VO。
