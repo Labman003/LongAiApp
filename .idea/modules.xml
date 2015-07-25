@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LongAiApp.iml" filepath="$PROJECT_DIR$/LongAiApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib/lib.iml" filepath="$PROJECT_DIR$/lib/lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/longai/longai.iml" filepath="$PROJECT_DIR$/longai/longai.iml" />
     </modules>
   </component>

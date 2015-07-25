@@ -1,1 +1,1 @@
-include ':longai'
+include ':longai', ':lib'
