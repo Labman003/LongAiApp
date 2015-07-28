@@ -3,9 +3,7 @@ package com.ouzhouren.longai;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -104,29 +102,5 @@ public class MainActivity extends AppCompatActivity {
         } else if (resultCode == Crop.RESULT_ERROR) {
             Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();
         }
-    }
-    /**
-     * 点击返回键退出程序
-     */
-    private static Boolean isExit = false;
-    private Handler mHandler = new Handler();
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (isExit == false) {
-                isExit = true;
-                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        isExit = false;
-                    }
-                }, 2000);
-            } else {
-                finish();
-                System.exit(0);
-            }
-        }
-        return false;
     }
 }
