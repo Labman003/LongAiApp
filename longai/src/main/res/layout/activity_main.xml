@@ -35,16 +35,18 @@
                  android:background="#555c0590"
                  app:layout_collapseMode="pin"
                  app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >
+                 <android.support.design.widget.TabLayout
+                     android:id="@+id/tabLayout"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:background="#005c0590"
+                     app:tabGravity="center"
+                     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+                 </android.support.v7.widget.Toolbar>
 
          </android.support.design.widget.CollapsingToolbarLayout>
-        <!--<android.support.design.widget.TabLayout
-            android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#905670"
-            app:tabGravity="center"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />-->
+
     </android.support.design.widget.AppBarLayout>
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -55,6 +57,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="用户名" />
+        </android.support.design.widget.TextInputLayout>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -130,8 +140,6 @@
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
-
-
 
     </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
