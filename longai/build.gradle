@@ -23,10 +23,14 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.1.1'
     compile 'com.android.support:design:22.2.0'
+    compile 'com.android.support:recyclerview-v7:22.+'
+    compile 'com.android.support:cardview-v7:22.+'
     compile project(':lib')
     compile files('libs/lite-http-2.1.2.jar')
     compile files('libs/universal-image-loader-1.9.4.jar')
     compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.1.4'
     compile 'de.hdodenhof:circleimageview:1.3.0'
     compile 'com.github.johnkil.android-appmsg:appmsg:1.2.0'
+    compile 'com.github.eluleci:flatui:3.0.0'
+    compile 'com.github.johnkil.android-progressfragment:progressfragment:1.4.+'
 }
