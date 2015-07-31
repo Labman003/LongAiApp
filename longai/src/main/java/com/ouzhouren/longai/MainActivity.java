@@ -1,6 +1,7 @@
 package com.ouzhouren.longai;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,10 +35,17 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.soundcloud.android.crop.Crop;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.io.File;
+import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
+
+public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     Activity mAc;
     SubsamplingScaleImageView resultView;
     ImageView imageView;
@@ -50,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     CollapsingToolbarLayout collapsingToolbarLayout;
     NavigationView navigation;
     private SwipeRefreshLayout mSwipeRefreshWidget;
+  //  ElasticDownloadView mElasticDownloadView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,7 +144,60 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         /*****************下拉加载***********************************/
-        mSwipeRefreshWidget = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_widget);
+       // mSwipeRefreshWidget = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_widget);
+        /***************sweet对话框***************/
+//        //MD进度条
+//        SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+//        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+//        pDialog.setTitleText("Loading");
+//        pDialog.setCancelable(false);
+//        pDialog.show();
+//        //普通消息
+//        new SweetAlertDialog(this)
+//                .setTitleText("Here's a message!")
+//                .show();
+
+//        //确认后改变样式
+//        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+//                .setTitleText("Are you sure?")
+//                .setContentText("Won't be able to recover this file!")
+//                .setConfirmText("Yes,delete it!")
+//                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//                    @Override
+//                    public void onClick(SweetAlertDialog sDialog) {
+//                        sDialog
+//                                .setTitleText("Deleted!")
+//                                .setContentText("Your imaginary file has been deleted!")
+//                                .setConfirmText("OK")
+//                                .setConfirmClickListener(null)
+//                                .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+//                    }
+//                })
+//                .show();
+        /***************TimePicker****************/
+        Calendar now = Calendar.getInstance();
+//        DatePickerDialog dpd = DatePickerDialog.newInstance(
+//                MainActivity.this,
+//                now.get(Calendar.YEAR),
+//                now.get(Calendar.MONTH),
+//                now.get(Calendar.DAY_OF_MONTH)
+//        );
+//        dpd.show(getFragmentManager(), "Datepickerdialog");
+        TimePickerDialog tpd = TimePickerDialog.newInstance(
+                MainActivity.this,
+                now.get(Calendar.HOUR_OF_DAY),
+                now.get(Calendar.MINUTE),
+                false
+        );
+        tpd.setThemeDark(false);
+        tpd.vibrate(false);
+        tpd.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                Log.d("TimePicker", "Dialog was cancelled");
+            }
+        });
+        tpd.show(getFragmentManager(), "Timepickerdialog");
     }
 
     @Override
@@ -202,5 +265,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog datePickerDialog,  int year, int monthOfYear, int dayOfMonth) {
+        String date = "You picked the following date: "+dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
+        //普通消息
+        new SweetAlertDialog(this)
+                .setTitleText(date)
+                .show();
+    }
+
+    @Override
+    public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i1) {
+
     }
 }

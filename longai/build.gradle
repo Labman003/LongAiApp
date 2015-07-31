@@ -33,4 +33,6 @@ dependencies {
     compile 'com.github.johnkil.android-appmsg:appmsg:1.2.0'
     compile 'com.github.eluleci:flatui:3.0.0'
     compile 'com.github.johnkil.android-progressfragment:progressfragment:1.4.+'
+    compile 'cn.pedant.sweetalert:library:1.3'
+    compile 'com.wdullaer:materialdatetimepicker:1.4.2'
 }
