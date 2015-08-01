@@ -26,4 +26,7 @@
     <string name="smssdk_write_mobile_phone">请填写手机号码</string>
     <string name="reg_send_ver">发送</string>
     <string name="reg_next">验证并登录</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

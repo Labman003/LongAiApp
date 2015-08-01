@@ -1,0 +1,200 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.ouzhouren.longai.SearchFragment">\
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/swipe_refresh_widget"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="用户名" />
+                </android.support.design.widget.TextInputLayout>
+                <!-- FlatTextView -->
+                <com.cengalabs.flatui.views.FlatTextView
+                    android:id="@+id/title_edittexts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="5dip"
+                    android:maxLines="1"
+                    android:gravity="center_vertical"
+                    android:text="彭先生 45岁 寻梅州小萝莉"
+                    android:textSize="20dip"
+                    flatui:fl_customBackgroundColor="#00aff0" />
+                <!-- FlatSeekBar -->
+                <com.cengalabs.flatui.views.FlatSeekBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+                <!-- FlatButton -->
+                <com.cengalabs.flatui.views.FlatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="彭先生 45岁 寻梅州小萝莉"
+                    flatui:fl_touchEffect="fl_ripple"
+                    flatui:fl_blockButtonEffectHeight="3dp" />
+
+                <!-- FlatRadioButton -->
+                <com.cengalabs.flatui.views.FlatRadioButton
+                    android:id="@+id/radio_unchecked_enabled"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="#0000"
+                    android:text="unchecked"
+                    android:layout_margin="5dip"
+                    flatui:fl_size="20dip"
+                    flatui:fl_dotMargin="1dp" />
+                <!-- FlatToggleButton -->
+                <!-- You can create different looks by playing with height, width, size, radius and space -->
+                <com.cengalabs.flatui.views.FlatToggleButton
+                    android:id="@+id/toggle_unchecked_enabled"
+                    android:layout_width="72dp"
+                    android:layout_height="36dp"
+                    android:text="Full Flat"
+                    flatui:fl_space="14dp"
+                    flatui:fl_cornerRadius="18dp" />
+                <!-- FlatCheckBox -->
+                <com.cengalabs.flatui.views.FlatCheckBox
+                    android:id="@+id/checkbox_unchecked_enabled"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="#0000"
+                    android:text="unchecked"
+                    android:layout_margin="5dip"
+                    flatui:fl_size="20dip" />
+
+                <com.cengalabs.flatui.views.FlatCheckBox
+                    android:id="@+id/checkbox_checked_enabled"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="checked"
+                    android:checked="true"
+                    android:background="#0000"
+                    android:layout_margin="5dip"
+                    flatui:fl_size="20dip" />
+
+                <com.cengalabs.flatui.views.FlatToggleButton
+                    android:id="@+id/toggle_checked_enabled"
+                    android:layout_width="72dp"
+                    android:layout_height="36dp"
+                    android:text="Full Flat"
+                    android:checked="true"
+                    flatui:fl_space="14dp"
+                    flatui:fl_cornerRadius="18dp" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/card_view"
+                    android:layout_gravity="center"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    card_view:cardCornerRadius="5dp">
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="彭先生 45岁 寻梅州小萝莉"/>
+                </android.support.v7.widget.CardView>
+                <!--<is.arontibo.library.ElasticDownloadView-->
+                <!--android:id="@+id/elastic_download_view"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerInParent="true"/>-->
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="彭先生 45岁 寻梅州小萝莉"/> <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="彭先生 45岁 寻梅州小萝莉"/> <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="彭先生 45岁 寻梅州小萝莉"/> <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="彭先生 45岁 寻梅州小萝莉"/> <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="彭先生 45岁 寻梅州小萝莉"/> <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="彭先生 45岁 寻梅州小萝莉"/> <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="彭先生 45岁 寻梅州小萝莉"/> <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="彭先生 45岁 寻梅州小萝莉"/> <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="彭先生 45岁 寻梅州小萝莉"/> <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="彭先生 45岁 寻梅州小萝莉"/> <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="彭先生 45岁 寻梅州小萝莉"/> <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="彭先生 45岁 寻梅州小萝莉"/> <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="彭先生 45岁 寻梅州小萝莉"/> <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="彭先生 45岁 寻梅州小萝莉"/> <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="彭先生 45岁 寻梅州小萝莉"/> <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="彭先生 45岁 寻梅州小萝莉"/> <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="彭先生 45岁 寻梅州小萝莉"/> <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="彭先生 45岁 寻梅州小萝莉"/>
+
+                <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView2"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</android.support.design.widget.CoordinatorLayout>
