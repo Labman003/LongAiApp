@@ -17,7 +17,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +26,7 @@ import android.widget.Toast;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
+import com.litesuits.http.request.StringRequest;
 import com.soundcloud.android.crop.Crop;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
@@ -192,32 +192,20 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 //        });
 //        tpd.show(getFragmentManager(), "Timepickerdialog");
         /******************* Tab & ViewPager *******/
-        Log.i("调试", "1");
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         // 设置ViewPager的数据等
-        // init view pager
-        Log.i("调试","2");
         pagerAdapter = new MainFragmentStatePagerAdapter(getSupportFragmentManager());
-        if(pagerAdapter.getItem(0) == null){
-            Log.i("调试","空");
-            Log.i("调试", String.valueOf(pagerAdapter.getCount()));
-        }else{
-            Log.i("调试",pagerAdapter.getItem(0).toString());
-        }
-
        mViewPager.setAdapter(pagerAdapter);
-        Log.i("调试","3");
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        Log.i("调试","4");
-//        tabLayout.addTab(tabLayout.newTab().setText("缘分"));
-//        tabLayout.addTab(tabLayout.newTab().setText("消息"));
-//        tabLayout.addTab(tabLayout.newTab().setText("课室"));
-//        tabLayout.addTab(tabLayout.newTab().setText("活动"));
-        Log.i("调试","5");
         tabLayout.setupWithViewPager(mViewPager);
-        Log.i("调试","6");
     //    tabLayout.setTabsFromPagerAdapter(pagerAdapter);
-        Log.i("调试","7");
+        /******************************************/
+        String url = "192.168.1.124:8080";
+        StringRequest req = new StringRequest(url).addUrlPrifix("http://").addUrlSuffix("/SignServer/ActionServlet").addUrlParam("path", "userlogin").addUrlParam("name", "彭小狗").addUrlParam("pwd", "123456");
+        new SweetAlertDialog(this)
+                .setTitleText("Here's a message!")
+                .setContentText(req.reqToString())
+                .show();
     }
 
     @Override
