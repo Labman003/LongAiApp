@@ -1,4 +1,4 @@
-package com.ouzhouren.longai.test;
+package com.ouzhouren.longai;
 
 public class AnyEventType {
     public AnyEventType(){}

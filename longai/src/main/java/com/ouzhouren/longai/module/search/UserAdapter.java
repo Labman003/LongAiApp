@@ -1,6 +1,7 @@
 package com.ouzhouren.longai.module.search;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ouzhouren.longai.R;
 import com.ouzhouren.longai.entity.User;
@@ -32,17 +34,27 @@ class UserAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return users.size();
+//        if (users == null) {
+//            return 0;
+//        } else
+//            return users.size();
+        return 20;
     }
 
     @Override
     public Object getItem(int i) {
-        return users.get(i);
+        if (users == null) {
+            return null;
+        } else
+            return users.get(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return i;
+        if (users == null) {
+            return -1;
+        } else
+            return i;
     }
 
     @Override
@@ -67,10 +79,19 @@ class UserAdapter extends BaseAdapter {
         }
 
         User currentUser = users.get(position);
-        viewHolder.userTitle.setText(currentUser.getName());
+        viewHolder.userTitle.setText("彭小包");
 
         // Load the user image asynchronously
-        imageLoader.displayImage("http://img4.douban.com/view/photo/photo/public/p2255230989.jpg", viewHolder.userImage);
+        viewHolder.userImage.setImageDrawable(null);
+        //显示图片的配置
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+              //  .showImageOnLoading(R.drawable.ic_stub)
+              //  .showImageOnFail(R.drawable.ic_error)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .build();
+        imageLoader.displayImage("http://img3.douban.com/view/photo/photo/public/p2260397105.jpg", viewHolder.userImage,options);
         // Set the proper view name to get the transition well managed
         // convertView.setViewName("photo" + position);
         return convertView;

@@ -1,13 +1,22 @@
-package com.ouzhouren.longai;
+package com.ouzhouren.longai.module.search;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+
+import com.ouzhouren.longai.R;
+import com.ouzhouren.longai.entity.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchFragment extends Fragment {
+    private Activity mAc;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -46,16 +55,26 @@ public class SearchFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        mAc = getActivity();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_search, container, false);
+        // Setup the gridview and te adapter
+        GridView gridview = (GridView) rootView.findViewById(R.id.user_grid);
+        //    gridview.setOnItemClickListener(userClickListener);
+        List<User> users = new ArrayList<User>();
+        for (int i = 0; i < 20; i++) {
+            User user = new User();
+            user.setName("彭小狗");
+            users.add(user);
+        }
+        gridview.setAdapter(new UserAdapter(mAc, users));
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        return rootView;
     }
-
-
 
 
 }
