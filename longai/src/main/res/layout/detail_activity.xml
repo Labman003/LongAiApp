@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/detail_iv_user_photo"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            style="@style/PaddingLinearLayout">
+
+            <TextView
+                android:id="@+id/detail_tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="34sp"
+                android:layout_gravity="center"
+                tools:text="Harper Jonny Noxville"/>
+            
+            <TextView
+                android:id="@+id/detail_tv_mail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:textSize="23sp"
+                android:fontFamily="sans-serif-light"
+                tools:text="myawesomemail@mail.com"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="40dp"
+                android:weightSum="4">
+
+                <TextView
+                    android:id="@+id/detail_tv_nickname_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="昵称"
+                    android:textSize="24sp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:layout_weight="1.5"/>
+
+                <TextView
+                    android:id="@+id/nickname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:fontFamily="sans-serif-light"
+                    android:layout_weight="3"
+                    tools:text="My awseome nickname"/>
+           </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:weightSum="4">
+
+                <TextView
+                    android:id="@+id/detail_tv_phone_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:text="手机"
+                    android:fontFamily="sans-serif-condensed"
+                    android:layout_weight="1.5"/>
+
+                <TextView
+                    android:id="@+id/detail_tv_phone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:fontFamily="sans-serif-light"
+                    android:layout_weight="3"
+                    tools:text="My aweseome nickname"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="40dp">
+
+                <TextView
+                    android:id="@+id/android_tv_biography_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="简介"
+                    android:textSize="24sp"
+                    android:fontFamily="sans-serif-condensed"/>
+
+                <TextView
+                    android:id="@+id/detail_tv_biography"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:lineSpacingExtra="10dp"
+                    android:textSize="22sp"
+                    android:maxLines="20"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-light"
+                    android:layout_weight="3"
+                    android:text="我在东北玩泥巴~你在哪里哈哈哈~给你一颗金柯拉~"
+                    tools:text="My aweseome nickname"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+
+

@@ -79,7 +79,7 @@ class UserAdapter extends BaseAdapter {
         }
 
         User currentUser = users.get(position);
-        viewHolder.userTitle.setText("彭小包");
+        viewHolder.userTitle.setText(currentUser.getName());
 
         // Load the user image asynchronously
         viewHolder.userImage.setImageDrawable(null);
@@ -91,7 +91,7 @@ class UserAdapter extends BaseAdapter {
                 .cacheOnDisk(true)
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .build();
-        imageLoader.displayImage("http://img3.douban.com/view/photo/photo/public/p2260397105.jpg", viewHolder.userImage,options);
+        imageLoader.displayImage(currentUser.getPicture(), viewHolder.userImage,options);
         // Set the proper view name to get the transition well managed
         // convertView.setViewName("photo" + position);
         return convertView;

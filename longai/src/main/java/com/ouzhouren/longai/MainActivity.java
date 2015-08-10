@@ -47,18 +47,17 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     SubsamplingScaleImageView resultView;
     ImageView imageView;
     TextView textView;
-    private CoordinatorLayout rootLayout;
-    private FloatingActionButton fabBtn;
+    CoordinatorLayout rootLayout;
+    FloatingActionButton fabBtn;
     Toolbar toolbar;
     TabLayout tabLayout;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle drawerToggle;
     CollapsingToolbarLayout collapsingToolbarLayout;
     NavigationView navigation;
-    private SwipeRefreshLayout mSwipeRefreshWidget;
-    private ViewPager mViewPager;
-    private MainFragmentStatePagerAdapter pagerAdapter;
-    //  ElasticDownloadView mElasticDownloadView;
+    SwipeRefreshLayout mSwipeRefreshWidget;
+    ViewPager mViewPager;
+    MainFragmentStatePagerAdapter pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
