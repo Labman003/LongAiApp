@@ -1,4 +1,4 @@
-package com.ouzhouren.longai;
+package com.ouzhouren.longai.module.news;
 
 
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.ouzhouren.longai.R;
 
 public class NewsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match

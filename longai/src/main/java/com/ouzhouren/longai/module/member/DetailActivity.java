@@ -1,15 +1,12 @@
 package com.ouzhouren.longai.module.member;
 
-import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ouzhouren.base.cache.ACache;
 import com.ouzhouren.longai.R;
 import com.ouzhouren.longai.common.utils.MyLogger;
 import com.ouzhouren.longai.entity.User;
@@ -28,30 +25,30 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_activity);
         int position = getIntent().getIntExtra("position",0);
-        DetailFragmentAdapter detailFragmentAdapter = new DetailFragmentAdapter(getSupportFragmentManager(),SearchFragment.users);
+        DetailFragmentAdapter detailFragmentAdapter = new DetailFragmentAdapter(getSupportFragmentManager(), SearchFragment.users);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(detailFragmentAdapter);
         viewPager.setCurrentItem(position);
 
-
-//获得user实体
-     //   users = (ArrayList<User>) getIntent().getSerializableExtra("users");
-        User selectedUser = SearchFragment.users.get(position);
-//获得图片缓存key
-        int bitMapResourcePath = getIntent().getIntExtra("photo", R.drawable.header);
-//按key路径从缓存取得图片
-        ACache mCache = ACache.get(this);
-        Bitmap bitmap = mCache.getAsBitmap(String.valueOf(bitMapResourcePath));
-//设置bitmap和默认bitmap
-        ImageView placeHolderImage = (ImageView) findViewById(R.id.detail_iv_user_photo);
-        //  placeHolderImage.setViewName("photo"+getIntent().getIntExtra("position",0));
-        placeHolderImage.setImageBitmap(bitmap);
-
-        if (bitmap != null) {
-            // With palette you can get the main colors of the give bitmap
-            Palette palette = Palette.generate(bitmap);
-            setUITextAndColor(palette, selectedUser);
-        }
+//
+////获得user实体
+//     //   users = (ArrayList<User>) getIntent().getSerializableExtra("users");
+//        User selectedUser = SearchFragment.users.get(position);
+////获得图片缓存key
+//        int bitMapResourcePath = getIntent().getIntExtra("photo", R.drawable.header);
+////按key路径从缓存取得图片
+//        ACache mCache = ACache.get(this);
+//        Bitmap bitmap = mCache.getAsBitmap(String.valueOf(bitMapResourcePath));
+////设置bitmap和默认bitmap
+//        ImageView placeHolderImage = (ImageView) findViewById(R.id.detail_iv_user_photo);
+//        //  placeHolderImage.setViewName("photo"+getIntent().getIntExtra("position",0));
+//        placeHolderImage.setImageBitmap(bitmap);
+//
+//        if (bitmap != null) {
+//            // With palette you can get the main colors of the give bitmap
+//            Palette palette = Palette.generate(bitmap);
+//            setUITextAndColor(palette, selectedUser);
+//        }
     }
 
     public void setUITextAndColor(Palette palette, User selectedUser) {

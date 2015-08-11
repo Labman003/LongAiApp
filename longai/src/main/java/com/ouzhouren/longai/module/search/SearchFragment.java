@@ -3,7 +3,6 @@ package com.ouzhouren.longai.module.search;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,9 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 
-import com.ouzhouren.base.cache.ACache;
 import com.ouzhouren.longai.R;
 import com.ouzhouren.longai.entity.User;
 import com.ouzhouren.longai.module.member.DetailActivity;
@@ -136,11 +133,11 @@ public class SearchFragment extends Fragment {
     //        detailIntent.putExtra("users", (ArrayList<User>)users);
             detailIntent.putExtra("position", i);
 
-            ImageView userImage = (ImageView) view.findViewById(R.id.user_image);
+//            ImageView userImage = (ImageView) view.findViewById(R.id.user_image);
 //            //  ((ViewGroup) userImage.getParent()).setTransitionGroup(false);
 //
-            ACache mCache = ACache.get(mAc);
-            mCache.put(String.valueOf(R.drawable.header), ((BitmapDrawable) userImage.getDrawable()).getBitmap());
+//            ACache mCache = ACache.get(mAc);
+//            mCache.put(String.valueOf(R.drawable.header), ((BitmapDrawable) userImage.getDrawable()).getBitmap());
 //
 //            // Setup the transition to the detail activity
 //              //  ActivityOptions options =  ActivityOptions.makeSceneTransitionAnimation(mAc, view, "photo" + i);

@@ -29,11 +29,8 @@ public class DetailFragmentAdapter extends FragmentStatePagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         DetailFragment f = (DetailFragment) super.instantiateItem(container, position);
-        /*Todo
-        传值user
-         */
-//        String title = mList.get(position);
-//        f.setTitle(title);
+        User user = users.get(position);
+        f.setUser(user);
         return f;
     }
 
