@@ -280,14 +280,14 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i1) {
 
     }
-    //再按一次退出速读
+    //再按一次退出龙爱
     private long exitTime = 0;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             if ((System.currentTimeMillis() - exitTime) > 2000) {
-                Toast.makeText(getApplicationContext(), "再按一次退出速读", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "再按一次退出龙爱", Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
                 finish();
