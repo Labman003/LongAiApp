@@ -3,11 +3,9 @@ package com.ouzhouren.longai.module.search;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.ouzhouren.base.cache.ACache;
 import com.ouzhouren.longai.R;
 import com.ouzhouren.longai.entity.User;
 import com.ouzhouren.longai.module.member.DetailActivity;
@@ -23,8 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchFragment extends Fragment {
-    public static SparseArray<Bitmap> photoCache = new SparseArray<Bitmap>(1);
-    List<User> users = new ArrayList<User>();
+    public static List<User> users = new ArrayList<User>();
     private Activity mAc;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -135,13 +133,14 @@ public class SearchFragment extends Fragment {
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
             Intent detailIntent = new Intent(mAc, DetailActivity.class);
-            detailIntent.putExtra("user", users.get(i));
+    //        detailIntent.putExtra("users", (ArrayList<User>)users);
             detailIntent.putExtra("position", i);
 
             ImageView userImage = (ImageView) view.findViewById(R.id.user_image);
 //            //  ((ViewGroup) userImage.getParent()).setTransitionGroup(false);
 //
-            photoCache.put(R.drawable.header, ((BitmapDrawable) userImage.getDrawable()).getBitmap());
+            ACache mCache = ACache.get(mAc);
+            mCache.put(String.valueOf(R.drawable.header), ((BitmapDrawable) userImage.getDrawable()).getBitmap());
 //
 //            // Setup the transition to the detail activity
 //              //  ActivityOptions options =  ActivityOptions.makeSceneTransitionAnimation(mAc, view, "photo" + i);
