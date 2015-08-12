@@ -19,6 +19,15 @@ tools:context="com.ouzhouren.longai.module.member.BlankFragment">
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:scaleType="centerCrop" />
+        <TextView
+            android:id="@+id/detail_tv_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_gravity="right"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:text="0/0"/>
     </FrameLayout>
 
     <LinearLayout

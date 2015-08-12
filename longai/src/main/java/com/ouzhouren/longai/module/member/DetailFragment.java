@@ -28,9 +28,13 @@ import java.util.List;
 public class DetailFragment extends Fragment {
     private MyLogger logger = MyLogger.benLog();
     private User user;
+    private int position;
+    private int size;
+
 
     View rootView;
     ImageView placeHolderImage;
+    TextView progressTV;
     TextView nameTV;
     TextView nicknameTV;
     TextView emailTV;
@@ -39,12 +43,16 @@ public class DetailFragment extends Fragment {
     TextView phoneTv;
     TextView biographyTitleTv;
 
-    public User getUser() {
-        return user;
-    }
-
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 
     public static DetailFragment newInstance() {
@@ -67,6 +75,7 @@ public class DetailFragment extends Fragment {
         logger.i("1");
         //find & set text
         placeHolderImage = (ImageView) rootView.findViewById(R.id.detail_iv_user_photo);
+        progressTV = (TextView) rootView.findViewById(R.id.detail_tv_progress);
         nameTV = (TextView) rootView.findViewById(R.id.detail_tv_name);
         emailTV = (TextView) rootView.findViewById(R.id.detail_tv_mail);
         nicknameTitleTv = (TextView) rootView.findViewById(R.id.detail_tv_nickname_title);
@@ -109,6 +118,7 @@ public class DetailFragment extends Fragment {
 //        getActivity().getWindow().setBackgroundDrawable(new ColorDrawable(palette.getDarkVibrantSwatch().getRgb()));
         rootView.setBackgroundDrawable(new ColorDrawable(palette.getDarkVibrantSwatch().getRgb()));
 
+        progressTV.setText(String.format("%s/%s",String.valueOf(++position),String.valueOf(size)));
         nameTV.setText(selectedUser.getName());
         emailTV.setText(selectedUser.getEmail());
        phoneTv.setText(selectedUser.getPhone());

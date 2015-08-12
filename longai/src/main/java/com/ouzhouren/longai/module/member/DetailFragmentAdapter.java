@@ -31,6 +31,8 @@ public class DetailFragmentAdapter extends FragmentStatePagerAdapter {
         DetailFragment f = (DetailFragment) super.instantiateItem(container, position);
         User user = users.get(position);
         f.setUser(user);
+        f.setPosition(position);
+        f.setSize(users.size());
         return f;
     }
 
