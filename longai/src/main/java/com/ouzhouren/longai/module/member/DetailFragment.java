@@ -42,6 +42,7 @@ public class DetailFragment extends Fragment {
     TextView phoneTitleTv;
     TextView phoneTv;
     TextView biographyTitleTv;
+    TextView biographyTv;
 
     public void setUser(User user) {
         this.user = user;
@@ -83,6 +84,7 @@ public class DetailFragment extends Fragment {
         phoneTitleTv = (TextView) rootView.findViewById(R.id.detail_tv_phone_title);
        phoneTv =  ((TextView) rootView.findViewById(R.id.detail_tv_phone));
         biographyTitleTv = (TextView) rootView.findViewById(R.id.android_tv_biography_title);
+        biographyTv = (TextView) rootView.findViewById(R.id.detail_tv_biography);
         //  placeHolderImage.setViewName("photo"+getIntent().getIntExtra("position",0));
         logger.i("2");
         ImageLoader.getInstance().displayImage(user.getPicture(), placeHolderImage);
@@ -110,30 +112,43 @@ public class DetailFragment extends Fragment {
 
     public void setUITextAndColor(Palette palette, User selectedUser) {
         List<Palette.Swatch> availablePaleteItems = palette.getSwatches();
-        Palette.Swatch lightVibrant = palette.getLightVibrantSwatch();//强调色
-        Palette.Swatch lightMuted = palette.getLightMutedSwatch();//轻柔色
+        Palette.Swatch lightVibrant = palette.getLightVibrantSwatch();//亮强调
+        Palette.Swatch lightMuted = palette.getLightMutedSwatch();//亮轻柔
+        Palette.Swatch DarkVibrant = palette.getDarkVibrantSwatch();//暗强调色
+        Palette.Swatch DarkMuted = palette.getDarkMutedSwatch();//亮强调色
+        Palette.Swatch muted = palette.getMutedSwatch();//轻柔色
+        Palette.Swatch vibrant = palette.getVibrantSwatch();//强调色
         int pSize = availablePaleteItems.size();
 
-//设置窗口背景为黑调色
-//        getActivity().getWindow().setBackgroundDrawable(new ColorDrawable(palette.getDarkVibrantSwatch().getRgb()));
-        rootView.setBackgroundDrawable(new ColorDrawable(palette.getDarkVibrantSwatch().getRgb()));
+
 
         progressTV.setText(String.format("%s/%s",String.valueOf(++position),String.valueOf(size)));
-        nameTV.setText(selectedUser.getName());
         emailTV.setText(selectedUser.getEmail());
+        nameTV.setText(selectedUser.getName());
        phoneTv.setText(selectedUser.getPhone());
        nicknameTV.setText(selectedUser.getUserName());
 
 //设置颜色
-        if (lightVibrant != null)
-            nameTV.setTextColor(lightVibrant.getRgb());
+        //设置窗口背景为黑调色
+//        getActivity().getWindow().setBackgroundDrawable(new ColorDrawable(palette.getDarkVibrantSwatch().getRgb()));
+        rootView.setBackgroundDrawable(new ColorDrawable(muted.getRgb()));
 
-        if (lightMuted != null)
-            emailTV.setTextColor(lightMuted.getRgb());
+//        if (lightVibrant != null)
+//            nameTV.setTextColor(lightVibrant.getRgb());
 
-        nicknameTitleTv.setTextColor(availablePaleteItems.get(2 % pSize).getRgb());
-        phoneTitleTv.setTextColor(availablePaleteItems.get(2 % pSize).getRgb());
-        biographyTitleTv.setTextColor(availablePaleteItems.get(2 % pSize).getRgb());
+        if (DarkMuted != null){
+            int rgb = DarkMuted.getRgb();
+            emailTV.setTextColor(rgb);
+            nicknameTitleTv.setTextColor(rgb);
+            phoneTitleTv.setTextColor(rgb);
+            biographyTitleTv.setTextColor(rgb);
+            nameTV.setTextColor(rgb);
+            phoneTv.setTextColor(rgb);
+            nicknameTV.setTextColor(rgb);
+            biographyTv.setTextColor(rgb);
+        }
+
+
     }
 
 
