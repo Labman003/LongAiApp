@@ -47,18 +47,17 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     SubsamplingScaleImageView resultView;
     ImageView imageView;
     TextView textView;
-    private CoordinatorLayout rootLayout;
-    private FloatingActionButton fabBtn;
+    CoordinatorLayout rootLayout;
+    FloatingActionButton fabBtn;
     Toolbar toolbar;
     TabLayout tabLayout;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle drawerToggle;
     CollapsingToolbarLayout collapsingToolbarLayout;
     NavigationView navigation;
-    private SwipeRefreshLayout mSwipeRefreshWidget;
-    private ViewPager mViewPager;
-    private MainFragmentStatePagerAdapter pagerAdapter;
-    //  ElasticDownloadView mElasticDownloadView;
+    SwipeRefreshLayout mSwipeRefreshWidget;
+    ViewPager mViewPager;
+    MainFragmentStatePagerAdapter pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -281,14 +280,14 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i1) {
 
     }
-    //再按一次退出速读
+    //再按一次退出龙爱
     private long exitTime = 0;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             if ((System.currentTimeMillis() - exitTime) > 2000) {
-                Toast.makeText(getApplicationContext(), "再按一次退出速读", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "再按一次退出龙爱", Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
                 finish();
