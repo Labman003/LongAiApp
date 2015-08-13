@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.ouzhouren.longai.module.news.NewsFragment;
 import com.ouzhouren.longai.module.search.SearchFragment;
 
 import java.util.ArrayList;
