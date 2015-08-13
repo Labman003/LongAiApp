@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Anim/Anim.iml" filepath="$PROJECT_DIR$/Anim/Anim.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LPreview/LPreview.iml" filepath="$PROJECT_DIR$/LPreview/LPreview.iml" />
       <module fileurl="file://$PROJECT_DIR$/LongAiApp.iml" filepath="$PROJECT_DIR$/LongAiApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MD/MD.iml" filepath="$PROJECT_DIR$/MD/MD.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib/lib.iml" filepath="$PROJECT_DIR$/lib/lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/longai/longai.iml" filepath="$PROJECT_DIR$/longai/longai.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sublimepickerlibrary/sublimepickerlibrary.iml" filepath="$PROJECT_DIR$/sublimepickerlibrary/sublimepickerlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/welcome/welcome.iml" filepath="$PROJECT_DIR$/welcome/welcome.iml" />
     </modules>
   </component>
 </project>
