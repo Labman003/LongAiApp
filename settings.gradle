@@ -1,1 +1,1 @@
-include ':longai', ':lib', ':welcome', ':MD', ':sublimepickerlibrary', ':LPreview', ':Anim'
+include ':longai', ':lib'

@@ -10,13 +10,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/Anim" />
-            <option value="$PROJECT_DIR$/LPreview" />
-            <option value="$PROJECT_DIR$/MD" />
             <option value="$PROJECT_DIR$/lib" />
             <option value="$PROJECT_DIR$/longai" />
-            <option value="$PROJECT_DIR$/sublimepickerlibrary" />
-            <option value="$PROJECT_DIR$/welcome" />
           </set>
         </option>
       </GradleProjectSettings>
