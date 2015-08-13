@@ -121,6 +121,18 @@ public class SearchFragment extends Fragment {
 
         }
         gridview.setAdapter(new UserAdapter(mAc, users));
+//        //动画测试
+//        rootView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                final DetailFragment toFragment = new DetailFragment();
+//                FragmentTransitionLauncher
+//                        .with(view.getContext())
+//                        .image(BitmapFactory.decodeResource(getResources(), R.drawable.photo))
+//                        .from(view.findViewById(R.id.imageView)).prepare(toFragment);
+//                getFragmentManager().beginTransaction().replace(R.id.content, toFragment).addToBackStack(null).commit();
+//            }
+//        });
         // Inflate the layout for this fragment
         return rootView;
     }
