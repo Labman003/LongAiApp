@@ -107,6 +107,7 @@ public class DetailFragment extends Fragment {
             setUITextAndColor(palette, user);
         }
         logger.i("5");
+
         return rootView;
     }
 
