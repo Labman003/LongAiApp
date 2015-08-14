@@ -14,7 +14,7 @@ public class MainFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
         private List<Fragment> mFragmentList;
         private List<String> titleList;
         private SearchFragment searchFragment;
-        private NewsFragment newsFragment;
+       private NewsFragment newsFragment;
         private TalksFragment talksFragment;
         private  EventsFragment eventsFragment;
         public MainFragmentStatePagerAdapter(FragmentManager fm) {
