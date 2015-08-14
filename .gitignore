@@ -1,5 +1,7 @@
-.gradle
+/lib
 /.idea
+.gradle
+/.idea/gradle.xml
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
