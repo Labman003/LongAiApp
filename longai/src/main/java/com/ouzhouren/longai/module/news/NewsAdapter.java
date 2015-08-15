@@ -2,6 +2,7 @@ package com.ouzhouren.longai.module.news;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.ouzhouren.longai.R;
 
 import java.util.List;
 import java.util.Map;
@@ -60,11 +62,11 @@ public class NewsAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ListItemView listItemView = new ListItemView();
         if(convertView == null){
-//            convertView =  LayoutInflater.from(context).inflate(R.layout.news_list_item, null);
-//
-//            listItemView.author= (TextView) convertView.findViewById(R.id.news_listItem_tv_author);
-//            listItemView.imageView= (ImageView) convertView.findViewById(R.id.news_listItem_iv_icon);
-//            listItemView.title = (TextView) convertView.findViewById(R.id.news_listItem_tv_title);
+            convertView =  LayoutInflater.from(context).inflate(R.layout.news_listitem, null);
+
+            listItemView.author= (TextView) convertView.findViewById(R.id.news_listItem_tv_author);
+            listItemView.imageView= (ImageView) convertView.findViewById(R.id.news_listItem_iv_icon);
+            listItemView.title = (TextView) convertView.findViewById(R.id.news_listItem_tv_title);
 
             convertView.setTag(listItemView);
 
