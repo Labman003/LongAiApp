@@ -1,15 +1,19 @@
 package com.ouzhouren.longai.module.news;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.ouzhouren.longai.R;
+import com.ouzhouren.longai.entity.News;
+import com.ouzhouren.longai.module.news.activity.NewsDetails;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 public class NewsFragment extends Fragment {
+    public static List<News> newsLists = new ArrayList<>();
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -64,25 +69,28 @@ public class NewsFragment extends Fragment {
         // Inflate the layout for this fragment
         View newsView = inflater.inflate(R.layout.fragment_news, container, false);
         SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) newsView.findViewById(R.id.news_swipe_container);
-        ListView listView = (ListView) newsView.findViewById(R.id.news_lv_list);
+        final ListView listView = (ListView) newsView.findViewById(R.id.news_lv_list);
 
-        List<Map<String, Object>> listItems = new ArrayList<>();
-        for (int i = 0; i <= 15; i++) {
-            Map<String, Object> listItem = new HashMap<String, Object>();
-            listItem.put("title", "标题" + i);
-            listItem.put("author", "作者" + i);
-            listItem.put("icon", "http://g.hiphotos.baidu.com/baike/s%3D500/sign=49ab240bb68f8c54e7d3c52f0a2b2dee/7e3e6709c93d70cfdd3d48e8fadcd100bba12b14.jpg");
-            listItems.add(listItem);
+
+        for (int i = 0; i <= 20; i++) {
+            News news = new News();
+            news.setAuthor("作者" + i);
+            news.setTitle("标题" + i);
+            news.setImgUrl("http://g.hiphotos.baidu.com/baike/s%3D500/sign=49ab240bb68f8c54e7d3c52f0a2b2dee/7e3e6709c93d70cfdd3d48e8fadcd100bba12b14.jpg");
+            newsLists.add(news);
         }
         //SimpleAdapter simpleAdapter = new SimpleAdapter(getActivity(), listItems, R.layout.news_list_item, new String[]{"title", "author", "icon"}, new int[]{R.id.news_listItem_tv_title, R.id.news_listItem_tv_author, R.id.news_listItem_iv_icon});
-        listView.setAdapter(new NewsAdapter(getActivity(),listItems));
+        listView.setAdapter(new NewsAdapter(getActivity(), newsLists));
 
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//            }
-//        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent news_intent = new Intent(getActivity(), NewsDetails.class);
+                news_intent.putExtra("position", position);
+                startActivity(news_intent);
+            }
+        });
+
 //        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 //            @Override
 //            public void onRefresh() {

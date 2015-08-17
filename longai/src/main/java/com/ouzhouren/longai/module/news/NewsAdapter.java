@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ouzhouren.longai.R;
+import com.ouzhouren.longai.entity.News;
 
 import java.util.List;
 import java.util.Map;
@@ -21,73 +22,71 @@ import java.util.Map;
  */
 public class NewsAdapter extends BaseAdapter {
     private Context context;
-    private List<Map<String, Object>> listItems;
+    private  List<News> newsList;
     private ImageLoader imageLoader;
 
-    public final class ListItemView {
+    public final class NewsItemView {
         public ImageView imageView;
         public TextView title;
         public TextView author;
     }
 
-    public NewsAdapter(Context context, List<Map<String, Object>> listItems) {
+    public NewsAdapter(Context context, List<News> newsList) {
         this.context = context;
         imageLoader = ImageLoader.getInstance();
-        this.listItems = listItems;
+        this.newsList = newsList;
     }
 
     @Override
     public int getCount() {
-        if (listItems == null)
+        if (newsList == null)
             return 0;
         else
-            return listItems.size();
+            return newsList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        if(listItems!=null)
-            return listItems.get(position);
+        if (newsList != null)
+            return newsList.get(position);
         return null;
     }
 
     @Override
     public long getItemId(int position) {
-        if(listItems!=null)
+        if (newsList != null)
             return position;
         return -1;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ListItemView listItemView = new ListItemView();
-        if(convertView == null){
-            convertView =  LayoutInflater.from(context).inflate(R.layout.news_listitem, null);
+        NewsItemView newsItemView = new NewsItemView();
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.news_listitem, null);
 
-            listItemView.author= (TextView) convertView.findViewById(R.id.news_listItem_tv_author);
-            listItemView.imageView= (ImageView) convertView.findViewById(R.id.news_listItem_iv_icon);
-            listItemView.title = (TextView) convertView.findViewById(R.id.news_listItem_tv_title);
+            newsItemView.author = (TextView) convertView.findViewById(R.id.news_listItem_tv_author);
+            newsItemView.imageView = (ImageView) convertView.findViewById(R.id.news_listItem_iv_icon);
+            newsItemView.title = (TextView) convertView.findViewById(R.id.news_listItem_tv_title);
 
-            convertView.setTag(listItemView);
+            News listItem = (News) newsList.get(position);
+            String url = (String) listItem.getImgUrl();
+            String currentTitle = (String) listItem.getTitle();
+            String currentAuthor = (String) listItem.getAuthor();
+            // listItemView.imageView.setImageDrawable(null);
 
+            DisplayImageOptions options = new DisplayImageOptions.Builder()
+                    //  .showImageOnLoading(R.drawable.ic_stub)
+                    //  .showImageOnFail(R.drawable.ic_error)
+                    .cacheInMemory(true)
+                    .cacheOnDisk(true)
+                    .bitmapConfig(Bitmap.Config.RGB_565)
+                    .build();
+            newsItemView.author.setText(currentAuthor);
+            newsItemView.title.setText(currentTitle);
+            imageLoader.displayImage(url, newsItemView.imageView, options);
+           // convertView.setTag(listItemView);
         }
-        Map<String, Object> listItem = (Map<String, Object>) listItems.get(position);
-        String url = (String) listItem.get("icon");
-        String currentTitle = (String) listItem.get("title");
-        String currentAuthor = (String) listItem.get("author");
-        listItemView.imageView.setImageDrawable(null);
-
-        DisplayImageOptions options = new DisplayImageOptions.Builder()
-                //  .showImageOnLoading(R.drawable.ic_stub)
-                //  .showImageOnFail(R.drawable.ic_error)
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .build();
-        listItemView.author.setText(currentAuthor);
-        listItemView.title.setText(currentTitle);
-        imageLoader.displayImage(url, listItemView.imageView,options);
-
         return convertView;
     }
 }
