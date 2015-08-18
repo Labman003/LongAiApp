@@ -2,6 +2,7 @@ package com.ouzhouren.longai.module.events;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -45,7 +46,8 @@ private RecyclerView recyclerView;
             @Override
             public void onItemClick(View view, int position) {
                 MyLogger logger = MyLogger.benLog();
-                logger.i("click"+position);
+                Intent intent = new Intent(mAc,DetailEventActivity.class);
+                mAc.startActivity(intent);
             }
 
             @Override

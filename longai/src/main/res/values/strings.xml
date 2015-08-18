@@ -31,4 +31,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="news_title1">标题1</string>
     <string name="new_title2">标题2</string>
+    <string name="title_activity_detail_event">DetailEventActivity</string>
 </resources>
