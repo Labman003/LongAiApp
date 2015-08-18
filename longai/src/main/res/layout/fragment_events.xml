@@ -11,15 +11,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="龙爱一线牵活动"
+        android:text="龙爱线下活动"
         android:textSize="20sp"/>
     <TextView
+        android:id="@+id/events_tv_city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="所有城市"
         android:paddingLeft="12dp"
         android:textSize="14sp"/>
     <TextView
+        android:id="@+id/events_tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="所有时间"

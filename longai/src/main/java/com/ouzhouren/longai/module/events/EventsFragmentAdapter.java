@@ -12,8 +12,8 @@ import com.ouzhouren.longai.R;
 /**
  * Created by BenPC on 2015/8/18.
  */
-public class EventFragmentAdapter extends RecyclerView.Adapter<EventFragmentAdapter.ViewHolder>{
-    public EventFragmentAdapter() {
+public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAdapter.ViewHolder>{
+    public EventsFragmentAdapter() {
     }
 
     //...
@@ -30,14 +30,14 @@ public class EventFragmentAdapter extends RecyclerView.Adapter<EventFragmentAdap
         this.mOnItemClickLitener = mOnItemClickLitener;
     }
     @Override
-    public EventFragmentAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public EventsFragmentAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_card, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(final EventFragmentAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final EventsFragmentAdapter.ViewHolder holder, int position) {
         // 如果设置了回调，则设置点击事件
         if (mOnItemClickLitener != null)
         {
