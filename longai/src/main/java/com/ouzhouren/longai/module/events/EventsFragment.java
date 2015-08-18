@@ -1,4 +1,4 @@
-package com.ouzhouren.longai;
+package com.ouzhouren.longai.module.events;
 
 
 import android.app.Activity;
@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ouzhouren.longai.R;
 import com.ouzhouren.longai.common.utils.MyLogger;
 
 public class EventsFragment extends Fragment {
