@@ -3,8 +3,11 @@ package com.ouzhouren.longai.module.news;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.ouzhouren.longai.R;
+import com.ouzhouren.longai.common.utils.MyLogger;
 import com.ouzhouren.longai.entity.News;
 import com.ouzhouren.longai.module.news.activity.NewsDetails;
 
@@ -19,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class NewsFragment extends Fragment {
     public static List<News> newsLists = new ArrayList<>();
@@ -68,35 +73,57 @@ public class NewsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View newsView = inflater.inflate(R.layout.fragment_news, container, false);
-        SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) newsView.findViewById(R.id.news_swipe_container);
-        final ListView listView = (ListView) newsView.findViewById(R.id.news_lv_list);
+        final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) newsView.findViewById(R.id.news_swipe_container);
+        RecyclerView recyclerView = (RecyclerView) newsView.findViewById(R.id.news_rv);
 
-
-        for (int i = 0; i <= 20; i++) {
+        //添加布局
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        for (int i = 0; i <= 4; i++) {
             News news = new News();
             news.setAuthor("作者" + i);
             news.setTitle("标题" + i);
             news.setImgUrl("http://g.hiphotos.baidu.com/baike/s%3D500/sign=49ab240bb68f8c54e7d3c52f0a2b2dee/7e3e6709c93d70cfdd3d48e8fadcd100bba12b14.jpg");
             newsLists.add(news);
         }
-        //SimpleAdapter simpleAdapter = new SimpleAdapter(getActivity(), listItems, R.layout.news_list_item, new String[]{"title", "author", "icon"}, new int[]{R.id.news_listItem_tv_title, R.id.news_listItem_tv_author, R.id.news_listItem_iv_icon});
-        listView.setAdapter(new NewsAdapter(getActivity(), newsLists));
+        final NewsAdapter newsAdapter = new NewsAdapter(getActivity(), newsLists);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        newsAdapter.setOnItemClickLitener(new NewsAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(View view, int position) {
                 Intent news_intent = new Intent(getActivity(), NewsDetails.class);
                 news_intent.putExtra("position", position);
                 startActivity(news_intent);
             }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
         });
 
-//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//
-//            }
-//        });
+        //添加适配器
+        recyclerView.setAdapter(newsAdapter);
+
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        News news = new News();
+                        int i = newsLists.size();
+                        news.setAuthor("作者"+i);
+                        news.setTitle("标题" + i);
+                        news.setImgUrl("http://img3.douban.com/view/photo/photo/public/p914300763.jpg");
+                        newsLists.add(news);
+                        newsAdapter.notifyDataSetChanged();
+                        //停止刷新动画
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 1000);
+            }
+        });
+
         return newsView;
     }
 
