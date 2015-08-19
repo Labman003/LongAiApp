@@ -65,6 +65,8 @@ private RecyclerView recyclerView;
             @Override
             public void onItemClick(View view, int position) {
                 MyLogger logger = MyLogger.benLog();
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("enroll_directlly",false);
                 Intent intent = new Intent(mAc,DetailEventActivity.class);
                 mAc.startActivity(intent);
             }
@@ -72,6 +74,15 @@ private RecyclerView recyclerView;
             @Override
             public void onItemLongClick(View view, int position) {
 
+            }
+        });
+        mAdapter.setOnStateButtonClickLitener(new EventsFragmentAdapter.OnStateButtonClickLitener() {
+            @Override
+            public void onStateButtonClick(View view, int position) {
+                MyLogger logger = MyLogger.benLog();
+                Intent intent = new Intent(mAc,DetailEventActivity.class);
+                intent.putExtra("enroll_directlly",true);
+                mAc.startActivity(intent);
             }
         });
         recyclerView.setAdapter(mAdapter);//设置适配器
