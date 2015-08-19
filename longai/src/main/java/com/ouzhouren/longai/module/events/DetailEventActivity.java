@@ -2,6 +2,7 @@ package com.ouzhouren.longai.module.events;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,10 +10,15 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import com.cengalabs.flatui.FlatUI;
 import com.cengalabs.flatui.views.FlatButton;
 import com.ouzhouren.longai.R;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -20,6 +26,8 @@ public class DetailEventActivity extends AppCompatActivity {
 
     private WebView webView;
     private FlatButton button;
+    private TextView deadlineTv;
+    private long timeStamp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +38,19 @@ public class DetailEventActivity extends AppCompatActivity {
         }
         webView = (WebView) findViewById(R.id.webview);
         button = (FlatButton) findViewById(R.id.detail_event_fb_enroll);
+        deadlineTv= (TextView) findViewById(R.id.detail_event_tv_deadline);
+        SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time="2015-08-20 11:45:55";
+        Date date = null;
+        try {
+            date = format.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        System.out.print("Format To times:"+date.getTime());
+        Date now = new Date();
+        timeStamp =date.getTime()-now.getTime();
+        handler.postDelayed(runnable, 1000);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,14 +72,20 @@ public class DetailEventActivity extends AppCompatActivity {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                pDialog.setCancelable(false);
                 pDialog.show();
+                pDialog.setCancelable(false);
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 pDialog.cancel();
+            }
+
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                super.onReceivedError(view, errorCode, description, failingUrl);
+                pDialog.changeAlertType(SweetAlertDialog.ERROR_TYPE);
             }
         });
 
@@ -80,6 +107,7 @@ public class DetailEventActivity extends AppCompatActivity {
                     public void onClick(SweetAlertDialog sDialog) {
                         button.getAttributes().setTheme(FlatUI.ORANGE,getResources());
                         button.setText("已报名成功");
+                        button.setClickable(false);
                         sDialog
                                 .setTitleText("报名成功!")
                                 .setContentText("一切安排妥当，届时于活动地点前台凭身份证即可入场，记得带身份证哟!")
@@ -122,4 +150,18 @@ public class DetailEventActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    Handler handler = new Handler();
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            timeStamp-=1000;
+            long day=timeStamp/(24*60*60*1000);
+            long hour=(timeStamp/(60*60*1000)-day*24);
+            long min=((timeStamp/(60*1000))-day*24*60-hour*60);
+            long s=(timeStamp/1000-day*24*60*60-hour*60*60-min*60);
+            deadlineTv.setText("报名截止："+day+"天"+hour+"小时"+min+"分"+s+"秒");
+            handler.postDelayed(this, 1000);
+        }
+    };
+
 }

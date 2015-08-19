@@ -40,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:text="主办方：彭小包关爱协会"/>
             <TextView
+                android:id="@+id/detail_event_tv_deadline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="报名截止：00天01时10分47秒"/>
