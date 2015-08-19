@@ -1,4 +1,4 @@
-package com.ouzhouren.longai.module.member;
+package com.ouzhouren.longai.module.member.activity;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.ouzhouren.longai.R;
 import com.ouzhouren.longai.common.utils.MyLogger;
 import com.ouzhouren.longai.entity.User;
+import com.ouzhouren.longai.module.member.DetailFragmentAdapter;
 import com.ouzhouren.longai.module.search.SearchFragment;
 
 import java.util.List;

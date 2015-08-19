@@ -13,7 +13,7 @@ import android.widget.GridView;
 
 import com.ouzhouren.longai.R;
 import com.ouzhouren.longai.entity.User;
-import com.ouzhouren.longai.module.member.DetailActivity;
+import com.ouzhouren.longai.module.member.activity.DetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;

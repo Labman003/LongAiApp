@@ -21,7 +21,7 @@
 
         </activity>
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
-        <activity android:name="com.ouzhouren.longai.module.member.DetailActivity" />
+        <activity android:name=".module.member.activity.DetailActivity" />
         <activity android:name="com.ouzhouren.longai.module.news.activity.NewsDetails" />
         <activity
             android:name="com.ouzhouren.longai.module.welcome.activity.WelcomeActivity"
