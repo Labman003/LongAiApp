@@ -11,19 +11,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.ouzhouren.longai.R;
-import com.ouzhouren.longai.common.utils.MyLogger;
 import com.ouzhouren.longai.entity.News;
 import com.ouzhouren.longai.module.news.activity.NewsDetails;
+import com.ouzhouren.longai.module.news.adapter.NewsAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 public class NewsFragment extends Fragment {
     public static List<News> newsLists = new ArrayList<>();
@@ -78,7 +73,7 @@ public class NewsFragment extends Fragment {
 
         //添加布局
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        for (int i = 0; i <= 4; i++) {
+        for (int i = 0; i <= 2; i++) {
             News news = new News();
             news.setAuthor("作者" + i);
             news.setTitle("标题" + i);
