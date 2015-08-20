@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by 郭泽锋 on 2015/8/19.
  */
-public class NewsComment {
+public class Comment {
     private int id;
     private int sid;
     private int newsId;
