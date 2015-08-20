@@ -1,4 +1,4 @@
-package com.ouzhouren.longai.module.news;
+package com.ouzhouren.longai.module.news.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -6,19 +6,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.ouzhouren.longai.MainActivity;
 import com.ouzhouren.longai.R;
-import com.ouzhouren.longai.common.utils.MyLogger;
 import com.ouzhouren.longai.entity.News;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by 郭泽锋 on 2015/8/13.
@@ -50,7 +46,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context
-        ).inflate(R.layout.news_listitem, parent, false);
+        ).inflate(R.layout.news_list_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -106,34 +102,4 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
         }
     }
 
-//    @Override
-//    public View getView(int position, View convertView, ViewGroup parent) {
-//        NewsItemView newsItemView = new NewsItemView();
-//        if (convertView == null) {
-//            convertView = LayoutInflater.from(context).inflate(R.layout.news_listitem, null);
-//
-//            newsItemView.author = (TextView) convertView.findViewById(R.id.news_listItem_tv_author);
-//            newsItemView.imageView = (ImageView) convertView.findViewById(R.id.news_listItem_iv_icon);
-//            newsItemView.title = (TextView) convertView.findViewById(R.id.news_listItem_tv_title);
-//
-//            News listItem = (News) newsList.get(position);
-//            String url = (String) listItem.getImgUrl();
-//            String currentTitle = (String) listItem.getTitle();
-//            String currentAuthor = (String) listItem.getAuthor();
-//            // listItemView.imageView.setImageDrawable(null);
-//
-//            DisplayImageOptions options = new DisplayImageOptions.Builder()
-//                    //  .showImageOnLoading(R.drawable.ic_stub)
-//                    //  .showImageOnFail(R.drawable.ic_error)
-//                    .cacheInMemory(true)
-//                    .cacheOnDisk(true)
-//                    .bitmapConfig(Bitmap.Config.RGB_565)
-//                    .build();
-//            newsItemView.author.setText(currentAuthor);
-//            newsItemView.title.setText(currentTitle);
-//            imageLoader.displayImage(url, newsItemView.imageView, options);
-//           // convertView.setTag(listItemView);
-//        }
-//        return convertView;
-//    }
 }
