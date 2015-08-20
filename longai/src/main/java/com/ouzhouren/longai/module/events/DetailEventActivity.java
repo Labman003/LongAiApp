@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -73,7 +74,6 @@ public class DetailEventActivity extends AppCompatActivity {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 pDialog.show();
-                pDialog.setCancelable(false);
             }
 
             @Override
@@ -159,7 +159,7 @@ public class DetailEventActivity extends AppCompatActivity {
             long hour=(timeStamp/(60*60*1000)-day*24);
             long min=((timeStamp/(60*1000))-day*24*60-hour*60);
             long s=(timeStamp/1000-day*24*60*60-hour*60*60-min*60);
-            deadlineTv.setText("报名截止："+day+"天"+hour+"小时"+min+"分"+s+"秒");
+            deadlineTv.setText( Html.fromHtml("报名截止：<strong><big> "+day+"</big></strong> 天 <strong><big>"+hour+"</big></strong> 小时 <strong><big>"+min+"</big></strong> 分 <strong><big>"+s+"</big></strong> 秒"));
             handler.postDelayed(this, 1000);
         }
     };
