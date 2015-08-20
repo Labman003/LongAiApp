@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:text="结束时间：2015-08-16 17：30 周六"/>
             <TextView
+                android:id="@+id/detail_event_tv_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="举办地点：成都上锦颐园二期"/>

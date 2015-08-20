@@ -1,5 +1,6 @@
 package com.ouzhouren.longai.module.events;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.cengalabs.flatui.FlatUI;
 import com.cengalabs.flatui.views.FlatButton;
+import com.ouzhouren.BaiduMapTestActivity;
 import com.ouzhouren.longai.R;
 
 import java.text.ParseException;
@@ -28,6 +30,7 @@ public class DetailEventActivity extends AppCompatActivity {
     private WebView webView;
     private FlatButton button;
     private TextView deadlineTv;
+    private TextView locationTv;
     private long timeStamp;
 
     @Override
@@ -40,6 +43,8 @@ public class DetailEventActivity extends AppCompatActivity {
         webView = (WebView) findViewById(R.id.webview);
         button = (FlatButton) findViewById(R.id.detail_event_fb_enroll);
         deadlineTv= (TextView) findViewById(R.id.detail_event_tv_deadline);
+        locationTv= (TextView) findViewById(R.id.detail_event_tv_location);
+        locationTv.setText(Html.fromHtml("举办地点：<font size=\"3\" color=\"#983785\">成都上锦颐园二期</font>"));
         SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time="2015-08-20 11:45:55";
         Date date = null;
@@ -56,6 +61,13 @@ public class DetailEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 enroll();
+            }
+        });
+        locationTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailEventActivity.this, BaiduMapTestActivity.class);
+                DetailEventActivity.this.startActivity(intent);
             }
         });
         //设置WebView属性，能够执行Javascript脚本
