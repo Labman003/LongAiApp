@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.ouzhouren.longai.module.events.EventsFragment;
 import com.ouzhouren.longai.module.news.NewsFragment;
 import com.ouzhouren.longai.module.search.SearchFragment;
 
@@ -16,7 +17,7 @@ public class MainFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
         private SearchFragment searchFragment;
        private NewsFragment newsFragment;
         private TalksFragment talksFragment;
-        private  EventsFragment eventsFragment;
+        private EventsFragment eventsFragment;
         public MainFragmentStatePagerAdapter(FragmentManager fm) {
             super(fm);
             if(titleList == null){

@@ -2,6 +2,7 @@ package com.ouzhouren.base;
 
 import android.app.Application;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -53,6 +54,11 @@ public class BaseApplication extends Application {
 				.writeDebugLogs() // Remove for release app
 				.build();//开始构建
 		ImageLoader.getInstance().init(config);//全局初始化此配置
+
+		/******************初始化百度地图sdk*************************/
+		//在使用SDK各组件之前初始化context信息，传入ApplicationContext
+		//注意该方法要再setContentView方法之前实现
+		SDKInitializer.initialize(this);
 	}
 
 }
