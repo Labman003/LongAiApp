@@ -1,9 +1,13 @@
 package com.ouzhouren.longai.module.news.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 
 import com.ouzhouren.longai.R;
 import com.ouzhouren.longai.entity.Comment;
@@ -16,8 +20,9 @@ import java.util.List;
 /**
  * Created by 郭泽锋 on 2015/8/19.
  */
-public class NewsComment extends Activity {
+public class NewsComment extends AppCompatActivity {
     public static List<Comment> commentList = new ArrayList<>();
+    private Button back,edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +30,8 @@ public class NewsComment extends Activity {
         setContentView(R.layout.news_comment);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.news_comment_rv);
+        back = (Button) findViewById(R.id.news_comment_back);
+        edit = (Button) findViewById(R.id.news_comment_edit);
 
         //添加布局
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -39,6 +46,25 @@ public class NewsComment extends Activity {
         }
          CommentAdapter commentAdapter = new CommentAdapter(this, commentList);
         recyclerView.setAdapter(commentAdapter);
+
+        View.OnClickListener listener = new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()){
+                    case R.id.news_comment_back:
+                        Intent intent = new Intent(NewsComment.this,NewsDetails.class);
+                        startActivity(intent);
+                        //finish();
+                        break;
+                    case R.id.news_comment_edit:
+                        Intent intent1 = new Intent(NewsComment.this, CommentEditPage.class);
+                        startActivity(intent1);
+                        break;
+                }
+            }
+        };
+        back.setOnClickListener(listener);
+        edit.setOnClickListener(listener);
 //
 //        newsAdapter.setOnItemClickLitener(new NewsAdapter.OnItemClickListener() {
 //            @Override

@@ -3,10 +3,13 @@ package com.ouzhouren.longai.module.news.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.support.v7.app.AppCompatActivity;
 
 import com.ouzhouren.longai.MainActivity;
 import com.ouzhouren.longai.R;
@@ -14,7 +17,7 @@ import com.ouzhouren.longai.R;
 /**
  * Created by 郭泽锋 on 2015/8/17.
  */
-public class NewsDetails extends Activity {
+public class NewsDetails extends AppCompatActivity {
     private TextView titleTV, authorTV;
     private Button news_comment;
     Toolbar mToolbar;
@@ -24,6 +27,10 @@ public class NewsDetails extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_details);
 
+//        CollapsingToolbarLayout collapsingToolbarLayout;
+//            collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbarLayout);
+//            collapsingToolbarLayout.setTitle("Design Library");
+
         news_comment = (Button) findViewById(R.id.news_comment);
         news_comment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,7 +39,7 @@ public class NewsDetails extends Activity {
                 startActivity(intent);
             }
         });
-//        mToolbar = (Toolbar) findViewById(R.id.news_detail_toolbar);
+//        mToolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(mToolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {

@@ -24,6 +24,7 @@
         <activity android:name=".module.member.activity.DetailActivity" />
         <activity android:name="com.ouzhouren.longai.module.news.activity.NewsDetails" />
         <activity android:name="com.ouzhouren.longai.module.news.activity.NewsComment" />
+        <activity android:name="com.ouzhouren.longai.module.news.activity.CommentEditPage" />
         <activity
             android:name="com.ouzhouren.longai.module.welcome.activity.WelcomeActivity"
             android:windowSoftInputMode="adjustNothing"

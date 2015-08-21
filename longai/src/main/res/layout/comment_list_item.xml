@@ -64,17 +64,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:ellipsize="marquee"
+            android:lines="10"
             android:text="一天，刘备、关羽和张飞被曹操抓起来了，曹操说：“你们到果园里去摘个水果，我就放了你们。”张飞第一个来，他拿了一个哈密瓜，曹操说：“你把哈密瓜塞进屁股里，我就放了你。”张飞塞呀塞，但塞不进，被杀了。关羽第二个来，他拿了一串葡萄，曹操说了同样的话，关羽一颗一颗地塞，当他塞到最后一颗时，突然“扑哧”一笑，葡萄爆了，也被杀了。在地狱，关羽和张飞见面了，张飞说：“你拿着葡萄，这么好塞，却也被杀了。要是我的话，就肯定会被放！”关羽叹了一口气，说：“没办法呀，那时，我突然看见刘备拿着榴莲走过来。”没多久，刘备也下了地狱。"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/comment_time"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:layout_marginTop="15dp"
-            android:gravity="center_vertical"
-            android:text="08-19 19:47"
-            android:textColor="#bfbfbf"
-            android:textSize="15sp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/comment_time"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:text="08-19 19:47"
+                android:textColor="#bfbfbf"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical|right">
+
+                <Button
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="展开"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
