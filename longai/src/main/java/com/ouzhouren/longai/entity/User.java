@@ -1,119 +1,145 @@
 package com.ouzhouren.longai.entity;
 
-import android.location.Location;
+public class User implements java.io.Serializable{
 
-import java.io.Serializable;
+	// Fields
+	private Integer userSid;
+	private String name;
+	private String nickname;
+	private String email;
+	private String location;
+	private String biography;
+	private String profilepic;
+	private String gender;
+	private String type;
+	private String phone;
+	private Double preferencegens;
+	private Double selfgens;
+	private String userId;
+	private String password;
+	
 
-/**
- * Created by BenPC on 2015/8/3.
- */
-public class User implements Serializable {
-    private String id;
-    private String logToken;
-    private String userName;
-    private String name;
-    private String phone;
-    private Location location;
-    private String gender;
-    private String email;
-    private String picture;
-    private String md5;
-    private String sha1;
-    private String sha256;
 
-    public String getId() {
-        return id;
-    }
+	// Constructors
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	/** default constructor */
+	public User() {
+	}
 
-    public String getLogToken() {
-        return logToken;
-    }
 
-    public void setLogToken(String logToken) {
-        this.logToken = logToken;
-    }
+	// Property accessors
 
-    public String getUserName() {
-        return userName;
-    }
+	public String getPhone() {
+		return phone;
+	}
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public Integer getUserSid() {
+		return this.userSid;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setUserSid(Integer userSid) {
+		this.userSid = userSid;
+	}
 
-    public String getPhone() {
-        return phone;
-    }
+	public String getName() {
+		return this.name;
+	}
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public Location getLocation() {
-        return location;
-    }
+	public String getNickname() {
+		return this.nickname;
+	}
 
-    public void setLocation(Location location) {
-        this.location = location;
-    }
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 
-    public String getGender() {
-        return gender;
-    }
+	public String getEmail() {
+		return this.email;
+	}
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getLocation() {
+		return this.location;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
-    public String getPicture() {
-        return picture;
-    }
+	public String getBiography() {
+		return this.biography;
+	}
 
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
+	public void setBiography(String biography) {
+		this.biography = biography;
+	}
 
-    public String getMd5() {
-        return md5;
-    }
+	public String getProfilepic() {
+		return this.profilepic;
+	}
 
-    public void setMd5(String md5) {
-        this.md5 = md5;
-    }
+	public void setProfilepic(String profilepic) {
+		this.profilepic = profilepic;
+	}
 
-    public String getSha1() {
-        return sha1;
-    }
+	public String getGender() {
+		return this.gender;
+	}
 
-    public void setSha1(String sha1) {
-        this.sha1 = sha1;
-    }
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
-    public String getSha256() {
-        return sha256;
-    }
+	public String getType() {
+		return this.type;
+	}
 
-    public void setSha256(String sha256) {
-        this.sha256 = sha256;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public Double getPreferencegens() {
+		return this.preferencegens;
+	}
+
+	public void setPreferencegens(Double preferencegens) {
+		this.preferencegens = preferencegens;
+	}
+
+	public Double getSelfgens() {
+		return this.selfgens;
+	}
+
+	public void setSelfgens(Double selfgens) {
+		this.selfgens = selfgens;
+	}
+
+	public String getUserId() {
+		return this.userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
 }

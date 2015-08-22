@@ -87,7 +87,7 @@ public class DetailFragment extends Fragment {
         biographyTv = (TextView) rootView.findViewById(R.id.detail_tv_biography);
         //  placeHolderImage.setViewName("photo"+getIntent().getIntExtra("position",0));
         logger.i("2");
-        ImageLoader.getInstance().displayImage(user.getPicture(), placeHolderImage);
+        ImageLoader.getInstance().displayImage(user.getProfilepic(), placeHolderImage);
         logger.i("3");
         // placeHolderImage.setImageBitmap(bitmap);
         Bitmap bitmap = null;
@@ -99,7 +99,7 @@ public class DetailFragment extends Fragment {
                 .cacheOnDisk(true)
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .build();
-        bitmap=ImageLoader.getInstance().loadImageSync(user.getPicture(),options);
+        bitmap=ImageLoader.getInstance().loadImageSync(user.getProfilepic(),options);
         logger.i("4");
         if (bitmap != null) {
             // With palette you can get the main colors of the give bitmap
@@ -127,7 +127,7 @@ public class DetailFragment extends Fragment {
         emailTV.setText(selectedUser.getEmail());
         nameTV.setText(selectedUser.getName());
        phoneTv.setText(selectedUser.getPhone());
-       nicknameTV.setText(selectedUser.getUserName());
+       nicknameTV.setText(selectedUser.getNickname());
 
 //设置颜色
         //设置窗口背景为黑调色

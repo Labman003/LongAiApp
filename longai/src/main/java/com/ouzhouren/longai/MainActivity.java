@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(mViewPager);
     //    tabLayout.setTabsFromPagerAdapter(pagerAdapter);
-        /******************************************/
+        /********************LiteHttp**********************/
 //        String url = "api.douban.com";
 //        StringRequest req = new StringRequest(url).addUrlPrifix("http://").addUrlSuffix("/v2/book/1220562");
 //        LiteHttpUtil.getLiteHttp(mAc).executeAsync(req.setHttpListener(new HttpListener<String>() {

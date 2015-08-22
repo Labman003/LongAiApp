@@ -7,7 +7,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/tv_down"
+        android:layout_above="@+id/ly_sharefunc"
         android:layout_alignParentTop="true"
         android:background="@color/white"
         android:scrollbars="none"
@@ -40,7 +40,7 @@
                     android:textSize="@dimen/text_18"/>
 
                 <EditText
-                    android:id="@+id/et_phone"
+                    android:id="@+id/login_et_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/tv_phonetitle"
@@ -80,7 +80,7 @@
                     android:textSize="@dimen/text_18"/>
 
                 <EditText
-                    android:id="@+id/et_psw"
+                    android:id="@+id/login_et_psw"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@+id/tv_forgetpsw"
@@ -95,7 +95,7 @@
                     android:textSize="@dimen/text_18"/>
 
                 <TextView
-                    android:id="@+id/tv_forgetpsw"
+                    android:id="@+id/login_tv_forgetpsw"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -104,7 +104,7 @@
                     android:textColor="@color/tab_message"
                     android:textSize="@dimen/text_18"/>
                 <ImageView
-                    android:id="@+id/btn_login"
+                    android:id="@+id/login_iv_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_login_confirm"

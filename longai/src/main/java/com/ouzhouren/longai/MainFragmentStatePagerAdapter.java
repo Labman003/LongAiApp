@@ -18,6 +18,7 @@ public class MainFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
        private NewsFragment newsFragment;
         private TalksFragment talksFragment;
         private EventsFragment eventsFragment;
+    private MomentsFragment momentsFragment;
         public MainFragmentStatePagerAdapter(FragmentManager fm) {
             super(fm);
             if(titleList == null){
@@ -25,7 +26,8 @@ public class MainFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
                 this.titleList.add("缘分");
                 this.titleList.add("消息");
                 this.titleList.add("课室");
-                this.titleList.add("活动q");
+                this.titleList.add("活动");
+                this.titleList.add("广场");
             }
             if(mFragmentList == null){
                 this.mFragmentList = new ArrayList<Fragment>();
@@ -37,6 +39,8 @@ public class MainFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
                 this.mFragmentList.add(newsFragment);
                 eventsFragment =new EventsFragment();
                 this.mFragmentList.add(eventsFragment);
+                momentsFragment =new MomentsFragment();
+                this.mFragmentList.add(momentsFragment);
             }
 
         }
