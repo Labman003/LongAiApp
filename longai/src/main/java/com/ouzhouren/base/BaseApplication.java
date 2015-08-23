@@ -85,6 +85,7 @@ public class BaseApplication extends Application {
 		@Override
 		public void onReceiveLocation(BDLocation location) {
 			//Receive Location
+			logger.i(1);
 			StringBuffer sb = new StringBuffer(256);
 			sb.append("time : ");
 			sb.append(location.getTime());
@@ -96,6 +97,7 @@ public class BaseApplication extends Application {
 			sb.append(location.getLongitude());
 			sb.append("\nradius : ");
 			sb.append(location.getRadius());
+			logger.i(2);
 			if (location.getLocType() == BDLocation.TypeServerError) {
 				sb.append("\ndescribe : ");
 				sb.append("服务端网络定位失败，可以反馈IMEI号和大体定位时间到loc-bugs@baidu.com，会有人追查原因");
@@ -110,7 +112,9 @@ public class BaseApplication extends Application {
 				ACache mCache = ACache.get(getApplicationContext());
 				mCache.put("latitude",location.getLatitude());
 				mCache.put("lontitude",location.getLongitude());
-				mCache.put("lontitude",location.getLocationDescribe());
+				if(location.getLocationDescribe()!=null){
+					mCache.put("locationdescribe",location.getLocationDescribe());
+				}
 				mLocationClient.stop();
 
 				if (location.getLocType() == BDLocation.TypeGpsLocation){// GPS定位结果
@@ -140,6 +144,7 @@ public class BaseApplication extends Application {
 					sb.append("离线定位成功，离线定位结果也是有效的");
 				}
 			}
+			logger.i(3);
 			sb.append("\nlocationdescribe : ");// 位置语义化信息
 			sb.append(location.getLocationDescribe());
 			List<Poi> list = location.getPoiList();// POI信息
@@ -151,6 +156,7 @@ public class BaseApplication extends Application {
 					sb.append(p.getId() + " " + p.getName() + " " + p.getRank());
 				}
 			}
+			logger.i(4);
 			logger.i(sb.toString());
 		}
 	}

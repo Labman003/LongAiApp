@@ -50,12 +50,28 @@
          <!--</android.support.design.widget.CollapsingToolbarLayout>-->
 
     </android.support.design.widget.AppBarLayout>
-        <!--可滑动的布局内容-->
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <TextView
+                android:id="@+id/main_tv_network_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="网络连接不可用 _(:3 」∠)_   "
+                android:gravity="center"
+                android:padding="10dp"
+                android:background="#f0c991a1"
+                />
+            <!--可滑动的布局内容-->
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
+
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabBtn"
@@ -64,6 +80,7 @@
             android:layout_gravity="bottom|right"
             android:src="@drawable/ic_plus"
             app:fabSize="normal" />
+
     </android.support.design.widget.CoordinatorLayout>
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation"
