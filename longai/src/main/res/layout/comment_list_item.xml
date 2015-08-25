@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/comment_user_icon"
@@ -18,7 +18,7 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:orientation="vertical">
 
@@ -42,10 +42,11 @@
                 android:gravity="center_vertical|right">
 
                 <ImageView
+                    android:id="@+id/comment_zan"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginRight="5dp"
-                    android:src="@drawable/news_comment_zan" />
+                    android:src="@drawable/icon_zan_grey" />
 
                 <TextView
                     android:id="@+id/comment_zanNum"
@@ -64,8 +65,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:ellipsize="marquee"
-            android:lines="10"
+            android:ellipsize="end"
+            android:maxLines="8"
             android:text="一天，刘备、关羽和张飞被曹操抓起来了，曹操说：“你们到果园里去摘个水果，我就放了你们。”张飞第一个来，他拿了一个哈密瓜，曹操说：“你把哈密瓜塞进屁股里，我就放了你。”张飞塞呀塞，但塞不进，被杀了。关羽第二个来，他拿了一串葡萄，曹操说了同样的话，关羽一颗一颗地塞，当他塞到最后一颗时，突然“扑哧”一笑，葡萄爆了，也被杀了。在地狱，关羽和张飞见面了，张飞说：“你拿着葡萄，这么好塞，却也被杀了。要是我的话，就肯定会被放！”关羽叹了一口气，说：“没办法呀，那时，我突然看见刘备拿着榴莲走过来。”没多久，刘备也下了地狱。"
             android:textSize="18sp" />
 
@@ -90,11 +91,14 @@
                 android:gravity="center_vertical|right">
 
                 <Button
+                    android:id="@+id/comment_item_show"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
+                    android:background="@null"
                     android:gravity="center"
                     android:text="展开"
-                    android:textSize="20sp" />
+                    android:textColor="#ff868686"
+                    android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

@@ -29,6 +29,7 @@
         <activity android:name="com.ouzhouren.longai.module.news.activity.NewsDetails" />
         <activity android:name="com.ouzhouren.longai.module.news.activity.NewsComment" />
         <activity android:name="com.ouzhouren.longai.module.news.activity.CommentEditPage" />
+        <activity android:name="com.ouzhouren.longai.module.news.NewsFragment" />
         <activity
             android:name=".module.welcome.activity.WelcomeActivity"
             android:label="@string/app_name"
@@ -39,10 +40,10 @@
             android:name=".module.events.DetailEventActivity"
             android:label="@string/title_activity_detail_event" >
         </activity>
-        <activity
-            android:name="com.ouzhouren.BaiduMapTestActivity"
-            android:label="@string/title_activity_baidu_map_test" >
-        </activity>
+        <!--<activity-->
+            <!--android:name="com.ouzhouren.BaiduMapTestActivity"-->
+            <!--android:label="@string/title_activity_baidu_map_test" >-->
+        <!--</activity>-->
     </application>
 
 </manifest>
