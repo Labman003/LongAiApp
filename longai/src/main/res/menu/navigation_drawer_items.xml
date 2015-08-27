@@ -14,8 +14,8 @@
             android:title="About"/>
 
         <item
-            android:id="@+id/navItem4"
-            android:title="Contact"/>
+            android:id="@+id/item_location"
+            android:title="未知地址"/>
     </group>
 
 </menu>

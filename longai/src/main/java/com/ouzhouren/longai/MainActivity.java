@@ -27,6 +27,9 @@ import android.widget.Toast;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
+import com.github.pwittchen.reactivenetwork.library.ConnectivityStatus;
+import com.github.pwittchen.reactivenetwork.library.ReactiveNetwork;
+import com.ouzhouren.base.cache.ACache;
 import com.soundcloud.android.crop.Crop;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
@@ -35,6 +38,9 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import java.io.File;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 //testajjjjTESTfffsshhhhhdddffffaaaaaaaaaaa123456789
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
@@ -100,6 +106,11 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
       //  collapsingToolbarLayout.setTitle("龙爱");
         /******************抽屉导航************************/
         navigation = (NavigationView) findViewById(R.id.navigation);
+        ACache aCache = ACache.get(mAc);
+        String locationdescribe = aCache.getAsString("locationdescribe");
+        if(locationdescribe!=null&&locationdescribe.length()>0){
+            navigation.getMenu().findItem(R.id.item_location).setTitle("位置："+locationdescribe);
+        }
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -110,6 +121,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                     case R.id.navItem2:
                         break;
                     case R.id.navItem3:
+                        break;
+                    case R.id.item_location:
                         break;
                 }
                 return false;
@@ -178,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(mViewPager);
     //    tabLayout.setTabsFromPagerAdapter(pagerAdapter);
-        /******************************************/
+        /********************LiteHttp**********************/
 //        String url = "api.douban.com";
 //        StringRequest req = new StringRequest(url).addUrlPrifix("http://").addUrlSuffix("/v2/book/1220562");
 //        LiteHttpUtil.getLiteHttp(mAc).executeAsync(req.setHttpListener(new HttpListener<String>() {
@@ -296,5 +309,43 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new ReactiveNetwork().observeConnectivity(this)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .filter(ConnectivityStatus.isEqualTo(ConnectivityStatus.OFFLINE))
+                .subscribe(new Action1<ConnectivityStatus>() {
+                    @Override public void call(ConnectivityStatus connectivityStatus) {
+                        // do something with connectivityStatus, which will be WIFI_CONNECTED
+                        TextView networkStateTv = (TextView) findViewById(R.id.main_tv_network_state);
+                        networkStateTv.setVisibility(View.VISIBLE);
+                    }
+                });
+        new ReactiveNetwork().observeConnectivity(this)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .filter(ConnectivityStatus.isEqualTo(ConnectivityStatus.MOBILE_CONNECTED))
+                .subscribe(new Action1<ConnectivityStatus>() {
+                    @Override public void call(ConnectivityStatus connectivityStatus) {
+                        // do something with connectivityStatus, which will be WIFI_CONNECTED
+                        TextView networkStateTv = (TextView) findViewById(R.id.main_tv_network_state);
+                        networkStateTv.setVisibility(View.GONE);
+                    }
+                });
+        new ReactiveNetwork().observeConnectivity(this)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .filter(ConnectivityStatus.isEqualTo(ConnectivityStatus.WIFI_CONNECTED))
+                .subscribe(new Action1<ConnectivityStatus>() {
+                    @Override public void call(ConnectivityStatus connectivityStatus) {
+                        // do something with connectivityStatus, which will be WIFI_CONNECTED
+                        TextView networkStateTv = (TextView) findViewById(R.id.main_tv_network_state);
+                        networkStateTv.setVisibility(View.GONE);
+                    }
+                });
     }
 }

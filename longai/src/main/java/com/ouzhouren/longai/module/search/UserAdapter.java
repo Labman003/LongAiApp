@@ -91,7 +91,7 @@ class UserAdapter extends BaseAdapter {
                 .cacheOnDisk(true)
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .build();
-        imageLoader.displayImage(currentUser.getPicture(), viewHolder.userImage,options);
+        imageLoader.displayImage(currentUser.getProfilepic(), viewHolder.userImage,options);
         // Set the proper view name to get the transition well managed
         // convertView.setViewName("photo" + position);
         return convertView;

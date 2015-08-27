@@ -70,7 +70,7 @@ public class DetailActivity extends AppCompatActivity {
         nameTV.setText(selectedUser.getName());
         emailTV.setText(selectedUser.getEmail());
         ((TextView) findViewById(R.id.detail_tv_phone)).setText(selectedUser.getPhone());
-        ((TextView) findViewById(R.id.nickname)).setText(selectedUser.getUserName());
+        ((TextView) findViewById(R.id.nickname)).setText(selectedUser.getNickname());
 
 //设置颜色
         if (lightVibrant != null)

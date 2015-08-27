@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.cengalabs.flatui.FlatUI;
 import com.cengalabs.flatui.views.FlatButton;
-//import com.ouzhouren.BaiduMapTestActivity;
+import com.ouzhouren.longai.PoiSearchDemo;
 import com.ouzhouren.longai.R;
 
 import java.text.ParseException;
@@ -66,8 +66,8 @@ public class DetailEventActivity extends AppCompatActivity {
         locationTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-      //          Intent intent = new Intent(DetailEventActivity.this, BaiduMapTestActivity.class);
-       //         DetailEventActivity.this.startActivity(intent);
+                Intent intent = new Intent(DetailEventActivity.this,PoiSearchDemo.class);
+                DetailEventActivity.this.startActivity(intent);
             }
         });
         //设置WebView属性，能够执行Javascript脚本
