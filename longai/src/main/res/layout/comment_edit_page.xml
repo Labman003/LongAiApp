@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FF494EFF"
+        android:gravity="center_vertical">
+
+        <Button
+            android:id="@+id/comment_edit_back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/icon_back"
+            android:padding="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/comment_edit_back"
+            android:gravity="center"
+            android:text="写点评"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/comment_edit_send"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/comment_edit_send"
+            android:paddingRight="15dp" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/comment_content_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:hint="请输入你的评论" />
+
+
+</LinearLayout>
