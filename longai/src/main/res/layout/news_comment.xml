@@ -4,39 +4,40 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#FF494EFF"
-            android:gravity="center_vertical"
-            >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FF494EFF"
+        android:gravity="center_vertical">
 
-            <Button
-                android:id="@+id/news_comment_back"
-                android:layout_marginLeft="15dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/news_comment_back" />
+        <Button
+            android:id="@+id/news_comment_back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/icon_back"
+            android:padding="15dp" />
 
-            <TextView
-                android:id="@+id/news_comment_numb"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_toRightOf="@id/news_comment_back"
-                android:layout_marginLeft="10dp"
-                android:text="3条点评"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:textSize="20sp" />
-            <Button
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="15dp"
-                android:id="@+id/news_comment_edit"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/news_comment_edit"
-                />
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/news_comment_numb"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/news_comment_back"
+            android:gravity="center"
+            android:text="3条点评"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/news_comment_edit"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:background="@drawable/news_comment_edit" />
+    </RelativeLayout>
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/news_comment_rv"
         android:layout_width="match_parent"

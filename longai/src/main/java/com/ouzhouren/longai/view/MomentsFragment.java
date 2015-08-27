@@ -1,15 +1,28 @@
-package com.ouzhouren.longai.view;
+package com.ouzhouren.longai;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ouzhouren.longai.R;
+import com.ouzhouren.longai.entity.Moment;
+import com.ouzhouren.longai.entity.News;
+import com.ouzhouren.longai.module.news.activity.NewsDetails;
+import com.ouzhouren.longai.module.news.adapter.NewsAdapter;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MomentsFragment extends Fragment {
+    public static List<Moment> momentLists = new ArrayList<>();
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -54,10 +67,59 @@ public class MomentsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_talks, container, false);
+        View newsView = inflater.inflate(R.layout.fragment_moments, container, false);
+        final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) newsView.findViewById(R.id.moments_swipe_container);
+        RecyclerView recyclerView = (RecyclerView) newsView.findViewById(R.id.moments_rv);
+
+        //添加布局
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        for (int i = 0; i <= 2; i++) {
+            Moment moment = new Moment();
+            moment.setMomentContent("psz love little loli!");
+            moment.setMomentPubtime(new Timestamp(System.currentTimeMillis()));
+            momentLists.add(moment);
+        }
+        final MomentsAdapter momentsAdapter = new MomentsAdapter(getActivity(), momentLists);
+
+//        momentsAdapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, int position) {
+//                Intent news_intent = new Intent(getActivity(), NewsDetails.class);
+//                news_intent.putExtra("position", position);
+//                startActivity(news_intent);
+//            }
+//
+//            @Override
+//            public void onItemLongClick(View view, int position) {
+//
+//            }
+//        });
+
+        //添加适配器
+        recyclerView.setAdapter(momentsAdapter);
+
+
+//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                new Handler().postDelayed(new Runnable() {
+//                    public void run() {
+//                        News news = new News();
+//                        int i = newsLists.size();
+//                        news.setAuthor("作者" + i);
+//                        news.setTitle("标题" + i);
+//                        news.setImgUrl("http://img3.douban.com/view/photo/photo/public/p914300763.jpg");
+//                        newsLists.add(news);
+//                        newsAdapter.notifyDataSetChanged();
+//                        //停止刷新动画
+//                        swipeRefreshLayout.setRefreshing(false);
+//                    }
+//                }, 1000);
+//            }
+//        });
+
+        return newsView;
     }
-
-
-
-
 }
+
+

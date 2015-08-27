@@ -10,8 +10,17 @@ public class Comment {
     private int sid;
     private int newsId;
     private int userId;
-    private String nickName;
-    private String content;
+
+    public int getZanNumb() {
+        return zanNumb;
+    }
+
+    public void setZanNumb(int zanNumb) {
+        this.zanNumb = zanNumb;
+    }
+
+    private int zanNumb;
+    private String nickName, content;
     private Date pubTime;
 
     public int getId() {

@@ -1,51 +1,76 @@
 package com.ouzhouren.longai.view.news.activity;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.support.v7.app.AppCompatActivity;
 
 import com.ouzhouren.longai.R;
+import com.ouzhouren.longai.module.news.NewsFragment;
 
 /**
  * Created by 郭泽锋 on 2015/8/17.
  */
-public class NewsDetails extends Activity {
-    private TextView titleTV, authorTV;
-    private Button news_comment;
+public class NewsDetails extends AppCompatActivity {
+    private TextView titleTV, authorTV, zanNumb, commentNumb;
+    private Button newsComment, newsDetailsBack, newsDetailsZan;
     Toolbar mToolbar;
+    boolean isZan = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_details);
 
-        news_comment = (Button) findViewById(R.id.news_comment);
-        news_comment.setOnClickListener(new View.OnClickListener() {
+        newsComment = (Button) findViewById(R.id.news_comment);
+        newsDetailsBack = (Button) findViewById(R.id.news_details_back);
+        newsDetailsZan = (Button) findViewById(R.id.news_details_zan);
+        zanNumb = (TextView) findViewById(R.id.news_zanNum);
+        commentNumb = (TextView) findViewById(R.id.news_commentNum);
+
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NewsDetails.this, NewsComment.class);
-                startActivity(intent);
+
+                switch (v.getId()) {
+                    case R.id.news_comment:
+                        Intent intent = new Intent(NewsDetails.this, NewsComment.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.news_details_back:
+                        finish();
+                        break;
+                    case R.id.news_details_zan:
+                        String text = zanNumb.getText().toString();
+                        int numb = Integer.parseInt(text);
+                        if (!isZan) {
+                            numb++;
+                            zanNumb.setText(numb + "");
+                            newsDetailsZan.setBackgroundResource(R.drawable.icon_zan_orange);
+                            isZan = true;
+                        } else {
+                            numb--;
+                            zanNumb.setText(numb + "");
+                            newsDetailsZan.setBackgroundResource(R.drawable.icon_zan_white);
+                            isZan = false;
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
-        });
-//        mToolbar = (Toolbar) findViewById(R.id.news_detail_toolbar);
-//        setSupportActionBar(mToolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onBackPressed();
-//            }
-//        });
-        //使用CollapsingToolbarLayout必须把title设置到CollapsingToolbarLayout上，设置到Toolbar上则不会显示
-//        CollapsingToolbarLayout mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-//        mCollapsingToolbarLayout.setTitle("CollapsingToolbarLayout");
-        //通过CollapsingToolbarLayout修改字体颜色
-//        mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
-//        mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的颜色
+        };
+        newsComment.setOnClickListener(listener);
+        newsDetailsBack.setOnClickListener(listener);
+        newsDetailsZan.setOnClickListener(listener);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setTitle("");
+        setSupportActionBar(mToolbar);
 
 
 //        titleTV = (TextView) findViewById(R.id.news_details_titleTV);

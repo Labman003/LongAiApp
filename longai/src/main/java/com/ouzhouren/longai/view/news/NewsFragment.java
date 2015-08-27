@@ -82,7 +82,7 @@ public class NewsFragment extends Fragment {
         }
         final NewsAdapter newsAdapter = new NewsAdapter(getActivity(), newsLists);
 
-        newsAdapter.setOnItemClickLitener(new NewsAdapter.OnItemClickListener() {
+        newsAdapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Intent news_intent = new Intent(getActivity(), NewsDetails.class);
