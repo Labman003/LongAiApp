@@ -14,14 +14,14 @@
         android:layout_marginTop="60dp"
         android:orientation="vertical">
 
-        <com.ouzhouren.longai.module.welcome.view.ChildViewPager
+        <com.ouzhouren.longai.view.welcome.view.ChildViewPager
             android:id="@+id/vp_imageanim"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
             android:background="@drawable/shape_round_red"/>
 
-        <com.ouzhouren.longai.module.welcome.view.ChildViewPager
+        <com.ouzhouren.longai.view.welcome.view.ChildViewPager
             android:id="@+id/vp_textanim"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -36,14 +36,14 @@
             android:background="@drawable/shape_round_bottom_white"
             android:orientation="vertical">
 
-            <com.ouzhouren.longai.module.welcome.view.WelcomeIndicator
+            <com.ouzhouren.longai.view.welcome.view.WelcomeIndicator
                 android:id="@+id/view_indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="#FFF"
                 android:orientation="vertical">
-            </com.ouzhouren.longai.module.welcome.view.WelcomeIndicator>
+            </com.ouzhouren.longai.view.welcome.view.WelcomeIndicator>
 
             <TextView
                 android:id="@+id/tv_skip"

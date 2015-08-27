@@ -1,0 +1,1 @@
+package com.ouzhouren.longai.model;

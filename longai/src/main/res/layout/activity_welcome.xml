@@ -17,7 +17,7 @@
         android:layout_gravity="center"
         android:src="@drawable/welcome_logo"/>
 
-    <com.ouzhouren.longai.module.welcome.view.ParentViewPager
+    <com.ouzhouren.longai.view.welcome.view.ParentViewPager
         android:id="@+id/vp_parent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
