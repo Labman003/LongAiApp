@@ -1,17 +1,15 @@
 package com.ouzhouren.longai.module.news.activity;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.ouzhouren.longai.R;
-import com.ouzhouren.longai.module.news.NewsFragment;
 
 /**
  * Created by 郭泽锋 on 2015/8/17.
@@ -52,11 +50,13 @@ public class NewsDetails extends AppCompatActivity {
                             numb++;
                             zanNumb.setText(numb + "");
                             newsDetailsZan.setBackgroundResource(R.drawable.icon_zan_orange);
+                            Toast.makeText(NewsDetails.this, "赞+1", Toast.LENGTH_SHORT).show();
                             isZan = true;
                         } else {
                             numb--;
                             zanNumb.setText(numb + "");
                             newsDetailsZan.setBackgroundResource(R.drawable.icon_zan_white);
+                            Toast.makeText(NewsDetails.this, "赞-1", Toast.LENGTH_SHORT).show();
                             isZan = false;
                         }
                         break;
@@ -68,7 +68,7 @@ public class NewsDetails extends AppCompatActivity {
         newsComment.setOnClickListener(listener);
         newsDetailsBack.setOnClickListener(listener);
         newsDetailsZan.setOnClickListener(listener);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.news_toolbar);
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
 

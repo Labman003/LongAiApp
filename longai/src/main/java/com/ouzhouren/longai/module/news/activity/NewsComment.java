@@ -1,21 +1,16 @@
 package com.ouzhouren.longai.module.news.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.ouzhouren.longai.R;
 import com.ouzhouren.longai.entity.Comment;
-import com.ouzhouren.longai.module.news.adapter.CommentAdapter;
+import com.ouzhouren.longai.module.news.adapter.NewsCommentAdapter;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,7 +20,7 @@ import java.util.List;
  * Created by 郭泽锋 on 2015/8/19.
  */
 public class NewsComment extends AppCompatActivity {
-    public static List<Comment> commentList = new ArrayList<>();
+    public static List<Comment> newsCommentList = new ArrayList<>();
     private Button commentBack, commentEdit;
     RecyclerView recyclerView;
 
@@ -47,10 +42,10 @@ public class NewsComment extends AppCompatActivity {
             comment.setContent(str);
             comment.setPubTime(new Date());
             comment.setUserId(i);
-            commentList.add(comment);
+            newsCommentList.add(comment);
         }
-        final CommentAdapter commentAdapter = new CommentAdapter(this, commentList);
-        recyclerView.setAdapter(commentAdapter);
+        final NewsCommentAdapter newsCommentAdapter = new NewsCommentAdapter(this, newsCommentList);
+        recyclerView.setAdapter(newsCommentAdapter);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -60,7 +55,7 @@ public class NewsComment extends AppCompatActivity {
                         finish();
                         break;
                     case R.id.news_comment_edit:
-                        Intent intent = new Intent(NewsComment.this, CommentEditPage.class);
+                        Intent intent = new Intent(NewsComment.this, NewsCommentEditPage.class);
                         startActivityForResult(intent, 1);
                         break;
                 }
@@ -78,7 +73,7 @@ public class NewsComment extends AppCompatActivity {
         comment.setContent(commentContent);
         comment.setPubTime(new Date());
         comment.setUserId(1);
-        commentList.add(0, comment);
+        newsCommentList.add(0, comment);
         recyclerView.getAdapter().notifyDataSetChanged();
     }
 }
