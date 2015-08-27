@@ -26,7 +26,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * Created by 郭泽锋 on 2015/8/19.
  */
-public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
+public class NewsCommentAdapter extends RecyclerView.Adapter<NewsCommentAdapter.ViewHolder> {
     private Context context;
     private List<Comment> commentList;
 
@@ -44,7 +44,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         this.mOnItemClickListener = mOnItemClickListener;
     }
 
-    public CommentAdapter(Context context, List<Comment> commentList) {
+    public NewsCommentAdapter(Context context, List<Comment> commentList) {
         this.context = context;
         this.commentList = commentList;
     }
@@ -95,6 +95,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                                             holder.commentZan.setImageResource(R.drawable.icon_zan_blue);
                                             zanNumb++;
                                             getItem(position).setZanNumb(zanNumb);
+                                            Toast.makeText(context, "赞+1", Toast.LENGTH_SHORT).show();
                                             holder.zanNum.setText(getItem(position).getZanNumb()+"");
                                             //notifyItemChanged(position);
                                         } else {
@@ -103,6 +104,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                                             holder.commentZan.setImageResource(R.drawable.icon_zan_grey);
                                             zanNumb--;
                                             getItem(position).setZanNumb(zanNumb);
+                                            Toast.makeText(context, "赞-1", Toast.LENGTH_SHORT).show();
                                             holder.zanNum.setText(getItem(position).getZanNumb()+"");
                                             //notifyItemChanged(position);
                                         }
