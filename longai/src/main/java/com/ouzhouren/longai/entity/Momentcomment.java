@@ -1,5 +1,7 @@
 package com.ouzhouren.longai.entity;
 
+import com.ouzhouren.longai.model.User;
+
 import java.sql.Timestamp;
 
 /**

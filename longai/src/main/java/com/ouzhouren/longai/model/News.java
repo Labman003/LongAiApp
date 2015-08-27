@@ -1,35 +1,13 @@
 package com.ouzhouren.longai.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 /**
  * News entity. @author MyEclipse Persistence Tools
  */
-@Entity
-@Table(name="news")
 public class News implements java.io.Serializable {
 
-	// Fields
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="news_id")
 	private Integer newsId;
-	@Column(name="content")
 	private String content;
-	@Column(name="author")
 	private String author;
-	@Column(name="title")
 	private String title;
 	// Constructors
 

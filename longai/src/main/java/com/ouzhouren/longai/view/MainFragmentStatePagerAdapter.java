@@ -4,10 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.ouzhouren.longai.view.talk.TalksFragment;
 import com.ouzhouren.longai.view.events.EventsFragment;
 import com.ouzhouren.longai.view.news.NewsFragment;
 import com.ouzhouren.longai.view.search.SearchFragment;
+import com.ouzhouren.longai.view.talk.TalksFragment;
 
 import java.util.ArrayList;
 import java.util.List;

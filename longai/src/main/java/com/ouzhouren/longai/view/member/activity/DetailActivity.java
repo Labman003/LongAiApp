@@ -69,7 +69,7 @@ public class DetailActivity extends AppCompatActivity {
         TextView biographyTitleTv = (TextView) findViewById(R.id.android_tv_biography_title);
         nameTV.setText(selectedUser.getName());
         emailTV.setText(selectedUser.getEmail());
-        ((TextView) findViewById(R.id.detail_tv_phone)).setText(selectedUser.getPhone());
+      //  ((TextView) findViewById(R.id.detail_tv_phone)).setText(selectedUser.getPhone());
         ((TextView) findViewById(R.id.nickname)).setText(selectedUser.getNickname());
 
 //设置颜色

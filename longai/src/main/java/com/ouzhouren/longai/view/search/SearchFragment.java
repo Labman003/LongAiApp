@@ -75,7 +75,7 @@ public class SearchFragment extends Fragment {
             user.setNickname("霸业蘑菇");
             user.setEmail("pengshizhong@dogdog.com");
             user.setGender("男");
-            user.setPhone("18508235983");
+          //  user.setPhone("18508235983");
             user.setProfilepic("http://img3.douban.com/view/photo/photo/public/p2260397105.jpg");
             users.add(user);
             User user2 = new User();
@@ -83,7 +83,7 @@ public class SearchFragment extends Fragment {
             user2.setNickname("霸业蘑菇");
             user2.setEmail("pengshizhong@dogdog.com");
             user2.setGender("男");
-            user2.setPhone("18508235983");
+          //  user2.setPhone("18508235983");
             user2.setProfilepic("http://img4.douban.com/view/photo/photo/public/p2257056746.jpg");
             users.add(user2);
             User user3 = new User();
@@ -91,7 +91,7 @@ public class SearchFragment extends Fragment {
             user3.setNickname("霸业蘑菇");
             user3.setEmail("pengshizhong@dogdog.com");
             user3.setGender("男");
-            user3.setPhone("18508235983");
+         //   user3.setPhone("18508235983");
             user3.setProfilepic("http://img3.douban.com/view/photo/photo/public/p897018060.jpg");
             users.add(user3);
             User user4 = new User();
@@ -99,7 +99,7 @@ public class SearchFragment extends Fragment {
             user4.setNickname("霸业蘑菇");
             user4.setEmail("pengshizhong@dogdog.com");
             user4.setGender("男");
-            user4.setPhone("18508235983");
+        //    user4.setPhone("18508235983");
             user4.setProfilepic("http://img3.douban.com/view/photo/photo/public/p2260762961.jpg");
             users.add(user4);
             User user5 = new User();
@@ -107,7 +107,7 @@ public class SearchFragment extends Fragment {
             user5.setNickname("霸业蘑菇");
             user5.setEmail("pengshizhong@dogdog.com");
             user5.setGender("男");
-            user5.setPhone("18508235983");
+         //   user5.setPhone("18508235983");
             user5.setProfilepic("http://img4.douban.com/view/photo/photo/public/p2257063766.jpg");
             users.add(user5);
             User user6 = new User();
@@ -115,7 +115,7 @@ public class SearchFragment extends Fragment {
             user6.setNickname("霸业蘑菇");
             user6.setEmail("pengshizhong@dogdog.com");
             user6.setGender("男");
-            user6.setPhone("18508235983");
+         //   user6.setPhone("18508235983");
             user6.setProfilepic("http://img3.douban.com/view/status/median/public/9ddb6a728b7b053.jpg");
             users.add(user6);
 

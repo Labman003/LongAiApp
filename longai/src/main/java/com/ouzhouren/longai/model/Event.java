@@ -1,46 +1,20 @@
 package com.ouzhouren.longai.model;
 
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  * Event entity. @author MyEclipse Persistence Tools
  */
-@Entity
-@Table(name="event")
 public class Event implements java.io.Serializable {
 
-	// Fields
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="event_id")
 	private String eventId;
-	@Column(name="title")
 	private String title;
-	@Column(name="sponsors")
 	private String sponsors;
-	@Column(name="starttime")
 	private Timestamp starttime;
-	@Column(name="endtime")
 	private Timestamp endtime;
-	@Column(name="status")
 	private String status;
-	@Column(name="contenturl")
 	private String contenturl;
-	@Column(name="permission")
 	private String permission;
-	@Column(name="location")
 	private String location;
 
 

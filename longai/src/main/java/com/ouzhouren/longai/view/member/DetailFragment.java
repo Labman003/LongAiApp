@@ -126,7 +126,7 @@ public class DetailFragment extends Fragment {
         progressTV.setText(String.format("%s/%s",String.valueOf(++position),String.valueOf(size)));
         emailTV.setText(selectedUser.getEmail());
         nameTV.setText(selectedUser.getName());
-       phoneTv.setText(selectedUser.getPhone());
+      // phoneTv.setText(selectedUser.getPhone());
        nicknameTV.setText(selectedUser.getNickname());
 
 //设置颜色

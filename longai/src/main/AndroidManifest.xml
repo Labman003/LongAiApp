@@ -96,6 +96,12 @@
             android:screenOrientation="portrait"
             android:label="demo_name_open_baidumap" >
         </activity>
+        <activity
+            android:name=".view.news.activity.NewsCommentEditPage"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:label="demo_name_open_baidumap" >
+        </activity>
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"

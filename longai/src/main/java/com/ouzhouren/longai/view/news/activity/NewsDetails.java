@@ -1,17 +1,14 @@
 package com.ouzhouren.longai.view.news.activity;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.support.v7.app.AppCompatActivity;
 
 import com.ouzhouren.longai.R;
-import com.ouzhouren.longai.module.news.NewsFragment;
 
 /**
  * Created by 郭泽锋 on 2015/8/17.

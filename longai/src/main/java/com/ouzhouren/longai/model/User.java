@@ -1,51 +1,22 @@
 package com.ouzhouren.longai.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  * User entity. @author MyEclipse Persistence Tools
  */
-@Entity
-@Table(name="user")
 public class User implements java.io.Serializable{
 
-	// Fields
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="user_Id")
 	private Integer userId;
-	@Column(name="name")
 	private String name;
-	@Column(name="nickname")
 	private String nickname;
-	@Column(name="email")
 	private String email;
-	@Column(name="location")
 	private String location;
-	@Column(name="biography")
 	private String biography;
-	@Column(name="profilepic")
 	private String profilepic;
-	@Column(name="gender")
 	private String gender;
-	@Column(name="type")
 	private String type;
-	@Column(name="preferencegens")
 	private Double preferencegens;
-	@Column(name="selfgens")
 	private Double selfgens;
-	@Column(name="password")
 	private String password;
 	
 

@@ -77,7 +77,7 @@ public class NewsFragment extends Fragment {
             News news = new News();
             news.setAuthor("作者" + i);
             news.setTitle("标题" + i);
-            news.setImgUrl("http://g.hiphotos.baidu.com/baike/s%3D500/sign=49ab240bb68f8c54e7d3c52f0a2b2dee/7e3e6709c93d70cfdd3d48e8fadcd100bba12b14.jpg");
+       //     news.setImgUrl("http://g.hiphotos.baidu.com/baike/s%3D500/sign=49ab240bb68f8c54e7d3c52f0a2b2dee/7e3e6709c93d70cfdd3d48e8fadcd100bba12b14.jpg");
             newsLists.add(news);
         }
         final NewsAdapter newsAdapter = new NewsAdapter(getActivity(), newsLists);
@@ -109,7 +109,7 @@ public class NewsFragment extends Fragment {
                         int i = newsLists.size();
                         news.setAuthor("作者"+i);
                         news.setTitle("标题" + i);
-                        news.setImgUrl("http://img3.douban.com/view/photo/photo/public/p914300763.jpg");
+                   //     news.setImgUrl("http://img3.douban.com/view/photo/photo/public/p914300763.jpg");
                         newsLists.add(news);
                         newsAdapter.notifyDataSetChanged();
                         //停止刷新动画

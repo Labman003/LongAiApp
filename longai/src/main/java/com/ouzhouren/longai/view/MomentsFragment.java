@@ -1,9 +1,7 @@
-package com.ouzhouren.longai;
+package com.ouzhouren.longai.view;
 
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,10 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ouzhouren.longai.R;
 import com.ouzhouren.longai.entity.Moment;
-import com.ouzhouren.longai.entity.News;
-import com.ouzhouren.longai.module.news.activity.NewsDetails;
-import com.ouzhouren.longai.module.news.adapter.NewsAdapter;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;

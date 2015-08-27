@@ -1,12 +1,12 @@
-package com.ouzhouren.longai.module.news.adapter;
+package com.ouzhouren.longai.view.news.adapter;
 
 import android.annotation.TargetApi;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.content.ClipboardManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ouzhouren.longai.R;
-import com.ouzhouren.longai.entity.Comment;
+import com.ouzhouren.longai.model.Comment;
 
 import java.util.Date;
 import java.util.List;

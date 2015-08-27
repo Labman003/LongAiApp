@@ -1,4 +1,4 @@
-package com.ouzhouren.longai;
+package com.ouzhouren.longai.view;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ouzhouren.longai.R;
 import com.ouzhouren.longai.entity.Moment;
 import com.ouzhouren.longai.entity.Momentcomment;
 
