@@ -33,4 +33,5 @@
     <string name="new_title2">标题2</string>
     <string name="title_activity_detail_event">DetailEventActivity</string>
     <string name="title_activity_baidu_map_test">BaiduMapTestActivity</string>
+    <string name="title_activity_talk">TalkActivity</string>
 </resources>

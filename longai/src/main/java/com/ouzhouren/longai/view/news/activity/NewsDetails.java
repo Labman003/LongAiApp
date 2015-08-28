@@ -65,7 +65,7 @@ public class NewsDetails extends AppCompatActivity {
         newsComment.setOnClickListener(listener);
         newsDetailsBack.setOnClickListener(listener);
         newsDetailsZan.setOnClickListener(listener);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.news_toolbar);
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
 

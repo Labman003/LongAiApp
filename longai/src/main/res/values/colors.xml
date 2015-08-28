@@ -10,4 +10,6 @@
     <color name="tab_message">#67da9f</color>
     <color name="mdtp_accent_color">#961760</color>
     <color name="mdtp_accent_color_dark">#790b00</color>
+
+    <color name="background_tab_pressed">#6633B5E5</color>
 </resources>
