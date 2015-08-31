@@ -17,4 +17,5 @@ public class ContactsPresenter {
         this.messageModelInterface = messageModelInterface;
         this.ctx = ctx;
     }
+    public void showContacts(){}
 }

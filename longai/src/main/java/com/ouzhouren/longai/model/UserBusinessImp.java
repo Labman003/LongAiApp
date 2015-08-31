@@ -9,7 +9,7 @@ import com.litesuits.http.request.StringRequest;
 import com.litesuits.http.response.Response;
 import com.ouzhouren.longai.common.utils.LiteHttpUtil;
 import com.ouzhouren.longai.common.utils.MyLogger;
-import com.ouzhouren.longai.config.ServerConfig;
+import com.ouzhouren.longai.constant.ConstantServer;
 
 /**
  * Created by BenPC on 2015/8/31.
@@ -19,7 +19,7 @@ public class UserBusinessImp implements UserModelInterface {
 
     @Override
     public void login(String userName, String password, final CallBack callBack, Context ctx) {
-        StringRequest req = new StringRequest(ServerConfig.HOSTNAME).addUrlPrifix(ServerConfig.PRE_FIX).addUrlSuffix(ServerConfig.PATCH_LOGIN).addUrlParam("path", "userReg").addUrlParam("user", "彭小狗");
+        StringRequest req = new StringRequest(ConstantServer.HOSTNAME).addUrlPrifix(ConstantServer.PRE_FIX).addUrlSuffix(ConstantServer.PATCH_LOGIN).addUrlParam("path", "userReg").addUrlParam("user", "彭小狗");
         LiteHttpUtil.getLiteHttp(ctx).executeAsync(req.setHttpListener(new HttpListener<String>() {
             @Override
             public void onSuccess(String s, Response<String> response) {
@@ -41,7 +41,7 @@ public class UserBusinessImp implements UserModelInterface {
 
     @Override
     public void register(String userName, String password, final CallBack callBack, Context ctx) {
-        StringRequest req = new StringRequest(ServerConfig.HOSTNAME).addUrlPrifix(ServerConfig.PRE_FIX).addUrlSuffix(ServerConfig.PATCHP_REGISTER).addUrlParam("path", "userReg").addUrlParam("user", "彭小狗");
+        StringRequest req = new StringRequest(ConstantServer.HOSTNAME).addUrlPrifix(ConstantServer.PRE_FIX).addUrlSuffix(ConstantServer.PATCHP_REGISTER).addUrlParam("path", "userReg").addUrlParam("user", "彭小狗");
         LiteHttpUtil.getLiteHttp(ctx).executeAsync(req.setHttpListener(new HttpListener<String>() {
             @Override
             public void onSuccess(String s, Response<String> response) {

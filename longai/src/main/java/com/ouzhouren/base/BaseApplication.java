@@ -17,6 +17,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.ouzhouren.base.cache.ACache;
 import com.ouzhouren.longai.common.utils.MyLogger;
+import com.ouzhouren.longai.constant.CacheKey;
 
 import java.util.List;
 
@@ -110,10 +111,10 @@ public class BaseApplication extends Application {
 			}
 			else{
 				ACache mCache = ACache.get(getApplicationContext());
-				mCache.put("latitude",location.getLatitude());
-				mCache.put("lontitude",location.getLongitude());
+				mCache.put(CacheKey.LATITUDE,location.getLatitude());
+				mCache.put(CacheKey.LONTITUDE,location.getLongitude());
 				if(location.getLocationDescribe()!=null){
-					mCache.put("locationdescribe",location.getLocationDescribe());
+					mCache.put(CacheKey.LOCATION_DESCRIBE,location.getLocationDescribe());
 				}
 				mLocationClient.stop();
 

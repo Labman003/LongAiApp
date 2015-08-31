@@ -1,9 +1,9 @@
-package com.ouzhouren.longai.config;
+package com.ouzhouren.longai.constant;
 
 /**
  * Created by BenPC on 2015/8/31.
  */
-public class ServerConfig {
+public class ConstantServer {
     public static String PRE_FIX = "http://";
     public static String HOSTNAME = "miao-mac.local:8080";
     public static String PATCH_LOGIN = "/longai/user/login";
