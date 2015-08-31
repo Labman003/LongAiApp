@@ -9,4 +9,5 @@ public class CacheKey {
     public static String LOCATION_DESCRIBE = "locationdescribe" ;
     public static String LATITUDE = "latitude";
     public static String LONTITUDE = "lontitude";
+    public static String USER = "user";
 }

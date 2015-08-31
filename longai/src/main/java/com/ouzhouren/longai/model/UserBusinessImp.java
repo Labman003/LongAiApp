@@ -34,7 +34,7 @@ public class UserBusinessImp implements UserModelInterface {
             public void onFailure(HttpException e, Response<String> response) {
                 // 失败：主线程回调，反馈异常
                 logger.i("faile exception:" + e + "----response:" + response);
-                callBack.onFail();
+                callBack.onFail(e);
             }
         }));
     }
@@ -56,7 +56,7 @@ public class UserBusinessImp implements UserModelInterface {
             public void onFailure(HttpException e, Response<String> response) {
                 // 失败：主线程回调，反馈异常
                 logger.i("faile exception:" + e + "----response:" + response);
-                callBack.onFail();
+                callBack.onFail(e);
             }
         }));
     }

@@ -8,4 +8,9 @@ public class EventBusinessImp implements com.ouzhouren.longai.model.EventModelIn
     public void getEvents(String time, String city, int pageNo, int pageSize, CallBack callBack) {
 
     }
+
+    @Override
+    public void enroll(int userId, int eventId, CallBack callBack) {
+
+    }
 }

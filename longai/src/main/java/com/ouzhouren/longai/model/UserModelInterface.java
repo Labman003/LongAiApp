@@ -2,6 +2,8 @@ package com.ouzhouren.longai.model;
 
 import android.content.Context;
 
+import com.litesuits.http.exception.HttpException;
+
 /**
  * Created by BenPC on 2015/8/31.
  */
@@ -13,6 +15,6 @@ public interface UserModelInterface {
 
     abstract class CallBack {
         public abstract void onSuccess(User user);
-        public abstract void onFail();
+        public abstract void onFail(HttpException e);
     }
 }

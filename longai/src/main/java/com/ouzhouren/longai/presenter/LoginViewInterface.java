@@ -10,4 +10,6 @@ public interface LoginViewInterface {
     void dismissProgress();
     void showLoginFail(String error);
     void goToActivity();
+    void hideLoginButton();
+    void showLoginButton();
 }
