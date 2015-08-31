@@ -34,4 +34,6 @@
     <string name="title_activity_detail_event">DetailEventActivity</string>
     <string name="title_activity_baidu_map_test">BaiduMapTestActivity</string>
     <string name="title_activity_talk">TalkActivity</string>
+    <string name="title_activity_gens_asker">GensAsker</string>
+    <string name="title_activity_crop_test">CropTest</string>
 </resources>

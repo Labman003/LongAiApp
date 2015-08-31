@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import com.ouzhouren.longai.view.events.EventsFragment;
 import com.ouzhouren.longai.view.news.NewsFragment;
 import com.ouzhouren.longai.view.search.SearchFragment;
-import com.ouzhouren.longai.view.talk.TalksFragment;
+import com.ouzhouren.longai.view.talk.ContactsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class MainFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
         private List<String> titleList;
         private SearchFragment searchFragment;
        private NewsFragment newsFragment;
-        private TalksFragment talksFragment;
+        private ContactsFragment contactsFragment;
         private EventsFragment eventsFragment;
     private MomentsFragment momentsFragment;
         public MainFragmentStatePagerAdapter(FragmentManager fm) {
@@ -34,8 +34,8 @@ public class MainFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
                 this.mFragmentList = new ArrayList<Fragment>();
                 searchFragment =new SearchFragment();
                 this.mFragmentList.add(searchFragment);
-                talksFragment =new TalksFragment();
-                this.mFragmentList.add(talksFragment);
+                contactsFragment =new ContactsFragment();
+                this.mFragmentList.add(contactsFragment);
                 newsFragment = new NewsFragment();
                 this.mFragmentList.add(newsFragment);
                 eventsFragment =new EventsFragment();

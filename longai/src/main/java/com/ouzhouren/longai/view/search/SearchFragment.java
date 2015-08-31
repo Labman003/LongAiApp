@@ -4,6 +4,8 @@ package com.ouzhouren.longai.view.search;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,8 @@ public class SearchFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private FloatingActionButton fabBtn;
+    private View rootView;
 
     /**
      * Use this factory method to create a new instance of
@@ -65,10 +69,23 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_search, container, false);
+        rootView = inflater.inflate(R.layout.fragment_search, container, false);
         // Setup the gridview and te adapter
         GridView gridview = (GridView) rootView.findViewById(R.id.user_grid);
         gridview.setOnItemClickListener(userClickListener);
+        fabBtn = (FloatingActionButton) rootView.findViewById(R.id.fabBtn);
+        fabBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(rootView, "收到彭菊的来信!", Snackbar.LENGTH_SHORT)
+                        .setAction("拆开", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                            }
+                        })
+                        .show();
+            }
+        });
         for (int i = 0; i < 8; i++) {
             User user = new User();
             user.setName("彭大狗");
