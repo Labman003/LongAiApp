@@ -2,7 +2,7 @@ package com.ouzhouren.longai.view.wiget.chat;
 
 import java.util.Date;
 
-public class Message {
+public class ChatMessage {
 	public final static int MSG_TYPE_TEXT 	= 0;
 	public final static int MSG_TYPE_PHOTO 	= 1;
 	public final static int MSG_TYPE_FACE 	= 2;
@@ -24,9 +24,9 @@ public class Message {
 	private Boolean sendSucces;
 	private Date time;
 
-	public Message(Integer type, Integer state, String fromUserName,
-			String fromUserAvatar, String toUserName, String toUserAvatar,
-			String content, Boolean isSend, Boolean sendSucces, Date time) {
+	public ChatMessage(Integer type, Integer state, String fromUserName,
+					   String fromUserAvatar, String toUserName, String toUserAvatar,
+					   String content, Boolean isSend, Boolean sendSucces, Date time) {
 		super();
 		this.type = type;
 		this.state = state;

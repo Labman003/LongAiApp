@@ -25,9 +25,9 @@ import java.util.List;
 public class MessageAdapter extends BaseAdapter {
 	
 	private Context context;
-	private List<Message> data = null;
+	private List<ChatMessage> data = null;
 	
-	public MessageAdapter(Context context, List<Message> list) {
+	public MessageAdapter(Context context, List<ChatMessage> list) {
 		super();
 		this.context = context;
 		this.data = list;
@@ -63,8 +63,8 @@ public class MessageAdapter extends BaseAdapter {
 	@SuppressLint("InflateParams")
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-		final Message message = data.get(position);
-		boolean isSend = message.getIsSend();
+		final ChatMessage chatMessage = data.get(position);
+		boolean isSend = chatMessage.getIsSend();
 
 		ViewHolder viewHolder = null;
 		if (convertView == null) {
@@ -92,7 +92,7 @@ public class MessageAdapter extends BaseAdapter {
 		}
 		
 		try {
-			String dateString = DateFormat.format("yyyy-MM-dd h:mmaa", message.getTime()).toString();
+			String dateString = DateFormat.format("yyyy-MM-dd h:mmaa", chatMessage.getTime()).toString();
 			String [] t = dateString.split(" ");
 			viewHolder.sendDateTextView.setText(t[0]);
 			viewHolder.sendTimeTextView.setText(t[1]);
@@ -101,8 +101,8 @@ public class MessageAdapter extends BaseAdapter {
 				viewHolder.sendDateTextView.setVisibility(View.VISIBLE);
 			}else{
 				//TODO is same day ?
-				Message pmsg = data.get(position-1);
-				if(inSameDay(pmsg.getTime(), message.getTime())){
+				ChatMessage pmsg = data.get(position-1);
+				if(inSameDay(pmsg.getTime(), chatMessage.getTime())){
 					viewHolder.sendDateTextView.setVisibility(View.GONE);
 				}else{
 					viewHolder.sendDateTextView.setVisibility(View.VISIBLE);
@@ -113,32 +113,32 @@ public class MessageAdapter extends BaseAdapter {
 		} catch (Exception e) {
 		}
 		
-		viewHolder.userNameTextView.setText(message.getFromUserName());
+		viewHolder.userNameTextView.setText(chatMessage.getFromUserName());
 		
 		
 
 		
-		switch (message.getType()) {
+		switch (chatMessage.getType()) {
 		case 0://text
-			viewHolder.textTextView.setText(message.getContent());
+			viewHolder.textTextView.setText(chatMessage.getContent());
 			viewHolder.textTextView.setVisibility(View.VISIBLE);
 			viewHolder.photoImageView.setVisibility(View.GONE);
 			viewHolder.faceImageView.setVisibility(View.GONE);
-			if(message.getIsSend()){
+			if(chatMessage.getIsSend()){
 				LayoutParams sendTimeTextViewLayoutParams = (LayoutParams) viewHolder.sendTimeTextView.getLayoutParams();
 				sendTimeTextViewLayoutParams.addRule(RelativeLayout.LEFT_OF, R.id.textTextView);
 				viewHolder.sendTimeTextView.setLayoutParams(sendTimeTextViewLayoutParams);
 				
 				LayoutParams layoutParams = (LayoutParams) viewHolder.failImageView.getLayoutParams();
 				layoutParams.addRule(RelativeLayout.LEFT_OF, R.id.textTextView);
-				if( message.getSendSucces() != null && message.getSendSucces() == false){
+				if( chatMessage.getSendSucces() != null && chatMessage.getSendSucces() == false){
 					viewHolder.failImageView.setVisibility(View.VISIBLE);
 					viewHolder.failImageView.setLayoutParams(layoutParams);
 				}else{
 					viewHolder.failImageView.setVisibility(View.GONE);
 				}
 				
-				if(message.getState() != null && message.getState() == 0){
+				if(chatMessage.getState() != null && chatMessage.getState() == 0){
 					viewHolder.sendingProgressBar.setVisibility(View.VISIBLE);
 					viewHolder.sendingProgressBar.setLayoutParams(layoutParams);
 				}else{
@@ -162,25 +162,25 @@ public class MessageAdapter extends BaseAdapter {
 			viewHolder.faceImageView.setVisibility(View.GONE);
 			
 			//TODO set image
-			int id = context.getResources().getIdentifier(message.getContent(), "drawable", context.getPackageName());
+			int id = context.getResources().getIdentifier(chatMessage.getContent(), "drawable", context.getPackageName());
 			viewHolder.photoImageView.setImageResource(id);
 			
 			
-			if(message.getIsSend() ){
+			if(chatMessage.getIsSend() ){
 				LayoutParams sendTimeTextViewLayoutParams = (LayoutParams) viewHolder.sendTimeTextView.getLayoutParams();
 				sendTimeTextViewLayoutParams.addRule(RelativeLayout.LEFT_OF, R.id.photoImageView);
 				viewHolder.sendTimeTextView.setLayoutParams(sendTimeTextViewLayoutParams);
 				
 				LayoutParams layoutParams = (LayoutParams) viewHolder.failImageView.getLayoutParams();
 				layoutParams.addRule(RelativeLayout.LEFT_OF, R.id.photoImageView);
-				if(message.getSendSucces() != null && message.getSendSucces() == false){
+				if(chatMessage.getSendSucces() != null && chatMessage.getSendSucces() == false){
 					viewHolder.failImageView.setVisibility(View.VISIBLE);
 					viewHolder.failImageView.setLayoutParams(layoutParams);
 				}else{
 					viewHolder.failImageView.setVisibility(View.GONE);
 				}
 				
-				if(message.getState() != null && message.getState() == 0){
+				if(chatMessage.getState() != null && chatMessage.getState() == 0){
 					viewHolder.sendingProgressBar.setVisibility(View.VISIBLE);
 					viewHolder.sendingProgressBar.setLayoutParams(layoutParams);
 				}else{
@@ -201,24 +201,24 @@ public class MessageAdapter extends BaseAdapter {
 			viewHolder.photoImageView.setVisibility(View.GONE);
 			viewHolder.textTextView.setVisibility(View.GONE);
 			viewHolder.faceImageView.setVisibility(View.VISIBLE);
-			int resId = context.getResources().getIdentifier(message.getContent(), "drawable", context.getPackageName());
+			int resId = context.getResources().getIdentifier(chatMessage.getContent(), "drawable", context.getPackageName());
 			viewHolder.faceImageView.setImageResource(resId);
 			
-			if(message.getIsSend()){
+			if(chatMessage.getIsSend()){
 				LayoutParams sendTimeTextViewLayoutParams = (LayoutParams) viewHolder.sendTimeTextView.getLayoutParams();
 				sendTimeTextViewLayoutParams.addRule(RelativeLayout.LEFT_OF, R.id.faceImageView);
 				viewHolder.sendTimeTextView.setLayoutParams(sendTimeTextViewLayoutParams);
 				
 				LayoutParams layoutParams = (LayoutParams) viewHolder.failImageView.getLayoutParams();
 				layoutParams.addRule(RelativeLayout.LEFT_OF, R.id.faceImageView);
-				if(message.getSendSucces() != null && message.getSendSucces() == false){
+				if(chatMessage.getSendSucces() != null && chatMessage.getSendSucces() == false){
 					viewHolder.failImageView.setVisibility(View.VISIBLE);
 					viewHolder.failImageView.setLayoutParams(layoutParams);
 				}else{
 					viewHolder.failImageView.setVisibility(View.GONE);
 				}
 				
-				if(message.getState() != null && message.getState() == 0){
+				if(chatMessage.getState() != null && chatMessage.getState() == 0){
 					viewHolder.sendingProgressBar.setVisibility(View.VISIBLE);
 					viewHolder.sendingProgressBar.setLayoutParams(layoutParams);
 				}else{
@@ -236,7 +236,7 @@ public class MessageAdapter extends BaseAdapter {
 			break;
 
 		default:
-			viewHolder.textTextView.setText(message.getContent());
+			viewHolder.textTextView.setText(chatMessage.getContent());
 			viewHolder.photoImageView.setVisibility(View.GONE);
 			viewHolder.faceImageView.setVisibility(View.GONE);
 			break;
@@ -248,11 +248,11 @@ public class MessageAdapter extends BaseAdapter {
 	}
 
 
-	public List<Message> getData() {
+	public List<ChatMessage> getData() {
 		return data;
 	}
 
-	public void setData(List<Message> data) {
+	public void setData(List<ChatMessage> data) {
 		this.data = data;
 	}
 
