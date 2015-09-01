@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ouzhouren.longai.R;
-import com.ouzhouren.longai.entity.Moment;
+import com.ouzhouren.longai.model.Moment;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -71,8 +71,8 @@ public class MomentsFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         for (int i = 0; i <= 2; i++) {
             Moment moment = new Moment();
-            moment.setMomentContent("psz love little loli!");
-            moment.setMomentPubtime(new Timestamp(System.currentTimeMillis()));
+            moment.setContent("psz love little loli!");
+            moment.setPubTime(System.currentTimeMillis());
             momentLists.add(moment);
         }
         final MomentsAdapter momentsAdapter = new MomentsAdapter(getActivity(), momentLists);

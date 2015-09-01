@@ -13,8 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ouzhouren.longai.R;
-import com.ouzhouren.longai.entity.Moment;
-import com.ouzhouren.longai.entity.Momentcomment;
+import com.ouzhouren.longai.model.Moment;
+import com.ouzhouren.longai.model.MomentComment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,13 +48,13 @@ public class MomentsAdapter extends RecyclerView.Adapter<MomentsAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.moment_content.setText(momentList.get(position).getMomentContent().toString());
-        holder.moment_pubtime.setText(momentList.get(position).getMomentPubtime().toString());
-        List<Momentcomment> momentcommentList = new ArrayList<>();
+        holder.moment_content.setText(momentList.get(position).getContent());
+        holder.moment_pubtime.setText(momentList.get(position).getPubTime()+"");
+        List<MomentComment> momentcommentList = new ArrayList<>();
         for (int i = 1; i <= 3; i++) {
-            Momentcomment momentcomment = new Momentcomment();
+            MomentComment momentcomment = new MomentComment();
             momentcomment.setNickName("psz");
-            momentcomment.setMomentcommentcontent("i want to fuck yyt!");
+            momentcomment.setContent("i want to fuck yyt!");
             momentcommentList.add(momentcomment);
             View view = LayoutInflater.from(context).inflate(R.layout.moment_comment_list_item, null);
             TextView nickName = (TextView) view.findViewById(R.id.moment_comment_user);

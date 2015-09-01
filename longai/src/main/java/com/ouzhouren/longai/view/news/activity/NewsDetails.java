@@ -36,7 +36,7 @@ public class NewsDetails extends AppCompatActivity {
 
                 switch (v.getId()) {
                     case R.id.news_comment:
-                        Intent intent = new Intent(NewsDetails.this, NewsComment.class);
+                        Intent intent = new Intent(NewsDetails.this, NewsCommentPage.class);
                         startActivity(intent);
                         break;
                     case R.id.news_details_back:
@@ -65,7 +65,7 @@ public class NewsDetails extends AppCompatActivity {
         newsComment.setOnClickListener(listener);
         newsDetailsBack.setOnClickListener(listener);
         newsDetailsZan.setOnClickListener(listener);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.news_toolbar);
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
 

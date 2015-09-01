@@ -35,7 +35,7 @@ public class NewsCommentEditPage extends AppCompatActivity {
                         finish();
                         break;
                     case R.id.comment_edit_send:
-                        Intent intent = new Intent(NewsCommentEditPage.this, NewsComment.class);
+                        Intent intent = new Intent(NewsCommentEditPage.this, NewsCommentPage.class);
                         String content = commentContentEdit.getText().toString();
                         intent.putExtra("commentContent", content);
                         setResult(RESULT_OK, intent);
