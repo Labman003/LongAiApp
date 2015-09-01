@@ -29,7 +29,7 @@ public class NavPresenter {
             }
 
             @Override
-            public void onFail() {
+            public void onFail(String e) {
 
             }
         },ctx);

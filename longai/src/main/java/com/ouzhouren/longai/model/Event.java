@@ -1,24 +1,23 @@
 package com.ouzhouren.longai.model;
 
-import java.sql.Timestamp;
-
 /**
  * Event entity. @author MyEclipse Persistence Tools
  */
 public class Event implements java.io.Serializable {
 
-	private String eventId;
+	private int eventId;
 	private String title;
 	private String sponsors;
-	private Timestamp starttime;
-	private Timestamp endtime;
+	private long starttime;
+	private long endtime;
 	private String status;
 	private String contenturl;
 	private String permission;
 	private String location;
+	private String cover;
 
 
-	// Constructors
+// Constructors
 
 	/** default constructor */
 	public Event() {
@@ -28,12 +27,12 @@ public class Event implements java.io.Serializable {
 
 	// Property accessors
 
-	public String getEventId() {
-		return this.eventId;
+	public String getCover() {
+		return cover;
 	}
 
-	public void setEventId(String eventId) {
-		this.eventId = eventId;
+	public void setCover(String cover) {
+		this.cover = cover;
 	}
 
 	public String getTitle() {
@@ -52,19 +51,27 @@ public class Event implements java.io.Serializable {
 		this.sponsors = sponsors;
 	}
 
-	public Timestamp getStarttime() {
-		return this.starttime;
+	public int getEventId() {
+		return eventId;
 	}
 
-	public void setStarttime(Timestamp starttime) {
+	public void setEventId(int eventId) {
+		this.eventId = eventId;
+	}
+
+	public long getStarttime() {
+		return starttime;
+	}
+
+	public void setStarttime(long starttime) {
 		this.starttime = starttime;
 	}
 
-	public Timestamp getEndtime() {
-		return this.endtime;
+	public long getEndtime() {
+		return endtime;
 	}
 
-	public void setEndtime(Timestamp endtime) {
+	public void setEndtime(long endtime) {
 		this.endtime = endtime;
 	}
 

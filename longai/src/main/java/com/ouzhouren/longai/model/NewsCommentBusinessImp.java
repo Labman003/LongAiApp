@@ -18,12 +18,14 @@ import java.util.List;
 /**
  * Created by BenPC on 2015/8/31.
  */
-public class EventBusinessImp implements com.ouzhouren.longai.model.EventModelInterface {
+public class NewsCommentBusinessImp implements NewsCommentModelInterface {
     private MyLogger logger = MyLogger.benLog();
 
+
+
     @Override
-    public void getEvents(int time, String city, int currentPage, int amount, final GetEventsCallBack callBack, Context ctx) {
-        StringRequest req = new StringRequest(ConstantServer.HOSTNAME).addUrlPrifix(ConstantServer.PRE_FIX).addUrlSuffix(ConstantServer.PATCH_GET_EVENT).addUrlParam("starttime", String.valueOf(time)).addUrlParam("currentPage", String.valueOf(currentPage)).addUrlParam("location",city).addUrlParam("amount", String.valueOf(amount));
+    public void getNewsComment(int newsId, int currentPage, int amount, final GetNewsCommentCallBack callBack, Context ctx) {
+        StringRequest req = new StringRequest(ConstantServer.HOSTNAME).addUrlPrifix(ConstantServer.PRE_FIX).addUrlSuffix(ConstantServer.PATCH_GET_NEWS_COMMENT).addUrlParam("newsId",String.valueOf(newsId)).addUrlParam("currentPage", String.valueOf(currentPage)).addUrlParam("amount", String.valueOf(amount));
         LiteHttpUtil.getLiteHttp(ctx).executeAsync(req.setHttpListener(new HttpListener<String>() {
             @Override
             public void onSuccess(String s, Response<String> response) {
@@ -32,11 +34,11 @@ public class EventBusinessImp implements com.ouzhouren.longai.model.EventModelIn
                     callBack.onFail();
                 }
                 logger.i("回调json" + s);
-                List<Event> events = PageUtil.fetchToList(s, new TypeToken<List<Event>>() {
+                List<NewsComment> newsComments = PageUtil.fetchToList(s, new TypeToken<List<NewsComment>>() {
                 }.getType());
-                logger.i("success result:" + s + "----response:" + response + "——Page:" + events);
-                logger.i("第一条" + events.get(0).getLocation());
-                callBack.onSuccess(events);
+                logger.i("success result:" + s + "----response:" + response + "——Page:" + newsComments);
+                logger.i("第一条" + newsComments.get(0).getCommentContent());
+                callBack.onSuccess(newsComments);
             }
 
             @Override
@@ -49,25 +51,27 @@ public class EventBusinessImp implements com.ouzhouren.longai.model.EventModelIn
     }
 
     @Override
-    public void enroll(int userId, int eventId, final EnrollCallBack callBack, Context ctx) {
-        StringRequest req = new StringRequest(ConstantServer.HOSTNAME).addUrlPrifix(ConstantServer.PRE_FIX).addUrlSuffix(ConstantServer.PATCH_ENROLL).addUrlParam("eventId",String.valueOf(eventId)).addUrlParam("userId",String.valueOf(userId));
+    public void sendNewsComment(NewsComment newsComment, final SendNewsCommentCallBack callBack, Context ctx) {
+        final Gson gson = new Gson();
+        String jNewsComment = gson.toJson(newsComment);
+        StringRequest req = new StringRequest(ConstantServer.HOSTNAME).addUrlPrifix(ConstantServer.PRE_FIX).addUrlSuffix(ConstantServer.PATCH_SEND_NEWS_COMMENT).addUrlParam("comment",jNewsComment);
         LiteHttpUtil.getLiteHttp(ctx).executeAsync(req.setHttpListener(new HttpListener<String>() {
             @Override
             public void onSuccess(String s, Response<String> response) {
-                // todo 成功：主线程回调，反馈一个string
-                if(s.length()==0){
+                // 成功：主线程回调，反馈一个string
+                if (s.length() == 0) {
                     callBack.onFail();
                 }
-                Gson gson = new Gson();
-                Enroll enroll = gson.fromJson(s,Enroll.class);
-              logger.i("success result:" + s + "----response:" + response+"——Enroll:"+enroll.toString());
-                callBack.onSuccess(enroll);
+                logger.i("回调json" + s);
+                NewsComment receive = gson.fromJson(s,NewsComment.class);
+                logger.i("success result:" + s + "----response:" + response + "——NewsComment:" + receive);
+                logger.i("第一条" + receive.getCommentContent());
+                callBack.onSuccess(receive);
             }
 
             @Override
             public void onFailure(HttpException e, Response<String> response) {
                 // 失败：主线程回调，反馈异常
-                //todo
                 logger.i("faile exception:" + e + "----response:" + response);
                 callBack.onFail();
             }

@@ -1,9 +1,10 @@
 package com.ouzhouren.longai.presenter;
 
-import com.ouzhouren.longai.model.Event;
-import com.ouzhouren.longai.model.EventModelInterface;
+import android.content.Context;
 
-import java.util.List;
+import com.ouzhouren.longai.model.Enroll;
+import com.ouzhouren.longai.model.EventBusinessImp;
+import com.ouzhouren.longai.model.EventModelInterface;
 
 /**
  * Created by BenPC on 2015/8/31.
@@ -15,11 +16,9 @@ public class EventPresenter {
     private  EventDetailViewInterface eventDetailViewInterface;
 
     public EventPresenter() {
+        this.eventModelInterface = new EventBusinessImp();
     }
 
-    public void setEventModelInterface(EventModelInterface eventModelInterface) {
-        this.eventModelInterface = eventModelInterface;
-    }
 
     public void setEventViewInterface(EventViewInterface eventViewInterface) {
         this.eventViewInterface = eventViewInterface;
@@ -29,30 +28,31 @@ public class EventPresenter {
         this.eventDetailViewInterface = eventDetailViewInterface;
     }
 
-    public void addEvents(int pageNo, int pageSize) {
+    public void addEvents(int pageNo, int pageSize, Context ctx) {
         String city = eventViewInterface.chooseCity();
         String time = eventViewInterface.chooseTime();
         eventViewInterface.showProgress();
-        eventModelInterface.getEvents(time, city, pageNo, pageSize, new EventModelInterface.CallBack() {
-            @Override
-            public void onSuccess(List<Event> events) {
-
-            }
-
-            @Override
-            public void onFail() {
-
-            }
-        });
+//        eventModelInterface.addEvents(time, city, pageNo, pageSize, new EventModelInterface.AddEventCallBack() {
+//            @Override
+//            public void onSuccess(List<Event> events) {
+//
+//            }
+//
+//            @Override
+//            public void onFail() {
+//
+//            }
+//        }, ctx);
     }
-    public void enroll(int eventId) {
+    public void enroll(int eventId, Context ctx) {
         //todo 获取userid
         int userId = 3;
         eventDetailViewInterface.showProgress();
-        eventModelInterface.enroll(userId, eventId, new EventModelInterface.CallBack() {
+        eventModelInterface.enroll(userId, eventId, new EventModelInterface.EnrollCallBack() {
+
             @Override
-            public void onSuccess(List<Event> events) {
-                eventDetailViewInterface.dismissProgress();
+            public void onSuccess(Enroll enroll) {
+
             }
 
             @Override
@@ -61,6 +61,6 @@ public class EventPresenter {
                 eventDetailViewInterface.showEnrollFail();
 
             }
-        });
+        }, ctx);
     }
 }

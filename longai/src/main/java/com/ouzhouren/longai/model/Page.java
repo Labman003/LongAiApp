@@ -66,7 +66,12 @@ public class Page {
 	public void setList(List list) {
 		this.list = list;
 	}
-	
-	
-	
+
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
 }

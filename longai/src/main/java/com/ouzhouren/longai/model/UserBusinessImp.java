@@ -85,7 +85,28 @@ public class UserBusinessImp implements UserModelInterface {
     }
 
     @Override
-    public void updateUserInfo(CallBack callBack, Context ctx) {
+    public void updateUserInfo(User user, final UpdateCallBack callBack, Context ctx) {
+        Gson gson = new Gson();
+        StringRequest req = new StringRequest(ConstantServer.HOSTNAME).addUrlPrifix(ConstantServer.PRE_FIX).addUrlSuffix(ConstantServer.PATCH_UPDATE_USER_INFO).addUrlParam("userDetail", gson.toJson(user));
+        LiteHttpUtil.getLiteHttp(ctx).executeAsync(req.setHttpListener(new HttpListener<String>() {
+            @Override
+            public void onSuccess(String s, Response<String> response) {
+                // 成功：主线程回调，反馈一个string
+                if (Integer.valueOf(s) == 0) {
+                    callBack.onFail("用户不存在或密码错误");
+                }
+                logger.i("回调json"+s);
+                callBack.onSuccess(Integer.valueOf(s));
+                logger.i("success result:" + s + "----response:" + response + "——User:" + Integer.valueOf(s));
+            }
 
+            @Override
+            public void onFailure(HttpException e, Response<String> response) {
+                // 失败：主线程回调，反馈异常
+                logger.i("faile exception:" + e + "----response:" + response);
+                callBack.onFail(e.getMessage());
+            }
+        }));
     }
+
 }
