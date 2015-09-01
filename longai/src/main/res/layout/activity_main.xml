@@ -73,13 +73,7 @@
         </LinearLayout>
 
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fabBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:src="@drawable/ic_plus"
-            app:fabSize="normal" />
+
 
     </android.support.design.widget.CoordinatorLayout>
     <android.support.design.widget.NavigationView
@@ -87,7 +81,6 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:headerLayout="@layout/nav_header"
         app:itemIconTint="#333"
         app:itemTextColor="#333"
         app:menu="@menu/navigation_drawer_items" />

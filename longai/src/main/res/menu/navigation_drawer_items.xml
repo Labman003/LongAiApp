@@ -3,19 +3,31 @@
 
     <group android:checkableBehavior="all">
         <item
-            android:id="@+id/navItem1"
-            android:title="Home"/>
+            android:id="@+id/navItem_message"
+            android:icon="@drawable/nav_message"
+            android:title="桃花信"/>
         <item
-            android:id="@+id/navItem2"
-            android:title="Blog"/>
+            android:id="@+id/navItem_album"
+            android:title="我的相册"
+            android:icon="@drawable/nav_album"/>
 
         <item
-            android:id="@+id/navItem3"
-            android:title="About"/>
+            android:id="@+id/navItem_vip"
+            android:title="VIP服务"
+            android:icon="@drawable/nav_vip"/>
 
         <item
-            android:id="@+id/item_location"
-            android:title="未知地址"/>
+            android:id="@+id/navItem_location"
+            android:title="未知地址"
+            android:icon="@drawable/nav_location"/>
+        <item
+            android:id="@+id/navItem_setting"
+            android:title="设置"
+            android:icon="@drawable/nav_setting"/>
+        <item
+            android:id="@+id/navItem_off"
+            android:title="退出"
+            android:icon="@drawable/nav_off"/>
     </group>
 
 </menu>
