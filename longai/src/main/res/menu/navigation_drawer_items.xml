@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="all">
-        <item
-            android:id="@+id/navItem_message"
-            android:icon="@drawable/nav_message"
-            android:title="桃花信"/>
+        <!--<item-->
+            <!--android:id="@+id/navItem_message"-->
+            <!--android:icon="@drawable/nav_message"-->
+            <!--android:title="桃花信"/>-->
         <item
             android:id="@+id/navItem_album"
-            android:title="我的相册"
+            android:title="我的主页"
             android:icon="@drawable/nav_album"/>
 
         <item

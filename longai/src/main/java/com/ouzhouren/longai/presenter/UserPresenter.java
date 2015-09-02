@@ -3,9 +3,7 @@ package com.ouzhouren.longai.presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.ouzhouren.base.cache.ACache;
 import com.ouzhouren.longai.common.utils.MyLogger;
-import com.ouzhouren.longai.constant.CacheKey;
 import com.ouzhouren.longai.model.User;
 import com.ouzhouren.longai.model.UserBusinessImp;
 import com.ouzhouren.longai.model.UserModelInterface;
@@ -56,8 +54,7 @@ public class UserPresenter {
 
             @Override
             public void onSuccess(User user) {
-                ACache cache = ACache.get(ctx);
-                cache.put(CacheKey.USER,user);
+                userModelInterface.cacheUser(user,ctx);
                 loginViewInterface.dismissProgress();
                 loginViewInterface.goToActivity();
             }
@@ -81,8 +78,7 @@ public class UserPresenter {
 
             @Override
             public void onSuccess(User user) {
-                ACache cache = ACache.get(ctx);
-                cache.put(CacheKey.USER, user);
+                userModelInterface.cacheUser(user,ctx);
                 logger.i("注册成功，name:"+user.getName()+"-userId:"+user.getUserId());
                 registerViewInterface.dismissProgress();
                 registerViewInterface.goToActivity();

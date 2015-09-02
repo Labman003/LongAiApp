@@ -3,13 +3,19 @@ package com.ouzhouren.longai.model;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.litesuits.http.exception.HttpException;
 import com.litesuits.http.listener.HttpListener;
 import com.litesuits.http.request.StringRequest;
 import com.litesuits.http.response.Response;
+import com.ouzhouren.base.cache.ACache;
 import com.ouzhouren.longai.common.utils.LiteHttpUtil;
 import com.ouzhouren.longai.common.utils.MyLogger;
+import com.ouzhouren.longai.common.utils.PageUtil;
+import com.ouzhouren.longai.constant.CacheKey;
 import com.ouzhouren.longai.constant.ConstantServer;
+
+import java.util.List;
 
 /**
  * Created by BenPC on 2015/8/31.
@@ -80,9 +86,18 @@ public class UserBusinessImp implements UserModelInterface {
     }
 
     @Override
-    public void uploadProfilePic(CallBack callBack, Context ctx) {
-
+    public void cacheUser(User user, Context ctx) {
+        ACache aCache = ACache.get(ctx);
+        aCache.put(CacheKey.USER,user);
     }
+
+    @Override
+    public User getCacheUser(Context ctx) {
+        ACache aCache = ACache.get(ctx);
+        User user = (User) aCache.getAsObject(CacheKey.USER);
+        return null;
+    }
+
 
     @Override
     public void updateUserInfo(User user, final UpdateCallBack callBack, Context ctx) {
@@ -98,6 +113,31 @@ public class UserBusinessImp implements UserModelInterface {
                 logger.i("回调json"+s);
                 callBack.onSuccess(Integer.valueOf(s));
                 logger.i("success result:" + s + "----response:" + response + "——User:" + Integer.valueOf(s));
+            }
+
+            @Override
+            public void onFailure(HttpException e, Response<String> response) {
+                // 失败：主线程回调，反馈异常
+                logger.i("faile exception:" + e + "----response:" + response);
+                callBack.onFail(e.getMessage());
+            }
+        }));
+    }
+
+    @Override
+    public void getUsersByGens(int gens, final getUsersByGensCallBack callBack, Context ctx) {
+        StringRequest req = new StringRequest(ConstantServer.HOSTNAME).addUrlPrifix(ConstantServer.PRE_FIX).addUrlSuffix(ConstantServer.PATCH_GET_USERS_BY_GENS).addUrlParam("gens", String.valueOf(gens));
+        LiteHttpUtil.getLiteHttp(ctx).executeAsync(req.setHttpListener(new HttpListener<String>() {
+            @Override
+            public void onSuccess(String s, Response<String> response) {
+                // 成功：主线程回调，反馈一个string
+                if (Integer.valueOf(s) == 0) {
+                    callBack.onFail("用户不存在或密码错误");
+                }
+                logger.i("回调json"+s);
+                List<User> users =PageUtil.fetchToList(s,new TypeToken<List<User>>(){}.getType());
+                callBack.onSuccess(users);
+                logger.i("success result:" + s + "----response:" + response + "——Users:" + users);
             }
 
             @Override

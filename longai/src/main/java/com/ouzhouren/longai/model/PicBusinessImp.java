@@ -17,7 +17,6 @@ import com.ouzhouren.longai.common.utils.LiteHttpUtil;
 import com.ouzhouren.longai.common.utils.MyLogger;
 import com.ouzhouren.longai.common.utils.PageUtil;
 import com.ouzhouren.longai.constant.ConstantServer;
-import com.ouzhouren.longai.constant.UserType;
 
 import java.io.File;
 import java.util.List;
@@ -29,13 +28,17 @@ public class PicBusinessImp implements PicModelInterface {
     private MyLogger logger = MyLogger.benLog();
 
     @Override
-    public void uploadAlbumPic(int userId, File file, final UploadCallBack callBack, Context ctx) {
+    public void uploadAlbumPic(int userId,Picture picDetail, File file, final UploadCallBack callBack, Context ctx) {
         StringRequest req = new StringRequest(ConstantServer.HOSTNAME).addUrlPrifix(ConstantServer.PRE_FIX).addUrlSuffix(ConstantServer.PATCH_UPLOAD_PHOTO)
                 .setMethod(HttpMethods.Post)
                 .setHttpListener(new HttpListener<String>(true, false, true) {
                     @Override
                     public void onSuccess(String s, Response<String> response) {
                         logger.i("success result:" + s + "----response:" + response);
+                        if(Integer.valueOf(s)==0){
+                          callBack.onFail("上传失败，请稍后在网络良好的地方尝试");
+                            return;
+                        }
                         callBack.onSuccess();
                         response.printInfo();
                     }
@@ -43,21 +46,15 @@ public class PicBusinessImp implements PicModelInterface {
                     @Override
                     public void onFailure(HttpException e, Response<String> response) {
                         logger.i("success result:" + e.toString() + "----response:" + response);
-                        callBack.onFail();
+                        callBack.onFail(e.toString());
                     }
 
                     @Override
                     public void onUploading(AbstractRequest<String> request, long total, long len) {
-
+                        callBack.onUpload(total, len);
                     }
                 });
-        //tod 返回的是1，0待处理
         MultipartBody body = new MultipartBody();
-        Picture picDetail = new Picture();
-        picDetail.setPicname("我叫世忠那个我最钓");
-        picDetail.setPermisson(UserType.NORMAL);
-        picDetail.setUserId(String.valueOf(1));
-        picDetail.setPicturePubtime(3423);
         Gson gson = new Gson();
         body.addPart(new StringPart("picDetail", gson.toJson(picDetail)));
         body.addPart(new FilePart("picUpload", file));
@@ -73,6 +70,10 @@ public class PicBusinessImp implements PicModelInterface {
                     @Override
                     public void onSuccess(String s, Response<String> response) {
                         logger.i("success result:" + s + "----response:" + response);
+                        if(Integer.valueOf(s)==0){
+                            callBack.onFail("上传失败，请稍后在网络良好的地方尝试");
+                            return;
+                        }
                         callBack.onSuccess();
                         response.printInfo();
                     }
@@ -81,12 +82,12 @@ public class PicBusinessImp implements PicModelInterface {
                     public void onFailure(HttpException e, Response<String> response) {
                         logger.i("Upload error:" + e.toString());
                         logger.i("success result:" + e.toString() + "----response:" + response);
-                        callBack.onFail();
+                        callBack.onFail(e.toString());
                     }
 
                     @Override
                     public void onUploading(AbstractRequest<String> request, long total, long len) {
-
+                        callBack.onUpload(total, len);
                     }
                 });
         MultipartBody body = new MultipartBody();

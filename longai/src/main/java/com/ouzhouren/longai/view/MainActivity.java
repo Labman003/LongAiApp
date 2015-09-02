@@ -7,20 +7,16 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -28,215 +24,117 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.pwittchen.reactivenetwork.library.ConnectivityStatus;
-import com.github.pwittchen.reactivenetwork.library.ReactiveNetwork;
-import com.ouzhouren.base.cache.ACache;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ouzhouren.longai.R;
 import com.ouzhouren.longai.common.utils.MyLogger;
-import com.ouzhouren.longai.model.PicBusinessImp;
-import com.ouzhouren.longai.model.PicModelInterface;
+import com.ouzhouren.longai.model.User;
+import com.ouzhouren.longai.presenter.NavPresenter;
+import com.ouzhouren.longai.presenter.NavViewInterface;
 import com.soundcloud.android.crop.Crop;
-import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
-import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
-import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class MainActivity extends AppCompatActivity implements NavViewInterface {
     private final int FRAGMENT_SEARCH = 0;
     private final int FRAGMENT_TALK = 1;
     private final int FRAGMENT_NEWS = 2;
     private final int FRAGMENT_EVENT = 3;
 
     Activity mAc;
-    ImageView resultView;
-    ImageView imageView;
-    TextView textView;
+    ImageView profileView;
+    TextView nickNameTv;
+    TextView userNameTv;
     CoordinatorLayout rootLayout;
-    FloatingActionButton fabBtn;
     Toolbar toolbar;
     TabLayout tabLayout;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle drawerToggle;
-    CollapsingToolbarLayout collapsingToolbarLayout;
     NavigationView navigation;
-    SwipeRefreshLayout mSwipeRefreshWidget;
     ViewPager mViewPager;
     MainFragmentStatePagerAdapter pagerAdapter;
-    private Bitmap bitmap;
+    Bitmap bitmap;
+    ImageButton cameraIB;
+    NavPresenter navPresenter;
+    SweetAlertDialog sadlg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAc = this;
-//        resultView = (SubsamplingScaleImageView)findViewById(R.id.imageView);
-//        imageView = (ImageView) findViewById(R.id.imageView2);
-//        textView = (TextView) findViewById(R.id.text);
+        findView();
+        init(mAc);
+        cameraIB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cropPic();
+            }
+        });
+    }
 
 
-      /*****************选择图片裁剪********************/
-      //  Crop.pickImage(this);
-        /*******************FB******************/
-//        rootLayout = (CoordinatorLayout) findViewById(R.id.rootLayout);
-//        fabBtn = (FloatingActionButton) findViewById(R.id.fabBtn);
-//        fabBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Snackbar.make(rootLayout, "收到彭菊的来信!", Snackbar.LENGTH_SHORT)
-//                        .setAction("拆开", new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                            }
-//                        })
-//                        .show();
-//            }
-//        });
-        /*****************ToolBar*********************/
+    private void findView() {
         toolbar = (Toolbar) findViewById(R.id.news_toolbar);
         setSupportActionBar(toolbar);
-        /***************Drawer*********************/
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         drawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.welcomanim_title_login, R.string.hello_world);
         drawerLayout.setDrawerListener(drawerToggle);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        /*********bar折叠*************/
-     //   collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbarLayout);
-      //  collapsingToolbarLayout.setTitle("龙爱");
-        /******************抽屉导航************************/
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+
         navigation = (NavigationView) findViewById(R.id.navigation);
-        ACache aCache = ACache.get(mAc);
-        String locationdescribe = aCache.getAsString("locationdescribe");
-        if(locationdescribe!=null&&locationdescribe.length()>0){
-            navigation.getMenu().findItem(R.id.navItem_location).setTitle("位置："+locationdescribe);
-        }
+        View header = navigation.inflateHeaderView(R.layout.nav_header);
+        profileView = (ImageView) header.findViewById(R.id.result);
+        nickNameTv = (TextView) header.findViewById(R.id.nav_tv_nick_name);
+        userNameTv = (TextView) header.findViewById(R.id.nav_tv_username);
+        cameraIB = (ImageButton) header.findViewById(R.id.nav_ib_camera);
+    }
+
+    private void init(final Activity mAc) {
+        navPresenter = new NavPresenter(this, this);
+        navPresenter.locate(mAc);
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 int id = menuItem.getItemId();
                 switch (id) {
-                    case R.id.navItem_message:
-                        break;
+//                    case R.id.navItem_message:
+//                        break;
                     case R.id.navItem_album:
+                        goAlbum();
                         break;
                     case R.id.navItem_vip:
+                        Snackbar.make(rootLayout, "暂未开通VIP特别服务，敬请期待!", Snackbar.LENGTH_SHORT)
+                                .setAction("确认", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                    }
+                                })
+                                .show();
                         break;
                     case R.id.navItem_location:
+                        navPresenter.locate(mAc);
+                        break;
+                    case R.id.navItem_setting:
+                        goSettings();
+                        break;
+                    case R.id.navItem_off:
+                        quitApplication();
                         break;
                 }
                 return false;
             }
         });
-        View header = navigation.inflateHeaderView(R.layout.nav_header);
-        resultView = (ImageView) header.findViewById(R.id.result);
-        ImageButton cameraIB = (ImageButton) header.findViewById(R.id.nav_ib_camera);
-        cameraIB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Crop.pickImage(MainActivity.this);
-            }
-        });
-        /*****************下拉加载***********************************/
-       // mSwipeRefreshWidget = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_widget);
-        /***************sweet对话框***************/
-//        //MD进度条
-//        SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
-//        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-//        pDialog.setTitleText("Loading");
-//        pDialog.setCancelable(false);
-//        pDialog.show();
-//        //普通消息
-//        new SweetAlertDialog(this)
-//                .setTitleText("Here's a message!")
-//                .show();
-
-//        //确认后改变样式
-//        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-//                .setTitleText("Are you sure?")
-//                .setContentText("Won't be able to recover this file!")
-//                .setConfirmText("Yes,delete it!")
-//                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-//                    @Override
-//                    public void onClick(SweetAlertDialog sDialog) {
-//                        sDialog
-//                                .setTitleText("Deleted!")
-//                                .setContentText("Your imaginary file has been deleted!")
-//                                .setConfirmText("OK")
-//                                .setConfirmClickListener(null)
-//                                .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
-//                    }
-//                })
-//                .show();
-        /***************TimePicker****************/
-//        Calendar now = Calendar.getInstance();
-////        DatePickerDialog dpd = DatePickerDialog.newInstance(
-////                MainActivity.this,
-////                now.get(Calendar.YEAR),
-////                now.get(Calendar.MONTH),
-////                now.get(Calendar.DAY_OF_MONTH)
-////        );
-////        dpd.show(getFragmentManager(), "Datepickerdialog");
-//        TimePickerDialog tpd = TimePickerDialog.newInstance(
-//                MainActivity.this,
-//                now.get(Calendar.HOUR_OF_DAY),
-//                now.get(Calendar.MINUTE),
-//                false
-//        );
-//        tpd.setThemeDark(false);
-//        tpd.vibrate(false);
-//        tpd.setOnCancelListener(new DialogInterface.OnCancelListener() {
-//            @Override
-//            public void onCancel(DialogInterface dialogInterface) {
-//                Log.d("TimePicker", "Dialog was cancelled");
-//            }
-//        });
-//        tpd.show(getFragmentManager(), "Timepickerdialog");
         /******************* Tab & ViewPager *******/
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
         // 设置ViewPager的数据等
         pagerAdapter = new MainFragmentStatePagerAdapter(getSupportFragmentManager());
-       mViewPager.setAdapter(pagerAdapter);
+        mViewPager.setAdapter(pagerAdapter);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(mViewPager);
-    //    tabLayout.setTabsFromPagerAdapter(pagerAdapter);
-        /********************LiteHttp**********************/
-//        String url = "api.douban.com";
-//        StringRequest req = new StringRequest(url).addUrlPrifix("http://").addUrlSuffix("/v2/book/1220562");
-//        LiteHttpUtil.getLiteHttp(mAc).executeAsync(req.setHttpListener(new HttpListener<String>() {
-//            @Override
-//            public void onSuccess(String s, Response<String> response) {
-//                // 成功：主线程回调，反馈一个string
-//                new SweetAlertDialog(mAc)
-//                        .setTitleText("Here's a message!")
-//                        .setContentText(s+response.resToString())
-//                        .show();
-//            }
-//
-//            @Override
-//            public void onFailure(HttpException e, Response<String> response) {
-//                // 失败：主线程回调，反馈异常
-//              //  logger.i("faile exception:" + e + "----response:" + response);
-//            }
-//        }));
-
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent result) {
@@ -256,108 +154,15 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     private void handleCrop(int resultCode, Intent result) {
         MyLogger logger = MyLogger.benLog();
         if (resultCode == RESULT_OK) {
-            resultView.setImageURI(Crop.getOutput(result));
-            BitmapDrawable bd = (BitmapDrawable) resultView.getDrawable();
-            bitmap = bd.getBitmap();
-            logger.i("beforesave");
-            saveBitmapFile(bitmap) ;
-            logger.i("aftersave");
-          //  imageView.setImage(ImageSource.resource(R.drawable.monkey));
-// ... or ...
-          //  imageView.setImage(ImageSource.asset("map.png"))
-// ... or ...
-          //  resultView.setImage(ImageSource.uri(Crop.getOutput(result)));
-//            MultipartBody body = new MultipartBody();
-//            body.addPart(new StringPart("key1", "hello"));
-//            body.addPart(new StringPart("key2", "很高兴见到你", "utf-8", null));
-//            body.addPart(new BytesPart("key3", new byte[]{1, 2, 3}));
-//            body.addPart(new FilePart("pic", new File("/sdcard/aaa.jpg"), "image/jpeg"));
-//            body.addPart(new InputStreamPart("litehttp", fis, "litehttp.txt", "text/plain"));
-//            postRequest.setHttpBody(body);
-
-            /*************upload**********/
-//            final ProgressDialog postProgress = new ProgressDialog(this);
-//            postProgress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-//            postProgress.setIndeterminate(false);
-//            postProgress.show();
-//            String uploadUrl= "http://192.168.1.106:8080/longai/userIcon";
-//            final StringRequest postRequest = new StringRequest(uploadUrl)
-//                    .setMethod(HttpMethods.Post)
-//                    .setHttpListener(new HttpListener<String>(true, false, true) {
-//                        @Override
-//                        public void onSuccess(String s, Response<String> response) {
-//                            //                                postProgress.dismiss();
-//                            HttpUtil.showTips(MainActivity.this, "Upload Success", s);
-//                            response.printInfo();
-//                        }
-//
-//                        @Override
-//                        public void onFailure(HttpException e, Response<String> response) {
-//                            postProgress.dismiss();
-//                            HttpUtil.showTips(MainActivity.this, "Upload Failed", e.toString());
-//                        }
-//
-//                        @Override
-//                        public void onUploading(AbstractRequest<String> request, long total, long len) {
-//                            postProgress.setMax((int) total);
-//                            postProgress.setProgress((int) len);
-//                        }
-//                    });
-//            MultipartBody body = new MultipartBody();
-//            body.addPart(new StringPart("userId", "3"));
-//            //body.addPart(new FilePart("userIcon",file, "image/jpeg"));
-//          //  body.addPart(new FilePart("userIcon",file));
-//            body.addPart(new FilePart("userIcon",new File(Environment.getExternalStorageDirectory()+"/01.jpg"), "image/jpeg"));
-////            FileInputStream fis = null;
-////            try {
-////                fis = new FileInputStream(file);
-////            } catch (Exception e) {
-////                e.printStackTrace();
-////            }
-////            body.addPart(new InputStreamPart("litehttp", fis, "litehttp.txt", "text/plain"));
-////            body.addPart(new  InputStreamPart("userIcon",fis,file.getName(),"image/jpeg"));
-//           // body.addPart(new InputStreamPart("userIcon",fis,file.getName()));
-//            postRequest.setHttpBody(body);
-//            LiteHttpUtil.getLiteHttp(mAc).executeAsync(postRequest);
-            PicBusinessImp picBusinessImp = new PicBusinessImp();
-            picBusinessImp.uploadAlbumPic(19, new File(Environment.getExternalStorageDirectory() + "/01.jpg"), new PicModelInterface.UploadCallBack() {
-                @Override
-                public void onSuccess() {
-                    
-                }
-
-                @Override
-                public void onFail() {
-
-                }
-            }, mAc);
-
+            refreshProfilePic(Crop.getOutput(result));
+            bitmap = ((BitmapDrawable) profileView.getDrawable()).getBitmap();
+            navPresenter.uploadProfilePic(bitmap, mAc);
         } else if (resultCode == Crop.RESULT_ERROR) {
             Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
-//    Bitmap对象保存味图片文件
-    public void saveBitmapFile(Bitmap bitmap){
-        File file=new File(Environment.getExternalStorageDirectory()+"/01.jpg");//将要保存图片的路径
-        FileOutputStream fOut = null;
-        try {
-            fOut = new FileOutputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
-        try {
-            fOut.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            fOut.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
     @Override
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -369,7 +174,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         super.onConfigurationChanged(newConfig);
         drawerToggle.onConfigurationChanged(newConfig);
     }
-
 
 
     @Override
@@ -390,19 +194,104 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
-    public void onDateSet(DatePickerDialog datePickerDialog,  int year, int monthOfYear, int dayOfMonth) {
-        String date = "You picked the following date: "+dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
-        //普通消息
-        new SweetAlertDialog(this)
-                .setTitleText(date)
+    protected void onResume() {
+        super.onResume();
+        navPresenter.detectNetwork(this);
+    }
+
+    @Override
+    public void cropPic() {
+        Crop.pickImage(MainActivity.this);
+    }
+
+    @Override
+    public void refreshProfilePic(Uri uri) {
+        profileView.setImageURI(uri);
+
+    }
+
+    @Override
+    public void refreshNav(User user) {
+       ImageLoader.getInstance().displayImage(user.getProfilepic(),profileView);
+        nickNameTv.setText(user.getNickname());
+        userNameTv.setText(user.getName());
+    }
+
+    @Override
+    public void refreshLocation(String locationdescribe) {
+        navigation.getMenu().findItem(R.id.navItem_location).setTitle("位置：" + locationdescribe);
+    }
+
+    @Override
+    public void quitApplication() {
+        this.finish();
+    }
+
+    @Override
+    public void goContacts() {
+
+    }
+
+    @Override
+    public void goAlbum() {
+
+    }
+
+    @Override
+    public void goSettings() {
+
+    }
+
+    @Override
+    public void showLocateFail() {
+        navigation.getMenu().findItem(R.id.navItem_location).setTitle("未知位置：定位失败");
+        Snackbar.make(rootLayout, "定位失败，请开启GPS并于信号良好的地方尝试定位!", Snackbar.LENGTH_SHORT)
+                .setAction("确认", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                })
                 .show();
     }
 
     @Override
-    public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i1) {
-
+    public void showNetworkDisable() {
+        TextView networkStateTv = (TextView) findViewById(R.id.main_tv_network_state);
+        networkStateTv.setVisibility(View.VISIBLE);
     }
+
+    @Override
+    public void hideNetworkDisable() {
+        TextView networkStateTv = (TextView) findViewById(R.id.main_tv_network_state);
+        networkStateTv.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showUploadSuccess() {
+        sadlg.dismiss();
+        sadlg = new SweetAlertDialog(mAc, SweetAlertDialog.SUCCESS_TYPE);
+        sadlg.show();
+    }
+
+    @Override
+    public void showUploadFail(String s) {
+        sadlg.dismiss();
+        sadlg = new SweetAlertDialog(mAc, SweetAlertDialog.SUCCESS_TYPE)
+                .setTitleText(s);
+        sadlg.show();
+    }
+
+    @Override
+    public void showUploading(long total, long len) {
+        sadlg.dismiss();
+        sadlg = new SweetAlertDialog(mAc, SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText(String.valueOf(total) + "/" + String.valueOf(len));
+        sadlg.show();
+    }
+
+
     //再按一次退出龙爱
     private long exitTime = 0;
 
@@ -419,43 +308,5 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             return true;
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        new ReactiveNetwork().observeConnectivity(this)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .filter(ConnectivityStatus.isEqualTo(ConnectivityStatus.OFFLINE))
-                .subscribe(new Action1<ConnectivityStatus>() {
-                    @Override public void call(ConnectivityStatus connectivityStatus) {
-                        // do something with connectivityStatus, which will be WIFI_CONNECTED
-                        TextView networkStateTv = (TextView) findViewById(R.id.main_tv_network_state);
-                        networkStateTv.setVisibility(View.VISIBLE);
-                    }
-                });
-        new ReactiveNetwork().observeConnectivity(this)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .filter(ConnectivityStatus.isEqualTo(ConnectivityStatus.MOBILE_CONNECTED))
-                .subscribe(new Action1<ConnectivityStatus>() {
-                    @Override public void call(ConnectivityStatus connectivityStatus) {
-                        // do something with connectivityStatus, which will be WIFI_CONNECTED
-                        TextView networkStateTv = (TextView) findViewById(R.id.main_tv_network_state);
-                        networkStateTv.setVisibility(View.GONE);
-                    }
-                });
-        new ReactiveNetwork().observeConnectivity(this)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .filter(ConnectivityStatus.isEqualTo(ConnectivityStatus.WIFI_CONNECTED))
-                .subscribe(new Action1<ConnectivityStatus>() {
-                    @Override public void call(ConnectivityStatus connectivityStatus) {
-                        // do something with connectivityStatus, which will be WIFI_CONNECTED
-                        TextView networkStateTv = (TextView) findViewById(R.id.main_tv_network_state);
-                        networkStateTv.setVisibility(View.GONE);
-                    }
-                });
     }
 }

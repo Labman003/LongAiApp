@@ -9,7 +9,7 @@ import java.util.List;
  * Created by BenPC on 2015/8/31.
  */
 public interface PicModelInterface {
-    void uploadAlbumPic(int userId, File f,UploadCallBack callBack, Context ctx);
+    void uploadAlbumPic(int userId,Picture picDetail, File f,UploadCallBack callBack, Context ctx);
 
     void uploadProfilePic(int userId, File f,UploadCallBack callBack, Context ctx);
 
@@ -17,8 +17,8 @@ public interface PicModelInterface {
 
     abstract class UploadCallBack {
         public abstract void onSuccess();
-
-        public abstract void onFail();
+        public abstract void onFail(String s);
+        public abstract void onUpload(long total, long len);
     }
     abstract class GetAlbumCallBack {
         public abstract void onSuccess(List<Picture> pictures);

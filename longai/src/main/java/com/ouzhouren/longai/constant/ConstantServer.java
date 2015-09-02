@@ -27,8 +27,8 @@ public class ConstantServer {
     public static String PATCH_GET_MOMENT_COMMENT = "/longai/momentComment/getComment";
     public static String PATCH_SEND_MOMENT_COMMENT="/longai/momentComment/addMomentComment";
     public static String PATCH_DELETE_MOMENT_COMMENT="/longai/momentComment/deleteMomentComment";
-
     public static String PATCH_GET_MOMENT_LIKE="/longai/momentLike/getLikes";
     public static String PATCH_SEND_MOMENTLIKE="/longai/momentLike/addMomentlike";
     public static String PATCH_DELETE_MOMENT_LIKE="/longai/momentLike/deleteMomentlike";
+    public static String PATCH_GET_USERS_BY_GENS= "";
 }

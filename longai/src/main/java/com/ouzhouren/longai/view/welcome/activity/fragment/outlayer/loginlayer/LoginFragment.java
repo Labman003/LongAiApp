@@ -16,9 +16,6 @@ import android.widget.TextView;
 
 import com.ouzhouren.longai.R;
 import com.ouzhouren.longai.common.utils.MyLogger;
-import com.ouzhouren.longai.model.MomentLike;
-import com.ouzhouren.longai.model.MomentLikeBusinessImp;
-import com.ouzhouren.longai.model.MomentLikeModelInterface;
 import com.ouzhouren.longai.presenter.LoginViewInterface;
 import com.ouzhouren.longai.presenter.UserPresenter;
 import com.ouzhouren.longai.view.MainActivity;
@@ -84,25 +81,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
         loginIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MomentLikeBusinessImp momentLikeBusinessImp = new MomentLikeBusinessImp();
-                MomentLike momentComment = new MomentLike();
-                momentComment.setUserId(19);
-                momentComment.setMomentId(1);
-                momentComment.setNickName("YYT");
-                momentComment.setPubTime(23453);
-                momentComment.setMomentLikeId(8);
-                momentLikeBusinessImp.deleteMomentLike(momentComment, new MomentLikeModelInterface.DeleteMomentLikeCallBack() {
-                    @Override
-                    public void onSuccess(int deletedMomentLikeId) {
-
-                    }
-
-                    @Override
-                    public void onFail() {
-
-                    }
-                }, mAc);
-               // userPresenter.login(mAc);
+                userPresenter.login(mAc);
             }
         });
     }
