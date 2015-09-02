@@ -16,16 +16,12 @@ import android.widget.TextView;
 
 import com.ouzhouren.longai.R;
 import com.ouzhouren.longai.common.utils.MyLogger;
-import com.ouzhouren.longai.constant.UserType;
-import com.ouzhouren.longai.model.PicBusinessImp;
-import com.ouzhouren.longai.model.PicModelInterface;
-import com.ouzhouren.longai.model.Picture;
-import com.ouzhouren.longai.model.User;
+import com.ouzhouren.longai.model.MomentLike;
+import com.ouzhouren.longai.model.MomentLikeBusinessImp;
+import com.ouzhouren.longai.model.MomentLikeModelInterface;
 import com.ouzhouren.longai.presenter.LoginViewInterface;
 import com.ouzhouren.longai.presenter.UserPresenter;
 import com.ouzhouren.longai.view.MainActivity;
-
-import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -88,18 +84,16 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
         loginIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PicBusinessImp picBusinessImp = new PicBusinessImp();
-                User user = new User();
-                user.setUserId(19);
-                user.setGender("男");
-                user.setNickname("采萝莉的小蘑菇");
-                user.setEmail("23423432@qq.com");
-                user.setBiography("诚实可靠");
-                user.setPhone(1233443322);
-                user.setType(UserType.NORMAL);
-                picBusinessImp.getAlbumPics(1, 1, 3, new PicModelInterface.GetAlbumCallBack() {
+                MomentLikeBusinessImp momentLikeBusinessImp = new MomentLikeBusinessImp();
+                MomentLike momentComment = new MomentLike();
+                momentComment.setUserId(19);
+                momentComment.setMomentId(1);
+                momentComment.setNickName("YYT");
+                momentComment.setPubTime(23453);
+                momentComment.setMomentLikeId(8);
+                momentLikeBusinessImp.deleteMomentLike(momentComment, new MomentLikeModelInterface.DeleteMomentLikeCallBack() {
                     @Override
-                    public void onSuccess(List<Picture> pictures) {
+                    public void onSuccess(int deletedMomentLikeId) {
 
                     }
 

@@ -1,13 +1,11 @@
 package com.ouzhouren.longai.model;
 
-import java.util.Date;
-
 public class Picture implements java.io.Serializable {
 
 	private Integer pictureId;
 	private String userId;
 	private String picname;
-	private Date picturePubtime;
+	private long picturePubtime;
 	private String originallurl;
 	private String permisson;
 	private String nailurl;
@@ -44,11 +42,11 @@ public class Picture implements java.io.Serializable {
 		this.picname = picname;
 	}
 
-	public Date getPicturePubtime() {
-		return this.picturePubtime;
+	public long getPicturePubtime() {
+		return picturePubtime;
 	}
 
-	public void setPicturePubtime(Date picturePubtime) {
+	public void setPicturePubtime(long picturePubtime) {
 		this.picturePubtime = picturePubtime;
 	}
 

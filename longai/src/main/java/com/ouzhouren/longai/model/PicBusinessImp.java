@@ -2,6 +2,7 @@ package com.ouzhouren.longai.model;
 
 import android.content.Context;
 
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.litesuits.http.exception.HttpException;
 import com.litesuits.http.listener.HttpListener;
@@ -16,6 +17,7 @@ import com.ouzhouren.longai.common.utils.LiteHttpUtil;
 import com.ouzhouren.longai.common.utils.MyLogger;
 import com.ouzhouren.longai.common.utils.PageUtil;
 import com.ouzhouren.longai.constant.ConstantServer;
+import com.ouzhouren.longai.constant.UserType;
 
 import java.io.File;
 import java.util.List;
@@ -49,8 +51,15 @@ public class PicBusinessImp implements PicModelInterface {
 
                     }
                 });
+        //tod 返回的是1，0待处理
         MultipartBody body = new MultipartBody();
-        body.addPart(new StringPart("userId", String.valueOf(userId)));
+        Picture picDetail = new Picture();
+        picDetail.setPicname("我叫世忠那个我最钓");
+        picDetail.setPermisson(UserType.NORMAL);
+        picDetail.setUserId(String.valueOf(1));
+        picDetail.setPicturePubtime(3423);
+        Gson gson = new Gson();
+        body.addPart(new StringPart("picDetail", gson.toJson(picDetail)));
         body.addPart(new FilePart("picUpload", file));
         req.setHttpBody(body);
         LiteHttpUtil.getLiteHttp(ctx).executeAsync(req);

@@ -6,7 +6,7 @@ package com.ouzhouren.longai.constant;
 public class ConstantServer {
     public static String PRE_FIX = "http://";
    // public static String HOSTNAME = "192.168.1.101:8080";
-    public static String HOSTNAME = "192.168.1.103:8080";
+    public static String HOSTNAME = "192.168.1.102:8080";
     public static String PATCH_LOGIN = "/longai/user/login";
     public static String PATCHP_REGISTER = "/longai/user/register";
     //todo
@@ -22,6 +22,13 @@ public class ConstantServer {
     public static String PATCH_SEND_NEWS_LIKE = "/longai/newslike/newsLike";
     public static String PATCH_UPDATE_USER_INFO="/longai/user/insertDetail";
     public static String PATCH_UPLOAD_PHOTO="/longai/picture/picUpload";
-    public static String PATCH_UPLOAD_PROFILE_PIC="/longai/userIcon";
+    public static String PATCH_UPLOAD_PROFILE_PIC="/longai/user/userIcon";
     public static String PATCH_GET_ALBUM="/longai/picture/getTotalPic";
+    public static String PATCH_GET_MOMENT_COMMENT = "/longai/momentComment/getComment";
+    public static String PATCH_SEND_MOMENT_COMMENT="/longai/momentComment/addMomentComment";
+    public static String PATCH_DELETE_MOMENT_COMMENT="/longai/momentComment/deleteMomentComment";
+
+    public static String PATCH_GET_MOMENT_LIKE="/longai/momentLike/getLikes";
+    public static String PATCH_SEND_MOMENTLIKE="/longai/momentLike/addMomentlike";
+    public static String PATCH_DELETE_MOMENT_LIKE="/longai/momentLike/deleteMomentlike";
 }
