@@ -9,10 +9,14 @@ public interface UserModelInterface {
     void login(String userName, String password, CallBack callBack, Context ctx);
     void register(String userName, String password, CallBack callBack, Context ctx);
     void uploadProfilePic(CallBack callBack, Context ctx);
-    void updateUserInfo(CallBack callBack, Context ctx);
+    void updateUserInfo(User user ,UpdateCallBack callBack, Context ctx);
 
     abstract class CallBack {
         public abstract void onSuccess(User user);
+        public abstract void onFail(String e);
+    }
+    abstract class UpdateCallBack {
+        public abstract void onSuccess(int userId);
         public abstract void onFail(String e);
     }
 }

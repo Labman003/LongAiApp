@@ -1,7 +1,6 @@
 package com.ouzhouren.longai.view;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -31,21 +30,11 @@ import android.widget.Toast;
 
 import com.github.pwittchen.reactivenetwork.library.ConnectivityStatus;
 import com.github.pwittchen.reactivenetwork.library.ReactiveNetwork;
-import com.litesuits.http.exception.HttpException;
-import com.litesuits.http.listener.HttpListener;
-import com.litesuits.http.request.AbstractRequest;
-import com.litesuits.http.request.StringRequest;
-import com.litesuits.http.request.content.multi.FilePart;
-import com.litesuits.http.request.content.multi.MultipartBody;
-import com.litesuits.http.request.content.multi.StringPart;
-import com.litesuits.http.request.param.HttpMethods;
-import com.litesuits.http.response.Response;
-import com.litesuits.http.utils.HttpUtil;
 import com.ouzhouren.base.cache.ACache;
 import com.ouzhouren.longai.R;
-import com.ouzhouren.longai.common.utils.LiteHttpUtil;
 import com.ouzhouren.longai.common.utils.MyLogger;
-import com.ouzhouren.longai.common.utils.UriUtil;
+import com.ouzhouren.longai.model.PicBusinessImp;
+import com.ouzhouren.longai.model.PicModelInterface;
 import com.soundcloud.android.crop.Crop;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
@@ -286,52 +275,62 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 //            body.addPart(new InputStreamPart("litehttp", fis, "litehttp.txt", "text/plain"));
 //            postRequest.setHttpBody(body);
 
-            File file = UriUtil.getFromMediaUri(this, getContentResolver(), Crop.getOutput(result));
-            logger.i(file.getAbsolutePath());
             /*************upload**********/
-            final ProgressDialog postProgress = new ProgressDialog(this);
-            postProgress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            postProgress.setIndeterminate(false);
-            postProgress.show();
-            String uploadUrl= "http://192.168.1.106:8080/longai/userIcon";
-            final StringRequest postRequest = new StringRequest(uploadUrl)
-                    .setMethod(HttpMethods.Post)
-                    .setHttpListener(new HttpListener<String>(true, false, true) {
-                        @Override
-                        public void onSuccess(String s, Response<String> response) {
-                            //                                postProgress.dismiss();
-                            HttpUtil.showTips(MainActivity.this, "Upload Success", s);
-                            response.printInfo();
-                        }
+//            final ProgressDialog postProgress = new ProgressDialog(this);
+//            postProgress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+//            postProgress.setIndeterminate(false);
+//            postProgress.show();
+//            String uploadUrl= "http://192.168.1.106:8080/longai/userIcon";
+//            final StringRequest postRequest = new StringRequest(uploadUrl)
+//                    .setMethod(HttpMethods.Post)
+//                    .setHttpListener(new HttpListener<String>(true, false, true) {
+//                        @Override
+//                        public void onSuccess(String s, Response<String> response) {
+//                            //                                postProgress.dismiss();
+//                            HttpUtil.showTips(MainActivity.this, "Upload Success", s);
+//                            response.printInfo();
+//                        }
+//
+//                        @Override
+//                        public void onFailure(HttpException e, Response<String> response) {
+//                            postProgress.dismiss();
+//                            HttpUtil.showTips(MainActivity.this, "Upload Failed", e.toString());
+//                        }
+//
+//                        @Override
+//                        public void onUploading(AbstractRequest<String> request, long total, long len) {
+//                            postProgress.setMax((int) total);
+//                            postProgress.setProgress((int) len);
+//                        }
+//                    });
+//            MultipartBody body = new MultipartBody();
+//            body.addPart(new StringPart("userId", "3"));
+//            //body.addPart(new FilePart("userIcon",file, "image/jpeg"));
+//          //  body.addPart(new FilePart("userIcon",file));
+//            body.addPart(new FilePart("userIcon",new File(Environment.getExternalStorageDirectory()+"/01.jpg"), "image/jpeg"));
+////            FileInputStream fis = null;
+////            try {
+////                fis = new FileInputStream(file);
+////            } catch (Exception e) {
+////                e.printStackTrace();
+////            }
+////            body.addPart(new InputStreamPart("litehttp", fis, "litehttp.txt", "text/plain"));
+////            body.addPart(new  InputStreamPart("userIcon",fis,file.getName(),"image/jpeg"));
+//           // body.addPart(new InputStreamPart("userIcon",fis,file.getName()));
+//            postRequest.setHttpBody(body);
+//            LiteHttpUtil.getLiteHttp(mAc).executeAsync(postRequest);
+            PicBusinessImp picBusinessImp = new PicBusinessImp();
+            picBusinessImp.uploadAlbumPic(19, new File(Environment.getExternalStorageDirectory() + "/01.jpg"), new PicModelInterface.UploadCallBack() {
+                @Override
+                public void onSuccess() {
+                    
+                }
 
-                        @Override
-                        public void onFailure(HttpException e, Response<String> response) {
-                            postProgress.dismiss();
-                            HttpUtil.showTips(MainActivity.this, "Upload Failed", e.toString());
-                        }
+                @Override
+                public void onFail() {
 
-                        @Override
-                        public void onUploading(AbstractRequest<String> request, long total, long len) {
-                            postProgress.setMax((int) total);
-                            postProgress.setProgress((int) len);
-                        }
-                    });
-            MultipartBody body = new MultipartBody();
-            body.addPart(new StringPart("userId", "3"));
-            //body.addPart(new FilePart("userIcon",file, "image/jpeg"));
-          //  body.addPart(new FilePart("userIcon",file));
-            body.addPart(new FilePart("userIcon",new File(Environment.getExternalStorageDirectory()+"/01.jpg"), "image/jpeg"));
-//            FileInputStream fis = null;
-//            try {
-//                fis = new FileInputStream(file);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//            body.addPart(new InputStreamPart("litehttp", fis, "litehttp.txt", "text/plain"));
-//            body.addPart(new  InputStreamPart("userIcon",fis,file.getName(),"image/jpeg"));
-           // body.addPart(new InputStreamPart("userIcon",fis,file.getName()));
-            postRequest.setHttpBody(body);
-            LiteHttpUtil.getLiteHttp(mAc).executeAsync(postRequest);
+                }
+            }, mAc);
 
         } else if (resultCode == Crop.RESULT_ERROR) {
             Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();

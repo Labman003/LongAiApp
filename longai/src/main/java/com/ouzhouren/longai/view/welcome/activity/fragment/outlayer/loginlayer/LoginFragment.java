@@ -16,9 +16,11 @@ import android.widget.TextView;
 
 import com.ouzhouren.longai.R;
 import com.ouzhouren.longai.common.utils.MyLogger;
-import com.ouzhouren.longai.model.Moment;
-import com.ouzhouren.longai.model.MomentBusinessImp;
-import com.ouzhouren.longai.model.MomentModelInterface;
+import com.ouzhouren.longai.constant.UserType;
+import com.ouzhouren.longai.model.PicBusinessImp;
+import com.ouzhouren.longai.model.PicModelInterface;
+import com.ouzhouren.longai.model.Picture;
+import com.ouzhouren.longai.model.User;
 import com.ouzhouren.longai.presenter.LoginViewInterface;
 import com.ouzhouren.longai.presenter.UserPresenter;
 import com.ouzhouren.longai.view.MainActivity;
@@ -86,10 +88,18 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
         loginIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MomentBusinessImp momentBusinessImp = new MomentBusinessImp();
-                momentBusinessImp.getMomentsPage(2, 1, 5, new MomentModelInterface.GetPageMomentsCallBack() {
+                PicBusinessImp picBusinessImp = new PicBusinessImp();
+                User user = new User();
+                user.setUserId(19);
+                user.setGender("男");
+                user.setNickname("采萝莉的小蘑菇");
+                user.setEmail("23423432@qq.com");
+                user.setBiography("诚实可靠");
+                user.setPhone(1233443322);
+                user.setType(UserType.NORMAL);
+                picBusinessImp.getAlbumPics(1, 1, 3, new PicModelInterface.GetAlbumCallBack() {
                     @Override
-                    public void onSuccess(List<Moment> moments) {
+                    public void onSuccess(List<Picture> pictures) {
 
                     }
 
@@ -97,7 +107,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
                     public void onFail() {
 
                     }
-                },mAc);
+                }, mAc);
                // userPresenter.login(mAc);
             }
         });

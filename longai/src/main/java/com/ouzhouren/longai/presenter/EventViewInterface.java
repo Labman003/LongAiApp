@@ -13,7 +13,6 @@ public interface EventViewInterface {
     void showEvents(String city,List<Event> events,String time);
     void addEvents(String city,List<Event> events,String time);
     void goToEventDetail();
-
     void showProgress();
     void dismissProgress();
 }

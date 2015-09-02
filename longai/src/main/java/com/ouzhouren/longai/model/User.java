@@ -18,7 +18,7 @@ public class User implements java.io.Serializable{
 	private Double preferencegens;
 	private Double selfgens;
 	private String password;
-	
+	private int phone;
 
 
 	// Constructors
@@ -127,4 +127,11 @@ public class User implements java.io.Serializable{
 	}
 
 
+	public void setPhone(int phone) {
+		this.phone = phone;
+	}
+
+	public int getPhone() {
+		return phone;
+	}
 }
