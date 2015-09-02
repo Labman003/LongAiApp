@@ -3,7 +3,6 @@ package com.ouzhouren.longai.presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.litesuits.http.exception.HttpException;
 import com.ouzhouren.base.cache.ACache;
 import com.ouzhouren.longai.common.utils.MyLogger;
 import com.ouzhouren.longai.constant.CacheKey;
@@ -64,7 +63,7 @@ public class UserPresenter {
             }
 
             @Override
-            public void onFail(HttpException e) {
+            public void onFail(String e) {
                 loginViewInterface.showLoginFail(e.toString());
             }
         }, ctx);
@@ -84,12 +83,13 @@ public class UserPresenter {
             public void onSuccess(User user) {
                 ACache cache = ACache.get(ctx);
                 cache.put(CacheKey.USER, user);
+                logger.i("注册成功，name:"+user.getName()+"-userId:"+user.getUserId());
                 registerViewInterface.dismissProgress();
                 registerViewInterface.goToActivity();
             }
 
             @Override
-            public void onFail(HttpException e) {
+            public void onFail(String e) {
                 registerViewInterface.showRegisterFail(e.toString());
             }
         }, ctx);

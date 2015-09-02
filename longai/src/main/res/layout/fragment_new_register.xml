@@ -109,8 +109,7 @@
         android:maxLength="6"
         android:drawablePadding="8dp"
         android:hint="@string/reg_write_identify_code"
-        android:singleLine="true"
-        android:inputType="number" />
+        android:singleLine="true" />
     <View
         android:layout_width="match_parent"
         android:layout_height="0.6dp"

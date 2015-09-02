@@ -15,9 +15,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ouzhouren.longai.R;
+import com.ouzhouren.longai.common.utils.MyLogger;
+import com.ouzhouren.longai.model.Moment;
+import com.ouzhouren.longai.model.MomentBusinessImp;
+import com.ouzhouren.longai.model.MomentModelInterface;
 import com.ouzhouren.longai.presenter.LoginViewInterface;
 import com.ouzhouren.longai.presenter.UserPresenter;
 import com.ouzhouren.longai.view.MainActivity;
+
+import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -33,6 +39,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     private SweetAlertDialog dlg;
     private Activity mAc;
     private UserPresenter userPresenter;
+    private MyLogger logger = MyLogger.benLog();
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -79,7 +86,19 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
         loginIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userPresenter.login(mAc);
+                MomentBusinessImp momentBusinessImp = new MomentBusinessImp();
+                momentBusinessImp.getMomentsPage(2, 1, 5, new MomentModelInterface.GetPageMomentsCallBack() {
+                    @Override
+                    public void onSuccess(List<Moment> moments) {
+
+                    }
+
+                    @Override
+                    public void onFail() {
+
+                    }
+                },mAc);
+               // userPresenter.login(mAc);
             }
         });
     }
@@ -97,6 +116,8 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
 
     @Override
     public void showProgress() {
+        dlg.dismiss();
+        dlg = new SweetAlertDialog(mAc, SweetAlertDialog.PROGRESS_TYPE);
         dlg.show();
     }
 
@@ -108,7 +129,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     @Override
     public void showLoginFail(String error) {
         dlg.dismiss();
-        dlg.changeAlertType(SweetAlertDialog.ERROR_TYPE);
+        dlg = new SweetAlertDialog(mAc, SweetAlertDialog.ERROR_TYPE);
         dlg.setTitleText(error);
         dlg.show();
     }
