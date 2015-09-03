@@ -16,6 +16,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements NavViewInterface 
                         goAlbum();
                         break;
                     case R.id.navItem_vip:
-                        Snackbar.make(rootLayout, "暂未开通VIP特别服务，敬请期待!", Snackbar.LENGTH_SHORT)
+                        Snackbar.make(drawerLayout, "暂未开通VIP特别服务，敬请期待!", Snackbar.LENGTH_SHORT)
                                 .setAction("确认", new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
@@ -300,6 +301,7 @@ public class MainActivity extends AppCompatActivity implements NavViewInterface 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             if ((System.currentTimeMillis() - exitTime) > 2000) {
+                drawerLayout.openDrawer(Gravity.LEFT);
                 Toast.makeText(getApplicationContext(), "再按一次退出龙爱", Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
