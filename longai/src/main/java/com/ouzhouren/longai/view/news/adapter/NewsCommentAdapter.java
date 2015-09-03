@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ouzhouren.longai.R;
-import com.ouzhouren.longai.model.Comment;
 import com.ouzhouren.longai.model.NewsComment;
 
 import java.util.List;
@@ -86,15 +85,15 @@ public class NewsCommentAdapter extends RecyclerView.Adapter<NewsCommentAdapter.
                         .setItems(holder.dialogContent, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-//                                int zanNumb = getItem(position).getZanNumb();
+                                int zanNumb = Integer.parseInt(holder.zanNum.getText().toString(), 10);
                                 switch (which) {
                                     case 0: //点击了 赞同 按钮
                                         if (!holder.isZan) {   //点击了赞同按钮
                                             holder.dialogContent[0] = "取消赞同";
                                             holder.isZan = true;
                                             holder.commentZan.setImageResource(R.drawable.icon_zan_blue);
-//                                            zanNumb++;
-//                                            getItem(position).setZanNumb(zanNumb);
+                                            zanNumb++;
+                                            holder.zanNum.setText(zanNumb+"");
                                             Toast.makeText(context, "赞+1", Toast.LENGTH_SHORT).show();
 //                                            holder.zanNum.setText(getItem(position).getZanNumb()+"");
                                             //notifyItemChanged(position);
@@ -102,16 +101,17 @@ public class NewsCommentAdapter extends RecyclerView.Adapter<NewsCommentAdapter.
                                             holder.dialogContent[0] = "赞同";
                                             holder.isZan = false;
                                             holder.commentZan.setImageResource(R.drawable.icon_zan_grey);
-//                                            zanNumb--;
+                                            zanNumb--;
+                                            holder.zanNum.setText(zanNumb +"");
 //                                            getItem(position).setZanNumb(zanNumb);
                                             Toast.makeText(context, "赞-1", Toast.LENGTH_SHORT).show();
-//                                            holder.zanNum.setText(getItem(position).getZanNumb()+"");
-                                            //notifyItemChanged(position);
+//                                            holder.zanNum.setText(getItem(position).getZanNumb() + "");
+//                                            notifyItemChanged(position);
                                         }
                                         break;
                                     case 1: //点击了复制按钮
                                         ClipboardManager clip = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-//                                        clip.setText(getItem(position).getContent().trim()); // 复制
+                                        clip.setText(getItem(position).getCommentContent().trim()); // 复制
                                         Toast.makeText(context,"复制成功",Toast.LENGTH_SHORT).show();
                                         break;
                                     default:

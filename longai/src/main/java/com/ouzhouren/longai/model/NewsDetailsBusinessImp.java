@@ -15,13 +15,12 @@ import com.ouzhouren.longai.constant.ConstantServer;
 import java.util.List;
 
 /**
- * Created by BenPC on 2015/8/31.
+ * Created by 郭泽锋 on 2015/9/1.
  */
-public class NewsBusinessImp implements NewsModelInterface {
-    private MyLogger logger = MyLogger.benLog();
-
+public class NewsDetailsBusinessImp implements NewsDetailsModelInterface{
+    MyLogger logger = MyLogger.benLog();
     @Override
-    public void getNews(int currentPage, int amount, final GetNewsCallBack callBack, Context ctx) {
+    public void getNewsDetailsInfo(int currentPage, int amount, final NewsModelInterface.GetNewsCallBack callBack, Context ctx) {
         StringRequest req = new StringRequest(ConstantServer.HOSTNAME).addUrlPrifix(ConstantServer.PRE_FIX).addUrlSuffix(ConstantServer.PATCH_GET_NEWS).addUrlParam("currentPage", String.valueOf(currentPage)).addUrlParam("amount", String.valueOf(amount));
         LiteHttpUtil.getLiteHttp(ctx).executeAsync(req.setHttpListener(new HttpListener<String>() {
             @Override
@@ -46,4 +45,5 @@ public class NewsBusinessImp implements NewsModelInterface {
             }
         }));
     }
+
 }

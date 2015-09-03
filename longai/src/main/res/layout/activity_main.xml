@@ -31,7 +31,7 @@
                  <!--app:layout_collapseParallaxMultiplier="0.3"-->
                  <!--android:src="@drawable/header" />-->
              <android.support.v7.widget.Toolbar
-                 android:id="@+id/news_toolbar"
+                 android:id="@+id/news_details_toolbar"
                  android:layout_width="match_parent"
                  android:layout_height="?attr/actionBarSize"
                  android:background="#555c0590"

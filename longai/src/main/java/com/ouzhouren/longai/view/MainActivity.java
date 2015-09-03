@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 //            }
 //        });
         /*****************ToolBar*********************/
-        toolbar = (Toolbar) findViewById(R.id.news_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.news_details_toolbar);
         setSupportActionBar(toolbar);
         /***************Drawer*********************/
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);

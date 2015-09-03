@@ -32,13 +32,15 @@ public class NewsCommentEditPage extends AppCompatActivity {
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.comment_edit_back:
+                        Intent intent = new Intent(NewsCommentEditPage.this, NewsCommentPage.class);
+                        setResult(RESULT_CANCELED, intent);
                         finish();
                         break;
                     case R.id.comment_edit_send:
-                        Intent intent = new Intent(NewsCommentEditPage.this, NewsCommentPage.class);
+                        Intent intent1 = new Intent(NewsCommentEditPage.this, NewsCommentPage.class);
                         String content = commentContentEdit.getText().toString();
-                        intent.putExtra("commentContent", content);
-                        setResult(RESULT_OK, intent);
+                        intent1.putExtra("commentContent", content);
+                        setResult(RESULT_OK, intent1);
                         new SweetAlertDialog(NewsCommentEditPage.this, SweetAlertDialog.SUCCESS_TYPE)
                                 .setTitleText("发送成功")
                                 .setConfirmText("OK")

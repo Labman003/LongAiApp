@@ -53,14 +53,14 @@ public class MomentsAdapter extends RecyclerView.Adapter<MomentsAdapter.ViewHold
         List<MomentComment> momentcommentList = new ArrayList<>();
         for (int i = 1; i <= 3; i++) {
             MomentComment momentcomment = new MomentComment();
-            momentcomment.setNickName("psz");
-            momentcomment.setContent("i want to fuck yyt!");
+            momentcomment.setNickName("许阿喵");
+            momentcomment.setContent("同志电我：15500155000");
             momentcommentList.add(momentcomment);
             View view = LayoutInflater.from(context).inflate(R.layout.moment_comment_list_item, null);
             TextView nickName = (TextView) view.findViewById(R.id.moment_comment_user);
             TextView content = (TextView) view.findViewById(R.id.moment_comment_content);
-            nickName.setText("psz");
-            content.setText("i want to fuck yyt!" + i);
+            nickName.setText("许阿喵");
+            content.setText("同志电我：15500155000");
             holder.layout.addView(view);
         }
         View.OnClickListener listener = new View.OnClickListener() {
@@ -88,7 +88,7 @@ public class MomentsAdapter extends RecyclerView.Adapter<MomentsAdapter.ViewHold
                         View view = LayoutInflater.from(context).inflate(R.layout.moment_comment_list_item, null);
                         TextView nickName = (TextView) view.findViewById(R.id.moment_comment_user);
                         TextView content = (TextView) view.findViewById(R.id.moment_comment_content);
-                        nickName.setText("psz");
+                        nickName.setText("许阿喵");
                         content.setText(holder.moment_comment_content.getText().toString());
                         Toast.makeText(context,"评论成功！",Toast.LENGTH_SHORT).show();
                         holder.layout.addView(view);

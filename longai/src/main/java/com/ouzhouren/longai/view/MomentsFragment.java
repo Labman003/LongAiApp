@@ -19,63 +19,19 @@ import java.util.List;
 
 public class MomentsFragment extends Fragment {
     public static List<Moment> momentLists = new ArrayList<>();
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BlankFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MomentsFragment newInstance(String param1, String param2) {
-        MomentsFragment fragment = new MomentsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    public MomentsFragment() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private RecyclerView recyclerView;
+    private MomentsAdapter momentsAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View newsView = inflater.inflate(R.layout.fragment_moments, container, false);
-        final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) newsView.findViewById(R.id.moments_swipe_container);
-        RecyclerView recyclerView = (RecyclerView) newsView.findViewById(R.id.moments_rv);
+        init(newsView);
+        showMoments();
 
-        //添加布局
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        for (int i = 0; i <= 2; i++) {
-            Moment moment = new Moment();
-            moment.setContent("psz love little loli!");
-            moment.setPubTime(System.currentTimeMillis());
-            momentLists.add(moment);
-        }
-        final MomentsAdapter momentsAdapter = new MomentsAdapter(getActivity(), momentLists);
+
 
 //        momentsAdapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
 //            @Override
@@ -90,11 +46,6 @@ public class MomentsFragment extends Fragment {
 //
 //            }
 //        });
-
-        //添加适配器
-        recyclerView.setAdapter(momentsAdapter);
-
-
 //        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 //            @Override
 //            public void onRefresh() {
@@ -115,6 +66,26 @@ public class MomentsFragment extends Fragment {
 //        });
 
         return newsView;
+    }
+
+    private void showMoments() {
+        for (int i = 0; i <= 5; i++) {
+            Moment moment = new Moment();
+            moment.setContent("寻找我的另一半！！！");
+            moment.setNickName("许阿喵" + (momentLists.size() + 1));
+            moment.setPubTime(2016);
+            momentLists.add(moment);
+        }
+        momentsAdapter = new MomentsAdapter(getActivity(), momentLists);
+        //添加适配器
+        recyclerView.setAdapter(momentsAdapter);
+    }
+
+    private void init(View view) {
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.moments_swipe_container);
+        recyclerView = (RecyclerView) view.findViewById(R.id.moments_rv);
+        //添加布局
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 }
 

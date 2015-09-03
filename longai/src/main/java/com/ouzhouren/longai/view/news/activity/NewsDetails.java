@@ -1,5 +1,6 @@
 package com.ouzhouren.longai.view.news.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,50 +10,48 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.ouzhouren.longai.R;
+import com.ouzhouren.longai.model.News;
+import com.ouzhouren.longai.view.news.NewsFragment;
 
 /**
  * Created by 郭泽锋 on 2015/8/17.
  */
 public class NewsDetails extends AppCompatActivity {
-    private TextView titleTV, authorTV, zanNumb, commentNumb;
-    private Button newsComment, newsDetailsBack, newsDetailsZan;
-    Toolbar mToolbar;
+    private TextView newsDetailsTitle, newsDetailsAuthor, newsDetailsZanNumb, newsDetailsCommentNumb,newsDetailsContent;
+    private Button newsDetailsComment, newsDetailsBack, newsDetailsZan;
+    private Toolbar mToolbar;
     boolean isZan = false;
+    Activity mActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_details);
-
-        newsComment = (Button) findViewById(R.id.news_comment);
-        newsDetailsBack = (Button) findViewById(R.id.news_details_back);
-        newsDetailsZan = (Button) findViewById(R.id.news_details_zan);
-        zanNumb = (TextView) findViewById(R.id.news_zanNum);
-        commentNumb = (TextView) findViewById(R.id.news_commentNum);
+        init();
+        showNewsDetails();
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 switch (v.getId()) {
-                    case R.id.news_comment:
-                        Intent intent = new Intent(NewsDetails.this, NewsCommentPage.class);
+                    case R.id.news_details_comment:
+                        Intent intent = new Intent(mActivity, NewsCommentPage.class);
                         startActivity(intent);
                         break;
                     case R.id.news_details_back:
                         finish();
                         break;
                     case R.id.news_details_zan:
-                        String text = zanNumb.getText().toString();
+                        String text = newsDetailsZanNumb.getText().toString();
                         int numb = Integer.parseInt(text);
                         if (!isZan) {
                             numb++;
-                            zanNumb.setText(numb + "");
+                            newsDetailsZanNumb.setText(numb + "");
                             newsDetailsZan.setBackgroundResource(R.drawable.icon_zan_orange);
                             isZan = true;
                         } else {
                             numb--;
-                            zanNumb.setText(numb + "");
+                            newsDetailsZanNumb.setText(numb + "");
                             newsDetailsZan.setBackgroundResource(R.drawable.icon_zan_white);
                             isZan = false;
                         }
@@ -62,20 +61,32 @@ public class NewsDetails extends AppCompatActivity {
                 }
             }
         };
-        newsComment.setOnClickListener(listener);
+        newsDetailsComment.setOnClickListener(listener);
         newsDetailsBack.setOnClickListener(listener);
         newsDetailsZan.setOnClickListener(listener);
-        mToolbar = (Toolbar) findViewById(R.id.news_toolbar);
+    }
+
+    private void showNewsDetails() {
+        int position = getIntent().getIntExtra("position", 0);
+        News newsItem = NewsFragment.newsLists.get(position);
+
+        newsDetailsTitle.setText(newsItem.getTitle());
+        newsDetailsAuthor.setText(newsItem.getAuthor());
+        newsDetailsContent.setText(newsItem.getContent().trim());
+    }
+
+    private void init() {
+        newsDetailsTitle = (TextView) findViewById(R.id.news_details_title);
+        newsDetailsAuthor = (TextView) findViewById(R.id.news_details_author);
+        newsDetailsContent = (TextView) findViewById(R.id.news_details_content);
+        newsDetailsComment = (Button) findViewById(R.id.news_details_comment);
+        newsDetailsBack = (Button) findViewById(R.id.news_details_back);
+        newsDetailsZan = (Button) findViewById(R.id.news_details_zan);
+        newsDetailsZanNumb = (TextView) findViewById(R.id.news_details_zanNum);
+        newsDetailsCommentNumb = (TextView) findViewById(R.id.news_details_commentNum);
+        mToolbar = (Toolbar) findViewById(R.id.news_details_toolbar);
+        mActivity = NewsDetails.this;
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
-
-
-//        titleTV = (TextView) findViewById(R.id.news_details_titleTV);
-//        authorTV = (TextView) findViewById(R.id.news_details_authorTV);
-//        int position = getIntent().getIntExtra("position", 0);
-//        News newsItem = NewsFragment.newsLists.get(position);
-
-//        titleTV.setText(newsItem.getTitle());
-//        authorTV.setText(newsItem.getAuthor());
     }
 }

@@ -12,10 +12,12 @@
 
         <Button
             android:id="@+id/news_comment_back"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
             android:background="@drawable/icon_back"
-            android:padding="15dp" />
+            android:layout_marginLeft="15dp"
+            />
 
         <TextView
             android:id="@+id/news_comment_numb"
@@ -30,10 +32,11 @@
 
         <Button
             android:id="@+id/news_comment_edit"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="15dp"
             android:layout_alignParentRight="true"
-            android:padding="10dp"
+            android:layout_centerVertical="true"
             android:background="@drawable/news_comment_edit" />
     </RelativeLayout>
 
