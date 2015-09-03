@@ -13,7 +13,7 @@ public interface UserModelInterface {
     void cacheUser(User user, Context ctx);
     User getCacheUser(Context ctx);
     void updateUserInfo(User user ,UpdateCallBack callBack, Context ctx);
-    void getUsersByGens(int gens ,getUsersByGensCallBack callBack, Context ctx);
+    void getUsersByGens(int gens ,GetUsersByGensCallBack callBack, Context ctx);
 
     abstract class CallBack {
         public abstract void onSuccess(User user);
@@ -23,7 +23,7 @@ public interface UserModelInterface {
         public abstract void onSuccess(int userId);
         public abstract void onFail(String e);
     }
-    abstract class getUsersByGensCallBack {
+    abstract class GetUsersByGensCallBack {
         public abstract void onSuccess(List<User> users);
         public abstract void onFail(String e);
     }

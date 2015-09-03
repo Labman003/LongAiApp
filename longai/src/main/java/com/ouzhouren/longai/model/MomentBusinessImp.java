@@ -30,7 +30,7 @@ public class MomentBusinessImp implements MomentModelInterface {
             public void onSuccess(String s, Response<String> response) {
                 // 成功：主线程回调，反馈一个string
                 if (s.length() == 0) {
-                    sendMomentCallBack.onFail();
+                    sendMomentCallBack.onFail("发送失败，请稍后再试");
                 }
                 logger.i("回调json" + s);
                 Gson gson = new Gson();
@@ -44,7 +44,7 @@ public class MomentBusinessImp implements MomentModelInterface {
             public void onFailure(HttpException e, Response<String> response) {
                 // 失败：主线程回调，反馈异常
                 logger.i("faile exception:" + e + "----response:" + response);
-                sendMomentCallBack.onFail();
+                sendMomentCallBack.onFail(e.toString());
             }
         }));
     }
@@ -56,8 +56,8 @@ public class MomentBusinessImp implements MomentModelInterface {
             @Override
             public void onSuccess(String s, Response<String> response) {
                 // 成功：主线程回调，反馈一个string
-                if (s.length() == 0) {
-                    deleteMomentCallBack.onFail();
+                if (Integer.valueOf(s) == 0) {
+                    deleteMomentCallBack.onFail("删除失败");
                 }
                 logger.i("回调json" + s);
                 logger.i("success result:" + s + "----response:" + response + "——MomentId:" + Integer.valueOf(s));
@@ -68,7 +68,7 @@ public class MomentBusinessImp implements MomentModelInterface {
             public void onFailure(HttpException e, Response<String> response) {
                 // 失败：主线程回调，反馈异常
                 logger.i("faile exception:" + e + "----response:" + response);
-                deleteMomentCallBack.onFail();
+                deleteMomentCallBack.onFail(e.toString());
             }
         }));
     }
@@ -81,7 +81,7 @@ public class MomentBusinessImp implements MomentModelInterface {
             public void onSuccess(String s, Response<String> response) {
                 // 成功：主线程回调，反馈一个string
                 if (s.length() == 0) {
-                    getPageMomentsCallBack.onFail();
+                    getPageMomentsCallBack.onFail("没有更多心情了");
                 }
                 logger.i("回调json" + s);
                 List<Moment> moments = PageUtil.fetchToList(s, new TypeToken<List<Moment>>() {
@@ -95,7 +95,7 @@ public class MomentBusinessImp implements MomentModelInterface {
             public void onFailure(HttpException e, Response<String> response) {
                 // 失败：主线程回调，反馈异常
                 logger.i("faile exception:" + e + "----response:" + response);
-                getPageMomentsCallBack.onFail();
+                getPageMomentsCallBack.onFail(e.toString());
             }
         }));
     }

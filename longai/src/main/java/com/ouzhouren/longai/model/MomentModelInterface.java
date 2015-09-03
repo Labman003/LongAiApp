@@ -14,15 +14,15 @@ public interface MomentModelInterface {
     void getMomentsPage(int userId, int currentPage,int amount,GetPageMomentsCallBack getPageMomentsCallBack, Context ctx);
     abstract class SendMomentCallBack {
         public abstract void onSuccess(Moment moment);
-        public abstract void onFail();
+        public abstract void onFail(String s);
     }
     abstract class DeleteMomentCallBack {
         public abstract void onSuccess(int deletedId);
-        public abstract void onFail();
+        public abstract void onFail(String s);
     }
 
     abstract class GetPageMomentsCallBack {
         public abstract void onSuccess(List<Moment> moments);
-        public abstract void onFail();
+        public abstract void onFail(String s);
     }
 }

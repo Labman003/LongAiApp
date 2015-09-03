@@ -80,7 +80,21 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
         });
         loginIv.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View v) {
+//                UserBusinessImp userBusinessImp = new UserBusinessImp();
+//                userBusinessImp.getUsersByGens(423, new UserModelInterface.GetUsersByGensCallBack() {
+//                    @Override
+//                    public void onSuccess(List<User> users) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onFail(String e) {
+//
+//                    }
+//                }, mAc);
+
                 userPresenter.login(mAc);
             }
         });

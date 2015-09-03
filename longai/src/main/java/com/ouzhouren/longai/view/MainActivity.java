@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavViewInterface 
 
     private void init(final Activity mAc) {
         navPresenter = new NavPresenter(this, this);
+        navPresenter.initNav();
         navPresenter.locate(mAc);
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override

@@ -29,7 +29,7 @@ public class NewsLikeBusinessImp implements NewsLikeModelInterface {
             public void onSuccess(String s, Response<String> response) {
                 // 成功：主线程回调，反馈一个string
                 if (s.length() == 0) {
-                    callBack.onFail();
+                    callBack.onFail("无更多赞");
                 }
                 logger.i("回调json" + s);
                 List<NewsLike> newsLikes = PageUtil.fetchToList(s, new TypeToken<List<NewsLike>>() {
@@ -45,7 +45,7 @@ public class NewsLikeBusinessImp implements NewsLikeModelInterface {
             public void onFailure(HttpException e, Response<String> response) {
                 // 失败：主线程回调，反馈异常
                 logger.i("faile exception:" + e + "----response:" + response);
-                callBack.onFail();
+                callBack.onFail(e.toString());
             }
         }));
     }
@@ -60,7 +60,7 @@ public class NewsLikeBusinessImp implements NewsLikeModelInterface {
             public void onSuccess(String s, Response<String> response) {
                 // 成功：主线程回调，反馈一个string
                 if (s.length() == 0) {
-                    callBack.onFail();
+                    callBack.onFail("发送失败");
                 }
                 logger.i("回调json" + s);
                 NewsLike receive = gson.fromJson(s,NewsLike.class);
@@ -73,7 +73,30 @@ public class NewsLikeBusinessImp implements NewsLikeModelInterface {
             public void onFailure(HttpException e, Response<String> response) {
                 // 失败：主线程回调，反馈异常
                 logger.i("faile exception:" + e + "----response:" + response);
-                callBack.onFail();
+                callBack.onFail(e.toString());
+            }
+        }));
+    }
+
+    @Override
+    public void deleteNewsLike(NewsLike newsLike, final DeleteNewsLikeCallBack callBack, Context ctx) {
+        StringRequest req = new StringRequest(ConstantServer.HOSTNAME).addUrlPrifix(ConstantServer.PRE_FIX).addUrlSuffix(ConstantServer.PATCH_DELETE_NEWS_LIKE).addUrlParam("newsLikeId",String.valueOf(newsLike.getNewsLikeId()));
+        LiteHttpUtil.getLiteHttp(ctx).executeAsync(req.setHttpListener(new HttpListener<String>() {
+            @Override
+            public void onSuccess(String s, Response<String> response) {
+                // 成功：主线程回调，反馈一个string
+                if (Integer.valueOf(s) == 0) {
+                    callBack.onFail("删除失败");
+                }
+                logger.i("success result:" + s + "----response:" + response + "——MomentLikeId:" + Integer.valueOf(s));
+                callBack.onSuccess(Integer.valueOf(s));
+            }
+
+            @Override
+            public void onFailure(HttpException e, Response<String> response) {
+                // 失败：主线程回调，反馈异常
+                logger.i("faile exception:" + e + "----response:" + response);
+                callBack.onFail(e.toString());
             }
         }));
     }

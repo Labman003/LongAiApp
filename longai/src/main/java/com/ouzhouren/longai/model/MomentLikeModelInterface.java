@@ -14,14 +14,14 @@ public interface MomentLikeModelInterface {
 
     abstract class GetMomentLikeCallBack {
         public abstract void onSuccess(List<MomentLike> MomentLikes);
-        public abstract void onFail();
+        public abstract void onFail(String s);
     }
     abstract class SendMomentLikeCallBack {
-        public abstract void onSuccess();
-        public abstract void onFail();
+        public abstract void onSuccess(int likeId);
+        public abstract void onFail(String s);
     }
     abstract class DeleteMomentLikeCallBack {
         public abstract void onSuccess(int deletedMomentLikeId);
-        public abstract void onFail();
+        public abstract void onFail(String s);
     }
 }

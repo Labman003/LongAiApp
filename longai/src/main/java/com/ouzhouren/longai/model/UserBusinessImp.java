@@ -95,7 +95,7 @@ public class UserBusinessImp implements UserModelInterface {
     public User getCacheUser(Context ctx) {
         ACache aCache = ACache.get(ctx);
         User user = (User) aCache.getAsObject(CacheKey.USER);
-        return null;
+        return user;
     }
 
 
@@ -125,19 +125,20 @@ public class UserBusinessImp implements UserModelInterface {
     }
 
     @Override
-    public void getUsersByGens(int gens, final getUsersByGensCallBack callBack, Context ctx) {
-        StringRequest req = new StringRequest(ConstantServer.HOSTNAME).addUrlPrifix(ConstantServer.PRE_FIX).addUrlSuffix(ConstantServer.PATCH_GET_USERS_BY_GENS).addUrlParam("gens", String.valueOf(gens));
+    public void getUsersByGens(int gens, final GetUsersByGensCallBack callBack, Context ctx) {
+        StringRequest req = new StringRequest(ConstantServer.HOSTNAME).addUrlPrifix(ConstantServer.PRE_FIX).addUrlSuffix(ConstantServer.PATCH_GET_USERS_BY_GENS).addUrlParam("gens", String.valueOf(gens)).addUrlParam("currentPage",String.valueOf(1)).addUrlParam("amount",String.valueOf(5));
         LiteHttpUtil.getLiteHttp(ctx).executeAsync(req.setHttpListener(new HttpListener<String>() {
             @Override
             public void onSuccess(String s, Response<String> response) {
                 // 成功：主线程回调，反馈一个string
-                if (Integer.valueOf(s) == 0) {
-                    callBack.onFail("用户不存在或密码错误");
-                }
+                //todo 处理空字符串
+//                if (Integer.valueOf(s) == 0) {
+//                    callBack.onFail("用户不存在或密码错误");
+//                }
                 logger.i("回调json"+s);
                 List<User> users =PageUtil.fetchToList(s,new TypeToken<List<User>>(){}.getType());
                 callBack.onSuccess(users);
-                logger.i("success result:" + s + "----response:" + response + "——Users:" + users);
+                logger.i("success result:" + s + "----response:" + response + "——UsersName:" + users.get(0).getName());
             }
 
             @Override

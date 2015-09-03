@@ -12,6 +12,6 @@ public interface NewsModelInterface {
 
     abstract class GetNewsCallBack {
         public abstract void onSuccess(List<News> newses);
-        public abstract void onFail();
+        public abstract void onFail(String s);
     }
 }

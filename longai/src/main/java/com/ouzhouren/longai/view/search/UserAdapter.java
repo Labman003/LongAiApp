@@ -32,13 +32,17 @@ class UserAdapter extends BaseAdapter {
         ImageView userImage;
     }
 
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
     @Override
     public int getCount() {
 //        if (users == null) {
 //            return 0;
 //        } else
 //            return users.size();
-        return 20;
+        return users.size();
     }
 
     @Override

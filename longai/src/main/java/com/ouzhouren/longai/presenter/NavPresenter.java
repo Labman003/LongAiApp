@@ -12,6 +12,7 @@ import com.ouzhouren.longai.common.utils.MyLogger;
 import com.ouzhouren.longai.constant.CacheKey;
 import com.ouzhouren.longai.model.PicBusinessImp;
 import com.ouzhouren.longai.model.PicModelInterface;
+import com.ouzhouren.longai.model.User;
 import com.ouzhouren.longai.model.UserBusinessImp;
 import com.ouzhouren.longai.model.UserModelInterface;
 
@@ -42,6 +43,10 @@ public class NavPresenter {
         this.ctx = context;
     }
 
+    public void initNav(){
+        User user = userModelInterface.getCacheUser(ctx);
+        navViewInterface.refreshNav(user);
+    }
     public void locate(Context ctx) {
         ACache aCache = ACache.get(ctx);
         String locationdescribe = aCache.getAsString(CacheKey.LOCATION_DESCRIBE);

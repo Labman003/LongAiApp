@@ -22,14 +22,14 @@ public class EventBusinessImp implements com.ouzhouren.longai.model.EventModelIn
     private MyLogger logger = MyLogger.benLog();
 
     @Override
-    public void getEvents(int time, String city, int currentPage, int amount, final GetEventsCallBack callBack, Context ctx) {
+    public void getEvents(long time, String city, int currentPage, int amount, final GetEventsCallBack callBack, Context ctx) {
         StringRequest req = new StringRequest(ConstantServer.HOSTNAME).addUrlPrifix(ConstantServer.PRE_FIX).addUrlSuffix(ConstantServer.PATCH_GET_EVENT).addUrlParam("starttime", String.valueOf(time)).addUrlParam("currentPage", String.valueOf(currentPage)).addUrlParam("location",city).addUrlParam("amount", String.valueOf(amount));
         LiteHttpUtil.getLiteHttp(ctx).executeAsync(req.setHttpListener(new HttpListener<String>() {
             @Override
             public void onSuccess(String s, Response<String> response) {
                 // 成功：主线程回调，反馈一个string
                 if (s.length() == 0) {
-                    callBack.onFail();
+                    callBack.onFail("木有更多活动了");
                 }
                 logger.i("回调json" + s);
                 List<Event> events = PageUtil.fetchToList(s, new TypeToken<List<Event>>() {
@@ -43,7 +43,7 @@ public class EventBusinessImp implements com.ouzhouren.longai.model.EventModelIn
             public void onFailure(HttpException e, Response<String> response) {
                 // 失败：主线程回调，反馈异常
                 logger.i("faile exception:" + e + "----response:" + response);
-                callBack.onFail();
+                callBack.onFail(e.toString());
             }
         }));
     }
@@ -56,7 +56,7 @@ public class EventBusinessImp implements com.ouzhouren.longai.model.EventModelIn
             public void onSuccess(String s, Response<String> response) {
                 // todo 成功：主线程回调，反馈一个string
                 if(s.length()==0){
-                    callBack.onFail();
+                    callBack.onFail("报名失败，请稍后再试");
                 }
                 Gson gson = new Gson();
                 Enroll enroll = gson.fromJson(s,Enroll.class);
@@ -69,7 +69,7 @@ public class EventBusinessImp implements com.ouzhouren.longai.model.EventModelIn
                 // 失败：主线程回调，反馈异常
                 //todo
                 logger.i("faile exception:" + e + "----response:" + response);
-                callBack.onFail();
+                callBack.onFail(e.toString());
             }
         }));
     }

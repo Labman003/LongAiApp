@@ -30,7 +30,7 @@ public class NewsBusinessImp implements NewsModelInterface {
             public void onSuccess(String s, Response<String> response) {
                 // 成功：主线程回调，反馈一个string
                 if (s.length() == 0) {
-                    callBack.onFail();
+                    callBack.onFail("无更多内容");
                 }
                 logger.i("回调json" + s);
                 List<News> newses = PageUtil.fetchToList(s, new TypeToken<List<News>>() {
@@ -44,7 +44,7 @@ public class NewsBusinessImp implements NewsModelInterface {
             public void onFailure(HttpException e, Response<String> response) {
                 // 失败：主线程回调，反馈异常
                 logger.i("faile exception:" + e + "----response:" + response);
-                callBack.onFail();
+                callBack.onFail(e.toString());
             }
         }));
     }

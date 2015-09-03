@@ -25,6 +25,17 @@
         android:numColumns="auto_fit"
         android:stretchMode="columnWidth"
         android:verticalSpacing="0dp" />
+
+    <TextView
+        android:id="@+id/search_tv_nodata"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:text="Opps~你与异性的缘分为0，不存在合拍异性，补充资料再试试？"
+        android:textSize="16sp"
+        android:visibility="gone"
+        />
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabBtn"
         android:layout_width="wrap_content"
@@ -32,6 +43,4 @@
         android:layout_gravity="bottom|right"
         android:src="@drawable/ic_plus"
         app:fabSize="normal" />
-</android.support.design.widget.CoordinatorLayout><!--</android.support.v4.widget.NestedScrollView>--><!--</android.support.v4.widget.SwipeRefreshLayout>-->
-
-    <!--</android.support.design.widget.CoordinatorLayout>-->
+</android.support.design.widget.CoordinatorLayout>

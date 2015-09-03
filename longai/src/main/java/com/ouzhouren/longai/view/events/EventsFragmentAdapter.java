@@ -1,5 +1,7 @@
 package com.ouzhouren.longai.view.events;
 
+import android.app.Activity;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,13 +10,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cengalabs.flatui.views.FlatButton;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ouzhouren.longai.R;
+import com.ouzhouren.longai.model.Event;
+
+import java.util.List;
 
 /**
  * Created by BenPC on 2015/8/18.
  */
 public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAdapter.ViewHolder>{
-    public EventsFragmentAdapter() {
+    private List<Event> events;
+    private ImageLoader imageLoader;
+
+    public EventsFragmentAdapter(Activity mAc, List<Event> events) {
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 
     //...
@@ -78,11 +92,21 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
             });
 
         }
+        //显示图片的配置
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                //  .showImageOnLoading(R.drawable.ic_stub)
+                //  .showImageOnFail(R.drawable.ic_error)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .build();
+        imageLoader.displayImage(events.get(position).getCover(), holder.eventImageIv,options);
+        holder.eventTitleTv.setText(events.get(position).getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return events.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
