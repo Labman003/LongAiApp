@@ -15,20 +15,19 @@ import com.ouzhouren.longai.constant.ConstantServer;
 import java.util.List;
 
 /**
- * Created by BenPC on 2015/8/31.
+ * Created by 郭泽锋 on 2015/9/1.
  */
-public class NewsBusinessImp implements NewsModelInterface {
-    private MyLogger logger = MyLogger.benLog();
-
+public class NewsDetailsBusinessImp implements NewsDetailsModelInterface{
+    MyLogger logger = MyLogger.benLog();
     @Override
-    public void getNews(int currentPage, int amount, final GetNewsCallBack callBack, Context ctx) {
+    public void getNewsDetailsInfo(int currentPage, int amount, final NewsModelInterface.GetNewsCallBack callBack, Context ctx) {
         StringRequest req = new StringRequest(ConstantServer.HOSTNAME).addUrlPrifix(ConstantServer.PRE_FIX).addUrlSuffix(ConstantServer.PATCH_GET_NEWS).addUrlParam("currentPage", String.valueOf(currentPage)).addUrlParam("amount", String.valueOf(amount));
         LiteHttpUtil.getLiteHttp(ctx).executeAsync(req.setHttpListener(new HttpListener<String>() {
             @Override
             public void onSuccess(String s, Response<String> response) {
                 // 成功：主线程回调，反馈一个string
                 if (s.length() == 0) {
-                    callBack.onFail("无更多内容");
+                    callBack.onFail();
                 }
                 logger.i("回调json" + s);
                 List<News> newses = PageUtil.fetchToList(s, new TypeToken<List<News>>() {
@@ -42,8 +41,9 @@ public class NewsBusinessImp implements NewsModelInterface {
             public void onFailure(HttpException e, Response<String> response) {
                 // 失败：主线程回调，反馈异常
                 logger.i("faile exception:" + e + "----response:" + response);
-                callBack.onFail(e.toString());
+                callBack.onFail();
             }
         }));
     }
+
 }

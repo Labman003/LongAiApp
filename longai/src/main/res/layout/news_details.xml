@@ -7,73 +7,80 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="320dp">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/news_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#FF494EFF"
-            android:orientation="horizontal"
-            app:layout_scrollFlags="scroll|enterAlways">
-
-            <Button
-                android:id="@+id/news_details_back"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/icon_back"
-                android:padding="15dp" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="right"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/news_comment"
-                    android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="3dp"
-                    android:background="@drawable/icon_comment" />
-
-                <TextView
-                    android:id="@+id/news_commentNum"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:text="8"
-                    android:textColor="#ffffff"
-                    android:textSize="20sp" />
-
-                <Button
-                    android:id="@+id/news_details_zan"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginRight="3dp"
-                    android:background="@drawable/icon_zan_white"/>
-
-                <TextView
-                    android:id="@+id/news_zanNum"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:text="4"
-                    android:textColor="#ffffff"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-        </android.support.v7.widget.Toolbar>
-
-        <ImageView
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/news_details_collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/header"
-            app:layout_collapseMode="parallax"
-            app:layout_collapseParallaxMultiplier="0.7"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed" />
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/header"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/news_details_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#FF494EFF"
+                android:orientation="horizontal"
+                app:layout_collapseMode="pin">
+
+                <Button
+                    android:id="@+id/news_details_back"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/icon_back"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/news_details_comment"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="3dp"
+                        android:background="@drawable/icon_comment" />
+
+                    <TextView
+                        android:id="@+id/news_details_commentNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="8"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+                    <Button
+                        android:id="@+id/news_details_zan"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="3dp"
+                        android:background="@drawable/icon_zan_white" />
+
+                    <TextView
+                        android:id="@+id/news_details_zanNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:text="4"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
@@ -82,110 +89,37 @@
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="8dp">
 
-            <Button
+            <TextView
+                android:id="@+id/news_details_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Yo Yo" />
+                android:layout_marginTop="10dp"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
-            <Button
+            <TextView
+                android:id="@+id/news_details_author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Yo Yo" />
+                android:textColor="#ff458eff"
+                android:textSize="20sp" />
 
-            <Button
+            <TextView
+                android:id="@+id/news_details_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Yo Yo" />
+                android:lineSpacingExtra="5dp"
+                android:layout_margin="10dp"
+                android:textSize="20sp" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yo Yo" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yo Yo" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yo Yo" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yo Yo" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yo Yo" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yo Yo" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yo Yo" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yo Yo" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yo Yo" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yo Yo" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yo Yo" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yo Yo" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yo Yo" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yo Yo" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yo Yo" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yo Yo" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yo Yo" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

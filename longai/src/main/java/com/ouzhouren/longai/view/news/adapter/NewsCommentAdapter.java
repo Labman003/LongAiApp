@@ -16,9 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ouzhouren.longai.R;
-import com.ouzhouren.longai.model.Comment;
+import com.ouzhouren.longai.model.NewsComment;
 
-import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -28,7 +27,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class NewsCommentAdapter extends RecyclerView.Adapter<NewsCommentAdapter.ViewHolder> {
     private Context context;
-    private List<Comment> commentList;
+    private List<NewsComment> commentList;
 
 
     //设置接口
@@ -44,7 +43,7 @@ public class NewsCommentAdapter extends RecyclerView.Adapter<NewsCommentAdapter.
         this.mOnItemClickListener = mOnItemClickListener;
     }
 
-    public NewsCommentAdapter(Context context, List<Comment> commentList) {
+    public NewsCommentAdapter(Context context, List<NewsComment> commentList) {
         this.context = context;
         this.commentList = commentList;
     }
@@ -59,14 +58,14 @@ public class NewsCommentAdapter extends RecyclerView.Adapter<NewsCommentAdapter.
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.userName.setText(commentList.get(position).getNickName());
-        holder.commentContent.setText(commentList.get(position).getContent());
-        Date date = commentList.get(position).getPubTime();
-        String hours = date.getHours() >= 10 ? (date.getHours() + "") : ("0" + date.getHours());
-        String minutes = date.getMinutes() > 10 ? (date.getMinutes() + "") : ("0" + date.getMinutes());
-        String time = (date.getMonth() + 1) + "-" + date.getDate() + " " + hours + ":" + minutes;
-        holder.commentTime.setText(time);
-        holder.zanNum.setText(commentList.get(position).getZanNumb() + "");
+        holder.userName.setText(commentList.get(position).getNickname());
+        holder.commentContent.setText(commentList.get(position).getCommentContent());
+        long date = commentList.get(position).getPubtime();
+//        String hours = date.getHours() >= 10 ? (date.getHours() + "") : ("0" + date.getHours());
+//        String minutes = date.getMinutes() > 10 ? (date.getMinutes() + "") : ("0" + date.getMinutes());
+//        String time = (date.getMonth() + 1) + "-" + date.getDate() + " " + hours + ":" + minutes;
+        holder.commentTime.setText(date+"");
+//        holder.zanNum.setText(commentList.get(position).getZanNumb() + "");
 
         //内容没超过8行自动隐藏展开按钮
         holder.commentContent.post(new Runnable() {
@@ -86,7 +85,7 @@ public class NewsCommentAdapter extends RecyclerView.Adapter<NewsCommentAdapter.
                         .setItems(holder.dialogContent, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                int zanNumb = getItem(position).getZanNumb();
+                                int zanNumb = Integer.parseInt(holder.zanNum.getText().toString(), 10);
                                 switch (which) {
                                     case 0: //点击了 赞同 按钮
                                         if (!holder.isZan) {   //点击了赞同按钮
@@ -94,24 +93,25 @@ public class NewsCommentAdapter extends RecyclerView.Adapter<NewsCommentAdapter.
                                             holder.isZan = true;
                                             holder.commentZan.setImageResource(R.drawable.icon_zan_blue);
                                             zanNumb++;
-                                            getItem(position).setZanNumb(zanNumb);
+                                            holder.zanNum.setText(zanNumb+"");
                                             Toast.makeText(context, "赞+1", Toast.LENGTH_SHORT).show();
-                                            holder.zanNum.setText(getItem(position).getZanNumb()+"");
+//                                            holder.zanNum.setText(getItem(position).getZanNumb()+"");
                                             //notifyItemChanged(position);
                                         } else {
                                             holder.dialogContent[0] = "赞同";
                                             holder.isZan = false;
                                             holder.commentZan.setImageResource(R.drawable.icon_zan_grey);
                                             zanNumb--;
-                                            getItem(position).setZanNumb(zanNumb);
+                                            holder.zanNum.setText(zanNumb +"");
+//                                            getItem(position).setZanNumb(zanNumb);
                                             Toast.makeText(context, "赞-1", Toast.LENGTH_SHORT).show();
-                                            holder.zanNum.setText(getItem(position).getZanNumb()+"");
-                                            //notifyItemChanged(position);
+//                                            holder.zanNum.setText(getItem(position).getZanNumb() + "");
+//                                            notifyItemChanged(position);
                                         }
                                         break;
                                     case 1: //点击了复制按钮
                                         ClipboardManager clip = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-                                        clip.setText(getItem(position).getContent().trim()); // 复制
+                                        clip.setText(getItem(position).getCommentContent().trim()); // 复制
                                         Toast.makeText(context,"复制成功",Toast.LENGTH_SHORT).show();
                                         break;
                                     default:
@@ -154,7 +154,7 @@ public class NewsCommentAdapter extends RecyclerView.Adapter<NewsCommentAdapter.
         return commentList.size();
     }
 
-    public Comment getItem(int position) {
+    public NewsComment getItem(int position) {
         return commentList.get(position);
     }
 

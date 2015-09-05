@@ -12,8 +12,10 @@
 
         <Button
             android:id="@+id/comment_edit_back"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
             android:background="@drawable/icon_back"
             android:padding="15dp" />
 
@@ -30,10 +32,11 @@
         <Button
             android:id="@+id/comment_edit_send"
             android:layout_width="40dp"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:layout_alignParentRight="true"
-            android:background="@drawable/comment_edit_send"
-            android:paddingRight="15dp" />
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/comment_edit_send" />
     </RelativeLayout>
 
     <EditText

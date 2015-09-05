@@ -13,8 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ouzhouren.longai.R;
-import com.ouzhouren.longai.entity.Moment;
-import com.ouzhouren.longai.entity.Momentcomment;
+import com.ouzhouren.longai.model.Moment;
+import com.ouzhouren.longai.model.MomentComment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,19 +48,19 @@ public class MomentsAdapter extends RecyclerView.Adapter<MomentsAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.moment_content.setText(momentList.get(position).getMomentContent().toString());
-        holder.moment_pubtime.setText(momentList.get(position).getMomentPubtime().toString());
-        List<Momentcomment> momentcommentList = new ArrayList<>();
+        holder.moment_content.setText(momentList.get(position).getContent());
+        holder.moment_pubtime.setText(momentList.get(position).getPubTime()+"");
+        List<MomentComment> momentcommentList = new ArrayList<>();
         for (int i = 1; i <= 3; i++) {
-            Momentcomment momentcomment = new Momentcomment();
-            momentcomment.setNickName("psz");
-            momentcomment.setMomentcommentcontent("i want to fuck yyt!");
+            MomentComment momentcomment = new MomentComment();
+            momentcomment.setNickName("许阿喵");
+            momentcomment.setContent("同志电我：15500155000");
             momentcommentList.add(momentcomment);
             View view = LayoutInflater.from(context).inflate(R.layout.moment_comment_list_item, null);
             TextView nickName = (TextView) view.findViewById(R.id.moment_comment_user);
             TextView content = (TextView) view.findViewById(R.id.moment_comment_content);
-            nickName.setText("psz");
-            content.setText("i want to fuck yyt!" + i);
+            nickName.setText("许阿喵");
+            content.setText("同志电我：15500155000");
             holder.layout.addView(view);
         }
         View.OnClickListener listener = new View.OnClickListener() {
@@ -88,7 +88,7 @@ public class MomentsAdapter extends RecyclerView.Adapter<MomentsAdapter.ViewHold
                         View view = LayoutInflater.from(context).inflate(R.layout.moment_comment_list_item, null);
                         TextView nickName = (TextView) view.findViewById(R.id.moment_comment_user);
                         TextView content = (TextView) view.findViewById(R.id.moment_comment_content);
-                        nickName.setText("psz");
+                        nickName.setText("许阿喵");
                         content.setText(holder.moment_comment_content.getText().toString());
                         Toast.makeText(context,"评论成功！",Toast.LENGTH_SHORT).show();
                         holder.layout.addView(view);
