@@ -1,6 +1,6 @@
 package com.ouzhouren.longai.model;
 
-public class Message {
+public class MessageVO {
 		private String message;
 		private java.sql.Timestamp time;
 		private int to;

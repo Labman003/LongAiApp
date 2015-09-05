@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ouzhouren.longai.R;
+import com.ouzhouren.longai.constant.ConstantServer;
 import com.ouzhouren.longai.model.User;
 
 import java.util.List;
@@ -95,7 +96,7 @@ class UserAdapter extends BaseAdapter {
                 .cacheOnDisk(true)
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .build();
-        imageLoader.displayImage(currentUser.getProfilepic(), viewHolder.userImage,options);
+        imageLoader.displayImage(ConstantServer.PRFIX_PROFILE_PIC+currentUser.getProfilepic(), viewHolder.userImage,options);
         // Set the proper view name to get the transition well managed
         // convertView.setViewName("photo" + position);
         return convertView;

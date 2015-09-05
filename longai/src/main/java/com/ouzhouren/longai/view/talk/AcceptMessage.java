@@ -1,7 +1,7 @@
 package com.ouzhouren.longai.view.talk;
 
 import com.google.gson.Gson;
-import com.ouzhouren.longai.model.Message;
+import com.ouzhouren.longai.model.MessageVO;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,9 +13,11 @@ public class AcceptMessage extends Thread{
 	private BufferedReader bufferedReader;
 	private Socket socket;
 	private boolean status=true;
-	public AcceptMessage(Socket s) throws UnknownHostException, IOException{
+	private TalkActivity.MessageCallBack messageCallBack;
+	public AcceptMessage(Socket s, TalkActivity.MessageCallBack messageCallBack) throws UnknownHostException, IOException{
 		this.socket=s;
 		this.bufferedReader = new BufferedReader(new InputStreamReader(s.getInputStream()));
+		this.messageCallBack = messageCallBack;
 	}
 	
 //	private String gson(String content,int to,int from){
@@ -38,8 +40,9 @@ public class AcceptMessage extends Thread{
 			if(msg!=null){
 				System.out.println("recive msg is:"+msg);
 				Gson gs= new Gson();
-				Message message=gs.fromJson(msg, Message.class);
-				System.out.println(message.getMessage());
+				MessageVO messageVO =gs.fromJson(msg, MessageVO.class);
+				messageCallBack.onSuccess(messageVO);
+				System.out.println(messageVO.getMessage());
 			}
 		}
 //		try {

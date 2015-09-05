@@ -9,11 +9,11 @@ import java.util.List;
  */
 public interface UserModelInterface {
     void login(String userName, String password, CallBack callBack, Context ctx);
-    void register(String userName, String password, CallBack callBack, Context ctx);
+    void register(String userName, String nickName,String password, CallBack callBack, Context ctx);
     void cacheUser(User user, Context ctx);
     User getCacheUser(Context ctx);
     void updateUserInfo(User user ,UpdateCallBack callBack, Context ctx);
-    void getUsersByGens(int gens ,GetUsersByGensCallBack callBack, Context ctx);
+    void getUsersByGens(double gens ,GetUsersByGensCallBack callBack, Context ctx);
 
     abstract class CallBack {
         public abstract void onSuccess(User user);

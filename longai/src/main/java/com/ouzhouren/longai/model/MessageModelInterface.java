@@ -6,15 +6,15 @@ import java.util.List;
  * Created by BenPC on 2015/8/31.
  */
 public interface MessageModelInterface {
-    Message getLatestMessages(int toId);
+    MessageVO getLatestMessages(int toId);
     int getUnreadCount(int toId);
-    List<Message> getLocalMessages(int toId);
-    void cacheLatestMessage(Message message);
+    List<MessageVO> getLocalMessages(int toId);
+    void cacheLatestMessage(MessageVO messageVO);
     void cacheUnreadCount(int count);
-    void saveMessage(Message message);
+    void saveMessage(MessageVO messageVO);
 
     void initChat();
     void closeChat();
-    void sendMessage(Message message);
+    void sendMessage(MessageVO messageVO);
     void acceptMessage();
 }

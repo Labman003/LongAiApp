@@ -62,6 +62,7 @@ public class NavPresenter {
         saveBitmapFile(bitmap);
         logger.i("aftersave");
         int userId = userModelInterface.getCacheUser(mAc).getUserId();
+        logger.i("userId:"+userId);
         picModelInterface.uploadProfilePic(userId, new File(Environment.getExternalStorageDirectory() + "/01.jpg"), new PicModelInterface.UploadCallBack() {
             @Override
             public void onSuccess() {

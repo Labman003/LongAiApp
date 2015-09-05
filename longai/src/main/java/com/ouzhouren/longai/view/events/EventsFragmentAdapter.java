@@ -13,6 +13,7 @@ import com.cengalabs.flatui.views.FlatButton;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ouzhouren.longai.R;
+import com.ouzhouren.longai.constant.ConstantServer;
 import com.ouzhouren.longai.model.Event;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
     private ImageLoader imageLoader;
 
     public EventsFragmentAdapter(Activity mAc, List<Event> events) {
+        imageLoader = ImageLoader.getInstance();
     }
 
     public void setEvents(List<Event> events) {
@@ -100,7 +102,7 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
                 .cacheOnDisk(true)
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .build();
-        imageLoader.displayImage(events.get(position).getCover(), holder.eventImageIv,options);
+        imageLoader.displayImage(ConstantServer.PRFIX_EVENT_PIC+events.get(position).getCover(), holder.eventImageIv,options);
         holder.eventTitleTv.setText(events.get(position).getTitle());
     }
 

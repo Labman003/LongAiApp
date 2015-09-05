@@ -35,7 +35,7 @@ public class PicBusinessImp implements PicModelInterface {
                     @Override
                     public void onSuccess(String s, Response<String> response) {
                         logger.i("success result:" + s + "----response:" + response);
-                        if(Integer.valueOf(s)==0){
+                        if(s.length()==0){
                           callBack.onFail("上传失败，请稍后在网络良好的地方尝试");
                             return;
                         }
@@ -64,13 +64,14 @@ public class PicBusinessImp implements PicModelInterface {
 
     @Override
     public void uploadProfilePic(int userId, File file, final UploadCallBack callBack, Context ctx) {
+        logger.i("upload请求发起");
         StringRequest req = new StringRequest(ConstantServer.HOSTNAME).addUrlPrifix(ConstantServer.PRE_FIX).addUrlSuffix(ConstantServer.PATCH_UPLOAD_PROFILE_PIC)
                 .setMethod(HttpMethods.Post)
                 .setHttpListener(new HttpListener<String>(true, false, true) {
                     @Override
                     public void onSuccess(String s, Response<String> response) {
                         logger.i("success result:" + s + "----response:" + response);
-                        if(Integer.valueOf(s)==0){
+                        if(s.length()==0){
                             callBack.onFail("上传失败，请稍后在网络良好的地方尝试");
                             return;
                         }
@@ -87,12 +88,13 @@ public class PicBusinessImp implements PicModelInterface {
 
                     @Override
                     public void onUploading(AbstractRequest<String> request, long total, long len) {
-                        callBack.onUpload(total, len);
+                        logger.i("Uploading:" + total+len);
+                      //  callBack.onUpload(total, len);
                     }
                 });
         MultipartBody body = new MultipartBody();
         body.addPart(new StringPart("userId", String.valueOf(userId)));
-        body.addPart(new FilePart("picUpload", file));
+        body.addPart(new FilePart("userIcon", file));
         req.setHttpBody(body);
         LiteHttpUtil.getLiteHttp(ctx).executeAsync(req);
     }
@@ -106,6 +108,7 @@ public class PicBusinessImp implements PicModelInterface {
                 // 成功：主线程回调，反馈一个string
                 if (s.length() == 0) {
                     callBack.onFail();
+                    return;
                 }
                 logger.i("回调json" + s);
                 List<Picture> pictures = PageUtil.fetchToList(s, new TypeToken<List<Picture>>() {

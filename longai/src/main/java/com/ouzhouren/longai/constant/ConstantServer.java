@@ -6,7 +6,8 @@ package com.ouzhouren.longai.constant;
 public class ConstantServer {
     public static String PRE_FIX = "http://";
    // public static String HOSTNAME = "192.168.1.101:8080";
-    public static String HOSTNAME = "192.168.1.107:8080";
+    public static String HOSTNAME = "192.168.1.102:8080";
+    public static String CHAT="192.168.1.111";
    // public static String HOSTNAME = "192.168.1.102:8080";
     public static String PATCH_LOGIN = "/longai/user/login";
     public static String PATCHP_REGISTER = "/longai/user/register";
@@ -34,4 +35,7 @@ public class ConstantServer {
     public static String PATCH_DELETE_MOMENT_LIKE="/longai/momentLike/deleteMomentlike";
     public static String PATCH_GET_USERS_BY_GENS= "/longai/user/findLover";
     public static String PATCH_DELETE_NEWS_LIKE="/longai/newslike/deleteNewsLike";
+    public static String PRFIX_PROFILE_PIC=PRE_FIX+HOSTNAME+"/longai/img/userIcon/";
+    public static String PRFIX_EVENT_PIC=PRE_FIX+HOSTNAME+"/longai/img/eventImage/";
+
 }

@@ -2,7 +2,7 @@ package com.ouzhouren.longai.view.talk;
 
 import com.google.gson.Gson;
 import com.ouzhouren.longai.common.utils.MyLogger;
-import com.ouzhouren.longai.model.Message;
+import com.ouzhouren.longai.model.MessageVO;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -62,13 +62,13 @@ public class Client {
 	}
 	
 	public static Boolean sendMessage(String content,int to){
-		Message message = new Message();
-		message.setMessage(content);
-		message.setTime(new java.sql.Timestamp(System.currentTimeMillis()));
-		message.setTo(to);
-		message.setFrom(from);
+		MessageVO messageVO = new MessageVO();
+		messageVO.setMessage(content);
+		messageVO.setTime(new java.sql.Timestamp(System.currentTimeMillis()));
+		messageVO.setTo(to);
+		messageVO.setFrom(from);
 		Gson gson = new Gson();
-		String msg = gson.toJson(message);
+		String msg = gson.toJson(messageVO);
 		System.out.println(msg);
 		printWriter.println(msg);
 		return true;

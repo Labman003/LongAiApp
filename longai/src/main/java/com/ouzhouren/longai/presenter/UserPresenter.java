@@ -61,7 +61,7 @@ public class UserPresenter {
 
             @Override
             public void onFail(String e) {
-                loginViewInterface.showLoginFail(e.toString());
+                loginViewInterface.showLoginFail("失败，请稍后再试");
             }
         }, ctx);
     }
@@ -69,12 +69,13 @@ public class UserPresenter {
     public void register(final Context ctx){
         String userName = registerViewInterface.getUserName();
         String password  = registerViewInterface.getPassword();
-        if(TextUtils.isEmpty(userName)||TextUtils.isEmpty(password)){
-            registerViewInterface.showRegisterFail("请完善登录信息");
+        String nickName  = registerViewInterface.getNickName();
+        if(TextUtils.isEmpty(userName)||TextUtils.isEmpty(password)||TextUtils.isEmpty(nickName)){
+            registerViewInterface.showRegisterFail("请完善注册信息");
             return;
         }
         registerViewInterface.showProgress();
-        userModelInterface.register(userName, password, new UserModelInterface.CallBack() {
+        userModelInterface.register(userName,nickName, password, new UserModelInterface.CallBack() {
 
             @Override
             public void onSuccess(User user) {
@@ -86,7 +87,7 @@ public class UserPresenter {
 
             @Override
             public void onFail(String e) {
-                registerViewInterface.showRegisterFail(e.toString());
+                registerViewInterface.showRegisterFail("失败，请稍后再试");
             }
         }, ctx);
     }

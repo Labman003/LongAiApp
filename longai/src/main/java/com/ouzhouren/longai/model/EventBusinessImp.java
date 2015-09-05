@@ -30,6 +30,7 @@ public class EventBusinessImp implements com.ouzhouren.longai.model.EventModelIn
                 // 成功：主线程回调，反馈一个string
                 if (s.length() == 0) {
                     callBack.onFail("木有更多活动了");
+                    return;
                 }
                 logger.i("回调json" + s);
                 List<Event> events = PageUtil.fetchToList(s, new TypeToken<List<Event>>() {
@@ -57,6 +58,7 @@ public class EventBusinessImp implements com.ouzhouren.longai.model.EventModelIn
                 // todo 成功：主线程回调，反馈一个string
                 if(s.length()==0){
                     callBack.onFail("报名失败，请稍后再试");
+                    return;
                 }
                 Gson gson = new Gson();
                 Enroll enroll = gson.fromJson(s,Enroll.class);

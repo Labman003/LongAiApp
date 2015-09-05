@@ -69,6 +69,7 @@ public class SearchFragment extends Fragment implements SearchViewInterface {
 
     private void init() {
         dlg = new SweetAlertDialog(mAc, SweetAlertDialog.PROGRESS_TYPE);
+        dlg.setTitleText("缘分系统正在为您连接有缘人...");
         gridview.setOnItemClickListener(userClickListener);
         fabBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,8 +97,9 @@ public class SearchFragment extends Fragment implements SearchViewInterface {
         if(users!=null){
             if(userAdapter==null){
                 userAdapter = new UserAdapter(mAc, users);
-                gridview.setAdapter(userAdapter);
+
             }
+            gridview.setAdapter(userAdapter);
             userAdapter.setUsers(users);
             userAdapter.notifyDataSetChanged();
         }
@@ -107,6 +109,7 @@ public class SearchFragment extends Fragment implements SearchViewInterface {
     public void showProgress() {
         dlg.dismiss();
         dlg = new SweetAlertDialog(mAc, SweetAlertDialog.PROGRESS_TYPE);
+        dlg.setTitleText("缘分系统正在为您连接有缘人...");
         dlg.show();
     }
 

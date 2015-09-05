@@ -35,7 +35,7 @@ public class SearchPresenter {
     public void searchLovers(){
         searchViewInterface.showProgress();
         //todo 随机gens
-        userModelInterface.getUsersByGens(245, new UserModelInterface.GetUsersByGensCallBack() {
+        userModelInterface.getUsersByGens(Math.random(), new UserModelInterface.GetUsersByGensCallBack() {
             @Override
             public void onSuccess(List<User> musers) {
                 searchViewInterface.dismissProgress();

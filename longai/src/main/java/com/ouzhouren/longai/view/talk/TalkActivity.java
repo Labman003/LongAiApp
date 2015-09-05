@@ -2,6 +2,9 @@ package com.ouzhouren.longai.view.talk;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
@@ -12,6 +15,8 @@ import android.widget.Toast;
 
 import com.ouzhouren.longai.R;
 import com.ouzhouren.longai.common.utils.MyLogger;
+import com.ouzhouren.longai.constant.ConstantServer;
+import com.ouzhouren.longai.model.MessageVO;
 import com.ouzhouren.longai.view.wiget.chat.ChatMessage;
 import com.ouzhouren.longai.view.wiget.chat.MessageAdapter;
 import com.ouzhouren.longai.view.wiget.chat.MessageInputToolBox;
@@ -35,16 +40,42 @@ public class TalkActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private Client client;
     private AcceptMessage socketConnect;
+    private MyHandler myHandler;
+    private Boolean isPrepare =false;
+
+    class MyHandler extends Handler {
+        public MyHandler() {
+        }
+
+        public MyHandler(Looper L) {
+            super(L);
+        }
+        // 子类必须重写此方法，接受数据
+        @Override
+        public void handleMessage(Message msg) {
+            // TODO Auto-generated method stub
+            super.handleMessage(msg);
+            // 此处可以更新UI
+            if(msg.what==0x123){
+                if(isPrepare==true){
+                    adapter.notifyDataSetChanged();
+                    listView.setSelection(listView.getBottom());
+                }
+
+            }
+
+        }
+    }
 
     @SuppressLint("UseSparseArrays")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_talk);
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("YYT");
         setSupportActionBar(toolbar);
+        myHandler = new MyHandler();
         new ChatThread().start();
         initMessageInputToolBox();
         initListView();
@@ -179,7 +210,7 @@ public class TalkActivity extends AppCompatActivity {
                 return false;
             }
         });
-
+isPrepare= true;
     }
 
 
@@ -212,12 +243,13 @@ public class TalkActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         try {
             client.closeSocket();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        super.onDestroy();
+
     }
     class ChatThread extends Thread{
         public ChatThread() {
@@ -228,8 +260,8 @@ public class TalkActivity extends AppCompatActivity {
             //定义消息
             logger.i("runinto");
             try {
-                client = new Client("192.168.1.104", 8899, 3);
-                socketConnect = new AcceptMessage(client.getSocket());
+                client = new Client(ConstantServer.CHAT, 8899,3);
+                socketConnect = new AcceptMessage(client.getSocket(),new MessageCallBack());
                 socketConnect.start();
                 logger.i("OOBInline status is:"+client.getSocket().getOOBInline());
             } catch (IOException e) {
@@ -238,4 +270,16 @@ public class TalkActivity extends AppCompatActivity {
 
         }
     }
+    class MessageCallBack {
+        public void onSuccess(MessageVO messageVO){
+            ChatMessage chatMessage = new ChatMessage(0, 1, "Tom", "avatar", "Jerry", "avatar", messageVO.getMessage(), true, true, new Date());
+            adapter.getData().add(chatMessage);
+            Message msg = new Message();
+            msg.what=0x123;
+            TalkActivity.this.myHandler.sendMessage(msg); // 向Handler发送消息，更新UI
+           // listView.setSelection(listView.getBottom());
+        }
+        public void onFail(String s){};
+    }
+
 }

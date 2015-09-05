@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ouzhouren.longai.R;
 import com.ouzhouren.longai.common.utils.MyLogger;
+import com.ouzhouren.longai.constant.ConstantServer;
 import com.ouzhouren.longai.model.User;
 import com.ouzhouren.longai.presenter.NavPresenter;
 import com.ouzhouren.longai.presenter.NavViewInterface;
@@ -95,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavViewInterface 
     }
 
     private void init(final Activity mAc) {
+        sadlg = new SweetAlertDialog(mAc, SweetAlertDialog.SUCCESS_TYPE);
         navPresenter = new NavPresenter(this, this);
         navPresenter.initNav();
         navPresenter.locate(mAc);
@@ -216,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements NavViewInterface 
 
     @Override
     public void refreshNav(User user) {
-       ImageLoader.getInstance().displayImage(user.getProfilepic(),profileView);
+       ImageLoader.getInstance().displayImage(ConstantServer.PRFIX_PROFILE_PIC+user.getProfilepic(),profileView);
         nickNameTv.setText(user.getNickname());
         userNameTv.setText(user.getName());
     }

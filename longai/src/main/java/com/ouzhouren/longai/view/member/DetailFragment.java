@@ -16,6 +16,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ouzhouren.longai.R;
 import com.ouzhouren.longai.common.utils.MyLogger;
+import com.ouzhouren.longai.constant.ConstantServer;
 import com.ouzhouren.longai.model.User;
 
 import java.util.List;
@@ -85,9 +86,14 @@ public class DetailFragment extends Fragment {
        phoneTv =  ((TextView) rootView.findViewById(R.id.detail_tv_phone));
         biographyTitleTv = (TextView) rootView.findViewById(R.id.android_tv_biography_title);
         biographyTv = (TextView) rootView.findViewById(R.id.detail_tv_biography);
-        //  placeHolderImage.setViewName("photo"+getIntent().getIntExtra("position",0));
+
+
+        nameTV.setText(user.getName());
+        nicknameTV.setText(user.getNickname());
+        phoneTv.setText(""+user.getPhone());
+        biographyTv.setText(user.getBiography());
         logger.i("2");
-        ImageLoader.getInstance().displayImage(user.getProfilepic(), placeHolderImage);
+        ImageLoader.getInstance().displayImage(ConstantServer.PRFIX_PROFILE_PIC+user.getProfilepic(), placeHolderImage);
         logger.i("3");
         // placeHolderImage.setImageBitmap(bitmap);
         Bitmap bitmap = null;
@@ -99,7 +105,7 @@ public class DetailFragment extends Fragment {
                 .cacheOnDisk(true)
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .build();
-        bitmap=ImageLoader.getInstance().loadImageSync(user.getProfilepic(),options);
+        bitmap=ImageLoader.getInstance().loadImageSync(ConstantServer.PRFIX_PROFILE_PIC+user.getProfilepic(),options);
         logger.i("4");
         if (bitmap != null) {
             // With palette you can get the main colors of the give bitmap

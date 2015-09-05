@@ -73,6 +73,7 @@ public class EventsFragment extends Fragment implements DatePickerDialog.OnDateS
         layoutManager = new GridLayoutManager(mAc, 2);
                 recyclerView.setLayoutManager(layoutManager);//设置布局管理器,不设置会闪退
         dlg = new SweetAlertDialog(mAc, SweetAlertDialog.PROGRESS_TYPE);
+        dlg.setTitleText("加载活动...");
         dateTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,10 +82,10 @@ public class EventsFragment extends Fragment implements DatePickerDialog.OnDateS
         });
 
         eventsPresenter.restore();
-//        if(isFirstCreateView){
-//            eventsPresenter.addEvents(mAc);
-//            isFirstCreateView = false;
-//        }
+        if(isFirstCreateView){
+            eventsPresenter.addEvents(mAc);
+            isFirstCreateView = false;
+        }
     }
 
 
@@ -135,7 +136,7 @@ public class EventsFragment extends Fragment implements DatePickerDialog.OnDateS
                 mAdapter.setOnItemClickLitener(new EventsFragmentAdapter.OnItemClickLitener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        goToEventDetail();
+                        goToEventDetail(position);
                     }
 
                     @Override
@@ -146,11 +147,11 @@ public class EventsFragment extends Fragment implements DatePickerDialog.OnDateS
                 mAdapter.setOnStateButtonClickLitener(new EventsFragmentAdapter.OnStateButtonClickLitener() {
                     @Override
                     public void onStateButtonClick(View view, int position) {
-                        goToEventDetailAndEnroll();
+                        goToEventDetailAndEnroll(position);
                     }
                 });
-                recyclerView.setAdapter(mAdapter);
             }
+            recyclerView.setAdapter(mAdapter);
             mAdapter.setEvents(events);
             mAdapter.notifyDataSetChanged();
         }
@@ -163,19 +164,20 @@ public class EventsFragment extends Fragment implements DatePickerDialog.OnDateS
     }
 
     @Override
-    public void goToEventDetail() {
+    public void goToEventDetail(int position) {
         MyLogger logger = MyLogger.benLog();
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("enroll_directlly", false);
         Intent intent = new Intent(mAc, DetailEventActivity.class);
+        intent.putExtra("enroll_directlly", false);
+        intent.putExtra("position", position);
         mAc.startActivity(intent);
     }
 
     @Override
-    public void goToEventDetailAndEnroll() {
+    public void goToEventDetailAndEnroll(int position) {
         MyLogger logger = MyLogger.benLog();
         Intent intent = new Intent(mAc, DetailEventActivity.class);
         intent.putExtra("enroll_directlly", true);
+        intent.putExtra("position",position);
         mAc.startActivity(intent);
     }
 
@@ -183,6 +185,7 @@ public class EventsFragment extends Fragment implements DatePickerDialog.OnDateS
     public void showProgress() {
         dlg.dismiss();
         dlg = new SweetAlertDialog(mAc, SweetAlertDialog.PROGRESS_TYPE);
+        dlg.setTitleText("加载活动...");
         dlg.show();
     }
 

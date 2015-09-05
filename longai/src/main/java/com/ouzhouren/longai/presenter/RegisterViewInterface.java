@@ -6,6 +6,9 @@ package com.ouzhouren.longai.presenter;
 public interface RegisterViewInterface {
     String getUserName();
     String getPassword();
+
+    String getNickName();
+
     void showProgress();
     void dismissProgress();
     void showRegisterFail(String error);

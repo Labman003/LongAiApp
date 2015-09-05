@@ -2,6 +2,7 @@ package com.ouzhouren.longai.presenter;
 
 import android.content.Context;
 
+import com.ouzhouren.longai.common.utils.MyLogger;
 import com.ouzhouren.longai.model.Enroll;
 import com.ouzhouren.longai.model.Event;
 import com.ouzhouren.longai.model.EventBusinessImp;
@@ -42,10 +43,18 @@ public class EventPresenter {
         city = eventViewInterface.getCity();
         time = eventViewInterface.getTime();
         eventViewInterface.showProgress();
-        eventModelInterface.getEvents(time, city, pageNo, pageSize, new EventModelInterface.GetEventsCallBack() {
+        eventModelInterface.getEvents(234, "广州", pageNo, pageSize, new EventModelInterface.GetEventsCallBack() {
             @Override
-            public void onSuccess(List<Event> events) {
-                eventViewInterface.refreshEvents(city,events,String.valueOf(time));
+            public void onSuccess(List<Event> mevents) {
+                EventPresenter.events.addAll(mevents);
+                if(mevents.size()==0){
+                    eventViewInterface.showNodata();
+                }
+                else {
+                    eventViewInterface.dismissProgress();
+                    eventViewInterface.dismissNodata();
+                    eventViewInterface.refreshEvents(city, mevents, String.valueOf(time));
+                }
             }
 
             @Override
@@ -77,12 +86,14 @@ public class EventPresenter {
     }
 
     public void restore() {
-        if(events.size()==0){
+        MyLogger logger = MyLogger.benLog();
+        logger.i("events:"+EventPresenter.events.size());
+        if(EventPresenter.events.size()==0){
             eventViewInterface.showNodata();
         }
         else {
             eventViewInterface.dismissNodata();
-            eventViewInterface.refreshEvents(city, events, String.valueOf(time));
+            eventViewInterface.refreshEvents(city, EventPresenter.events, String.valueOf(time));
         }
     }
 }

@@ -35,6 +35,7 @@ public class UserBusinessImp implements UserModelInterface {
                 // 成功：主线程回调，反馈一个string
                 if (s.length() == 0) {
                     callBack.onFail("用户不存在或密码错误");
+                    return;
                 }
                 logger.i("回调json"+s);
                 Gson gson = new Gson();
@@ -54,11 +55,12 @@ public class UserBusinessImp implements UserModelInterface {
     }
 
     @Override
-    public void register(String userName, String password, final CallBack callBack, Context ctx) {
+    public void register(String userName, String nickName,String password, final CallBack callBack, Context ctx) {
         User mUser = new User();
         Gson gson = new Gson();
         mUser.setName(userName);
         mUser.setPassword(password);
+        mUser.setNickname(nickName);
         mUser.setGender("男");
         StringRequest req = new StringRequest(ConstantServer.HOSTNAME).addUrlPrifix(ConstantServer.PRE_FIX).addUrlSuffix(ConstantServer.PATCHP_REGISTER).addUrlParam("user", gson.toJson(mUser));
         LiteHttpUtil.getLiteHttp(ctx).executeAsync(req.setHttpListener(new HttpListener<String>() {
@@ -67,6 +69,7 @@ public class UserBusinessImp implements UserModelInterface {
                 // 成功：主线程回调，反馈一个string
                 if (s.length() == 0) {
                     callBack.onFail("用户不存在或密码错误");
+                    return;
                 }
                 logger.i("回调json"+s);
                 Gson gson = new Gson();
@@ -109,6 +112,7 @@ public class UserBusinessImp implements UserModelInterface {
                 // 成功：主线程回调，反馈一个string
                 if (Integer.valueOf(s) == 0) {
                     callBack.onFail("用户不存在或密码错误");
+                    return;
                 }
                 logger.i("回调json"+s);
                 callBack.onSuccess(Integer.valueOf(s));
@@ -125,17 +129,17 @@ public class UserBusinessImp implements UserModelInterface {
     }
 
     @Override
-    public void getUsersByGens(int gens, final GetUsersByGensCallBack callBack, Context ctx) {
+    public void getUsersByGens(double gens, final GetUsersByGensCallBack callBack, Context ctx) {
         StringRequest req = new StringRequest(ConstantServer.HOSTNAME).addUrlPrifix(ConstantServer.PRE_FIX).addUrlSuffix(ConstantServer.PATCH_GET_USERS_BY_GENS).addUrlParam("gens", String.valueOf(gens)).addUrlParam("currentPage",String.valueOf(1)).addUrlParam("amount",String.valueOf(5));
         LiteHttpUtil.getLiteHttp(ctx).executeAsync(req.setHttpListener(new HttpListener<String>() {
             @Override
             public void onSuccess(String s, Response<String> response) {
                 // 成功：主线程回调，反馈一个string
-                //todo 处理空字符串
-//                if (Integer.valueOf(s) == 0) {
-//                    callBack.onFail("用户不存在或密码错误");
-//                }
-                logger.i("回调json"+s);
+                if (s.length() == 0) {
+                    callBack.onFail("用户不存在或密码错误");
+                    return;
+                }
+                logger.i("回调json"+s+"——"+response);
                 List<User> users =PageUtil.fetchToList(s,new TypeToken<List<User>>(){}.getType());
                 callBack.onSuccess(users);
                 logger.i("success result:" + s + "----response:" + response + "——UsersName:" + users.get(0).getName());

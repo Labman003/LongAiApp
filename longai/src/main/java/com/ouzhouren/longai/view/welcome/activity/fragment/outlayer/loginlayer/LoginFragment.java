@@ -57,6 +57,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
         this.userPresenter = new UserPresenter();
         this.userPresenter.setLoginViewInterface(this);
         dlg = new SweetAlertDialog(mAc, SweetAlertDialog.PROGRESS_TYPE);
+        dlg.setTitleText("努力登录中...");
         //绑定监听器
         passwordEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -115,6 +116,7 @@ public class LoginFragment extends Fragment implements LoginViewInterface {
     public void showProgress() {
         dlg.dismiss();
         dlg = new SweetAlertDialog(mAc, SweetAlertDialog.PROGRESS_TYPE);
+        dlg.setTitleText("努力登录中...");
         dlg.show();
     }
 

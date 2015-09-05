@@ -15,8 +15,8 @@ public interface EventViewInterface {
 
     void refreshEvents(String city,List<Event> events,String time);
     void addEvents(String city,List<Event> events,String time);
-    void goToEventDetail();
-    void goToEventDetailAndEnroll();
+    void goToEventDetail(int position);
+    void goToEventDetailAndEnroll(int position);
     void showProgress();
     void dismissProgress();
     void showFail(String s);

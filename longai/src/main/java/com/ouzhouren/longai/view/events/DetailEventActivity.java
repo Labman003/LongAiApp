@@ -16,8 +16,10 @@ import android.widget.TextView;
 
 import com.cengalabs.flatui.FlatUI;
 import com.cengalabs.flatui.views.FlatButton;
-import com.ouzhouren.longai.view.search.PoiSearchDemo;
 import com.ouzhouren.longai.R;
+import com.ouzhouren.longai.model.Event;
+import com.ouzhouren.longai.presenter.EventPresenter;
+import com.ouzhouren.longai.view.search.PoiSearchDemo;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,13 +42,15 @@ public class DetailEventActivity extends AppCompatActivity {
         if(getIntent().getBooleanExtra("enroll_directlly",false)==true){
             enroll();
         }
+        int position = getIntent().getIntExtra("position",0);
+        Event mEvent = EventPresenter.events.get(position);
         webView = (WebView) findViewById(R.id.webview);
         button = (FlatButton) findViewById(R.id.detail_event_fb_enroll);
         deadlineTv= (TextView) findViewById(R.id.detail_event_tv_deadline);
         locationTv= (TextView) findViewById(R.id.detail_event_tv_location);
-        locationTv.setText(Html.fromHtml("举办地点：<font size=\"3\" color=\"#983785\">成都上锦颐园二期</font>"));
+        locationTv.setText(Html.fromHtml("举办地点：<font size=\"3\" color=\"#983785\">"+mEvent.getLocation()+"</font>"));
         SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String time="2015-08-20 11:45:55";
+        String time="2015-09-20 11:45:55";
         Date date = null;
         try {
             date = format.parse(time);
@@ -107,7 +111,7 @@ public class DetailEventActivity extends AppCompatActivity {
         webSettings.setLoadWithOverviewMode(true);
 
         //加载需要显示的网页
-        webView.loadUrl("http://www.baidu.com/");
+        webView.loadUrl("http://segmentfault.com/e/1160000003694478");
     }
 
     private void enroll() {

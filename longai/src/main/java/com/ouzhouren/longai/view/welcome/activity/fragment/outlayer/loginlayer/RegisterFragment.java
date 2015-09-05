@@ -25,6 +25,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  */
 public class RegisterFragment extends Fragment implements RegisterViewInterface {
     private EditText phoneEt;
+    private EditText nickNameEt;
     private EditText passwordEt;
     private TextView fogetPSWTv;
     private Button loginIv;
@@ -42,6 +43,7 @@ public class RegisterFragment extends Fragment implements RegisterViewInterface 
 
     private void findViewById(View view) {
         phoneEt = (EditText) view.findViewById(R.id.et_write_phone);
+        nickNameEt = (EditText) view.findViewById(R.id.et_nick_name);
         passwordEt = (EditText) view.findViewById(R.id.et_put_identify);
         loginIv = (Button) view.findViewById(R.id.btn_login);
     }
@@ -51,6 +53,7 @@ public class RegisterFragment extends Fragment implements RegisterViewInterface 
         this.userPresenter = new UserPresenter();
         this.userPresenter.setRegisterViewInterface(this);
         dlg = new SweetAlertDialog(mAc, SweetAlertDialog.PROGRESS_TYPE);
+        dlg.setTitleText("努力注册中...");
         //绑定监听器
         loginIv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +72,10 @@ public class RegisterFragment extends Fragment implements RegisterViewInterface 
     public String getPassword() {
         return passwordEt.getText().toString().trim();
     }
+    @Override
+    public String getNickName() {
+        return nickNameEt.getText().toString().trim();
+    }
 
     @Override
     public void showProgress() {
@@ -83,7 +90,7 @@ public class RegisterFragment extends Fragment implements RegisterViewInterface 
     @Override
     public void showRegisterFail(String error) {
         dlg.dismiss();
-        dlg.changeAlertType(SweetAlertDialog.ERROR_TYPE);
+        dlg = new SweetAlertDialog(mAc, SweetAlertDialog.ERROR_TYPE);
         dlg.setTitleText(error);
         dlg.show();
     }
