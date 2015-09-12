@@ -5,11 +5,10 @@
 涉及LiteHttp网络框架,json数据传输,Gson库，ImageLoader，XhsWelcomeAnim等开源工具.
 
 ####部分截图:  
- <img src="https://github.com/Labman003/LongAiApp/blob/master/screen/event_fragment.png" width = "300" height = "200" alt="图片名称" align=center />
-![活动](https://github.com/Labman003/LongAiApp/blob/master/screen/event_fragment.png)
-![活动详情](https://github.com/Labman003/LongAiApp/blob/master/screen/detail_event_fragment.png)
-![心情广场](https://github.com/Labman003/LongAiApp/blob/master/screen/moment.jpg)
-![缘分搜索](https://github.com/Labman003/LongAiApp/blob/master/screen/search.jpg)
-![缘分搜索](https://github.com/Labman003/LongAiApp/blob/master/screen/searchresult.jpg)
-![欢迎](https://github.com/Labman003/LongAiApp/blob/master/screen/welcome.jpg)
+ <img src="https://github.com/Labman003/LongAiApp/blob/master/screen/welcome.jpg" width = "460" height = "818" alt="图片名称" align=center />
+ <img src="https://github.com/Labman003/LongAiApp/blob/master/screen/event_fragment.png" width = "460" height = "818" alt="图片名称" align=center />
+ <img src="https://github.com/Labman003/LongAiApp/blob/master/screen/detail_event_fragment.png" width = "460" height = "818" alt="图片名称" align=center />
+ <img src="https://github.com/Labman003/LongAiApp/blob/master/screen/moment.jpg" width = "460" height = "818" alt="图片名称" align=center />
+ <img src="https://github.com/Labman003/LongAiApp/blob/master/screen/search.jpg" width = "460" height = "818" alt="图片名称" align=center />
+ <img src="https://github.com/Labman003/LongAiApp/blob/master/screen/searchresult.jpg" width = "460" height = "818" alt="图片名称" align=center />
 
