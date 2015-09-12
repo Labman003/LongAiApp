@@ -6,9 +6,10 @@
 
 ####部分截图:  
  <img src="https://github.com/Labman003/LongAiApp/blob/master/screen/welcome.jpg" width = "320" height = "570" alt="图片名称" align=center />
+  <img src="https://github.com/Labman003/LongAiApp/blob/master/screen/search.jpg" width = "320" height = "570" alt="图片名称" align=center />
+ <img src="https://github.com/Labman003/LongAiApp/blob/master/screen/searchresult.jpg" width = "320" height = "570" alt="图片名称" align=center />
  <img src="https://github.com/Labman003/LongAiApp/blob/master/screen/event_fragment.png" width = "320" height = "570" alt="图片名称" align=center />
  <img src="https://github.com/Labman003/LongAiApp/blob/master/screen/detail_event_fragment.png" width = "320" height = "570" alt="图片名称" align=center />
  <img src="https://github.com/Labman003/LongAiApp/blob/master/screen/moment.jpg" width = "320" height = "570" alt="图片名称" align=center />
- <img src="https://github.com/Labman003/LongAiApp/blob/master/screen/search.jpg" width = "320" height = "570" alt="图片名称" align=center />
- <img src="https://github.com/Labman003/LongAiApp/blob/master/screen/searchresult.jpg" width = "320" height = "570" alt="图片名称" align=center />
+
 
